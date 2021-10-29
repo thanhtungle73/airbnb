@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/grid.css">
     <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -37,8 +38,8 @@
 
                 <ul class="header__navbar-list">
                     <li class="header__navbar-mid-item header__navbar-mid-item--active">Nơi ở</li>
-                    <li class="header__navbar-mid-item">Chỗ ở theo tháng</li>
                     <li class="header__navbar-mid-item">Trải nghiệm</li>
+                    <li class="header__navbar-mid-item">Trải nghiệm trực tuyến</li>
                 </ul>
 
                 <ul class="header__navbar-list header__navbar-list--text-right">
@@ -68,9 +69,46 @@
                     </li>
                 </ul>
             </nav>
-            <div class="header__search"></div>
+            <div class="header__search">
+                <label for="header-search__box" class="header-search__location header-search__hover">
+                    <h4 class="header-search__heading">Địa điểm</h4>
+                    <input type="text" class="header-search__input" id="header-search__box" placeholder="Bạn sắp đi đâu?">
+                </label>
+                <div class="header-search__room header-search__hover">
+                    <h4 class="header-search__heading">Nhận phòng</h4>
+                    <p class="header-search__desc">Thêm ngày</p>
+                </div>
+                <div class="header-search__room header-search__hover">
+                    <h4 class="header-search__heading">Trả phòng</h4>
+                    <p class="header-search__desc">Thêm ngày</p>
+                </div>
+                <div class="header-search__customer header-search__hover">
+                    <div class="header-search__person">
+                        <h4 class="header-search__heading">Khách</h4>
+                        <p class="header-search__desc">Thêm khách</p>
+                    </div>
+
+                    <div class="header-search__btn">
+                        <i class="ti-search header-search__btn-icon"></i>
+                        <div class="header-search__btn-label">Tìm kiếm</div>
+                    </div>
+                </div>
+            </div>
             <div class="header__suggestion"></div>
-            <div class="header__background" style="background-image: url(./assets/img/header/landing_page_img_960.png)"></div>
+            <div class="header__background">
+                <picture>
+                    <source media="(max-width: 739px)" srcset="./assets/img/header/landing_page_img_320.png"
+                        class="header__background-img">
+                    <source media="(min-width: 740px) and (max-width: 1023px)"
+                        srcset="./assets/img/header/landing_page_img_720.png" class="header__background-img">
+                    <source media="(min-width: 1024px) and (max-width: 1439px)"
+                        srcset="./assets/img/header/landing_page_img_960.png" class="header__background-img">
+                    <source media="(min-width: 1440px)" srcset="./assets/img/header/landing_page_img.png"
+                        class="header__background-img">
+                    <img src="./assets/img/header/landing_page_img_960.png" alt="Header Lading"
+                        class="header__background-img">
+                </picture>
+            </div>
         </header>
         <div class="app_container"></div>
         <footer class="footer"></footer>
