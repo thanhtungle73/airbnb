@@ -7,10 +7,14 @@ const headerSearch = $(".header__search");
 const headerSearchBtn = $(".header-search__btn");
 const headerSearchTextBtn = $(".header-search__btn-label");
 const headerSearchItems = $$(".header-search__item");
+const headerSearchBtnColor = $(".header-search__color");
+const headerSearchBtnIcon = $(".header-search__btn-icon");
 
 app = {
   handleEvents: function () {
     const _this = this;
+    let headerSearchBtnWidth;
+
     const resetHeaderSearchBorder = function (e) {
       /* headerSearchItems.forEach((e) => { */
       if (e.previousElementSibling) {
@@ -41,6 +45,7 @@ app = {
     headerSearch.onclick = function (e) {
       e.stopPropagation();
       headerSearchBtn.classList.add("header-search__btn--active");
+      headerSearchBtnIcon.style.background = "unset";
     };
 
     //handle close header search button & navigation options when clicking outside
@@ -117,10 +122,38 @@ app = {
           );
         }
         e.classList.add("header-search__item--no-border");
-
+        headerSearch.style.backgroundColor = "#f7f7f7";
         e.classList.add("header-search__item--active");
       };
     });
+
+    //handle color moves according to the cursor when hovering mouse on header search btn
+    headerSearchBtn.onmousemove = function (e) {
+      if (headerSearchBtn.classList.contains("header-search__btn--active")) {
+        headerSearchBtnWidth = headerSearchBtn.offsetWidth;
+        let xMouse = e.offsetX;
+        let yMouse = -headerSearchBtnWidth / 3;
+
+        headerSearchBtnColor.style.width = headerSearchBtnWidth + "px";
+        headerSearchBtnColor.style.height = headerSearchBtnWidth + "px";
+        if (xMouse >= -64 && xMouse <= headerSearchBtnWidth) {
+          headerSearchBtnColor.style.top = yMouse + "px";
+          headerSearchBtnColor.style.left =
+            xMouse - headerSearchBtnWidth / 3 + "px";
+        } else {
+          headerSearchBtnColor.style.top = -headerSearchBtnWidth / 3 + "px";
+          headerSearchBtnColor.style.left = -headerSearchBtnWidth / 3 + "px";
+        }
+      }
+    };
+
+    //handle color back to initial position when mouse is left
+    headerSearchBtn.onmouseleave = function () {
+      headerSearchBtnColor.style.width = 0;
+      headerSearchBtnColor.style.height = 0;
+      headerSearchBtnColor.style.left = -headerSearchBtnWidth / 3 + "px";
+      headerSearchBtnColor.style.top = -headerSearchBtnWidth / 3 + "px";
+    };
   },
 
   resetSearchBtn: function () {
