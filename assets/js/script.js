@@ -9,37 +9,18 @@ const headerSearchTextBtn = $(".header-search__btn-label");
 const headerSearchItems = $$(".header-search__item");
 const headerSearchBtnColor = $(".header-search__color");
 const headerSearchBtnIcon = $(".header-search__btn-icon");
+const headerSearchLocation = $(".header-search__location");
+const headerSearchPanelLocation = $(".search-panel__location");
+const headerSearchPanelLocationVideo = $(".search-panel__location-btn-video");
+const headerSearchPanelCustomer = $(".search-panel-customer");
+const headerSearchPanelCustomerPlusBtn = $(".search-panel-customer__plus");
+const headerSearchPanelCustomerMinusBtn = $(".search-panel-customer__minus");
+const headerSearchPanelCustomerNum = $(".search-panel-customer__num");
 
 app = {
   handleEvents: function () {
     const _this = this;
     let headerSearchBtnWidth;
-
-    const resetHeaderSearchBorder = function (e) {
-      /* headerSearchItems.forEach((e) => { */
-      if (e.previousElementSibling) {
-        e.previousElementSibling.classList.remove(
-          "header-search__item--no-border"
-        );
-      }
-      e.classList.remove("header-search__item--no-border");
-      /* }); */
-    };
-
-    const removeHeaderSearchBorder = function (e) {
-      if (e.previousElementSibling) {
-        e.previousElementSibling.classList.add(
-          "header-search__item--no-border"
-        );
-      }
-      e.classList.add("header-search__item--no-border");
-    };
-
-    const resetHeaderSearchItems = function () {
-      headerSearchItems.forEach((e) => {
-        e.classList.remove("header-search__item--active");
-      });
-    };
 
     //handle when clicking header search button
     headerSearch.onclick = function (e) {
@@ -48,14 +29,42 @@ app = {
       headerSearchBtnIcon.style.background = "unset";
     };
 
-    //handle close header search button & navigation options when clicking outside
+    //handle close header search items, button & navigation options when clicking outside
     document.onmouseup = function (e) {
+      //close the header navbar options when clicking outside
       if (
         headerSearchBtn.classList.contains("header-search__btn--active") ||
         !e.target.closest(".header__navbar-right-item--js")
       ) {
         _this.resetSearchBtn();
         headerNavOptions.checked = false;
+      }
+
+      //close header menu items when clicking outside
+      if (!e.target.closest(".header__search")) {
+        _this.resetHeaderSearchItems();
+        _this.resetHeaderSearchBorder();
+      }
+
+      //close header location panel when clicking outside
+      if (
+        !e.target.closest(".search-panel__location") &&
+        !e.target.closest(".header-search__location")
+      ) {
+        headerSearchPanelLocation.style.display = "none";
+        headerSearchPanelLocationVideo.load();
+      }
+
+      //close header customer panel when clicking outside
+      if (
+        !e.target.closest(".search-panel-customer ") &&
+        !e.target.closest(".header-search__customer")
+      ) {
+        headerSearchPanelCustomer.classList.remove(
+          "search-panel-customer--active"
+        );
+        headerSearchPanelCustomer.style.transform = "translateX(50%)";
+        headerSearchPanelCustomer.style.opacity = "0";
       }
     };
 
@@ -70,7 +79,7 @@ app = {
     //handle when mouse over header search menu
     headerSearchItems.forEach((e) => {
       e.onmouseover = function () {
-        removeHeaderSearchBorder(e);
+        _this.removeHeaderSearchBorder(e);
       };
     });
 
@@ -78,7 +87,7 @@ app = {
     headerSearchItems.forEach((e) => {
       e.onmouseout = function () {
         if (!e.classList.contains("header-search__item--active")) {
-          resetHeaderSearchBorder(e);
+          _this.resetCurrentHeaderSearchBorder(e);
         }
 
         if (
@@ -104,22 +113,35 @@ app = {
     //handle when clicking header search items
     headerSearchItems.forEach((e) => {
       e.onclick = function () {
-        resetHeaderSearchItems();
-
-        //Reset
-        headerSearchItems.forEach((element) => {
-          if (element.previousElementSibling) {
-            element.previousElementSibling.classList.remove(
-              "header-search__item--no-border"
-            );
-          }
-          element.classList.remove("header-search__item--no-border");
-        });
+        _this.resetHeaderSearchItems();
+        _this.resetHeaderSearchBorder();
 
         if (e.previousElementSibling) {
           e.previousElementSibling.classList.add(
             "header-search__item--no-border"
           );
+        }
+
+        //display header search location panel
+        if (e.classList.contains("header-search__location")) {
+          if (!headerSearchPanelLocationVideo.ended) {
+            headerSearchPanelLocationVideo.play();
+          }
+          headerSearchPanelLocation.style.display = "block";
+        }
+
+        //display header search customer panel
+        if (e.classList.contains("header-search__customer")) {
+          headerSearchPanelCustomer.classList.toggle(
+            "search-panel-customer--active",
+            !headerSearchPanelCustomer.classList.contains(
+              "search-panel-customer--active"
+            )
+          );
+          setTimeout(() => {
+            headerSearchPanelCustomer.style.transform = "translateX(0)";
+            headerSearchPanelCustomer.style.opacity = "1";
+          }, 50);
         }
         e.classList.add("header-search__item--no-border");
         headerSearch.style.backgroundColor = "#f7f7f7";
@@ -154,6 +176,106 @@ app = {
       headerSearchBtnColor.style.left = -headerSearchBtnWidth / 3 + "px";
       headerSearchBtnColor.style.top = -headerSearchBtnWidth / 3 + "px";
     };
+
+    //handle display header search location panel when clicking header search btn
+    headerSearchBtn.onclick = function (e) {
+      e.stopPropagation();
+      _this.resetHeaderSearchPanel();
+      headerSearchBtnColor.style.width = 0;
+      headerSearchBtnColor.style.height = 0;
+      headerSearchPanelLocation.style.display = "block";
+      if (!headerSearchPanelLocationVideo.ended) {
+        headerSearchPanelLocationVideo.play();
+      }
+    };
+
+    //handle when clicking plus btn on header search customer panel
+    headerSearchPanelCustomerPlusBtn.onclick = function () {
+      headerSearchPanelCustomerNum.innerText =
+        Number(headerSearchPanelCustomerNum.innerText) + 1;
+      if (Number(headerSearchPanelCustomerNum.innerText) <= 0) {
+        headerSearchPanelCustomerMinusBtn.classList.add(
+          "search-panel-customer__btn--disable"
+        );
+      } else if (
+        Number(headerSearchPanelCustomerNum.innerText) > 0 &&
+        Number(headerSearchPanelCustomerNum.innerText) <= 16
+      ) {
+        headerSearchPanelCustomerMinusBtn.classList.remove(
+          "search-panel-customer__btn--disable"
+        );
+      } else {
+        headerSearchPanelCustomerPlusBtn.classList.add(
+          "search-panel-customer__btn--disable"
+        );
+        headerSearchPanelCustomerNum.innerText = 16;
+      }
+    };
+
+    //handle when clicking minus btn on header search customer panel
+    headerSearchPanelCustomerMinusBtn.onclick = function () {
+      headerSearchPanelCustomerNum.innerText =
+        Number(headerSearchPanelCustomerNum.innerText) - 1;
+      if (Number(headerSearchPanelCustomerNum.innerText) <= 0) {
+        headerSearchPanelCustomerMinusBtn.classList.add(
+          "search-panel-customer__btn--disable"
+        );
+        headerSearchPanelCustomerPlusBtn.classList.remove(
+          "search-panel-customer__btn--disable"
+        );
+        headerSearchPanelCustomerNum.innerText = 0;
+      } else if (
+        Number(headerSearchPanelCustomerNum.innerText) > 0 &&
+        Number(headerSearchPanelCustomerNum.innerText) <= 16
+      ) {
+        headerSearchPanelCustomerMinusBtn.classList.remove(
+          "search-panel-customer__btn--disable"
+        );
+      } else {
+        headerSearchPanelCustomerPlusBtn.classList.add(
+          "search-panel-customer__btn--disable"
+        );
+      }
+    };
+  },
+
+  resetHeaderSearchPanel: function () {
+    headerSearchPanelCustomer.classList.remove("search-panel-customer--active");
+    headerSearchPanelCustomer.style.transform = "translateX(50%)";
+    headerSearchPanelCustomer.style.opacity = "0";
+  },
+
+  resetCurrentHeaderSearchBorder: function (e) {
+    if (e.previousElementSibling) {
+      e.previousElementSibling.classList.remove(
+        "header-search__item--no-border"
+      );
+    }
+    e.classList.remove("header-search__item--no-border");
+  },
+
+  resetHeaderSearchBorder: function () {
+    headerSearchItems.forEach((e) => {
+      if (e.previousElementSibling) {
+        e.previousElementSibling.classList.remove(
+          "header-search__item--no-border"
+        );
+      }
+      e.classList.remove("header-search__item--no-border");
+    });
+  },
+
+  removeHeaderSearchBorder: function (e) {
+    if (e.previousElementSibling) {
+      e.previousElementSibling.classList.add("header-search__item--no-border");
+    }
+    e.classList.add("header-search__item--no-border");
+  },
+
+  resetHeaderSearchItems: function () {
+    headerSearchItems.forEach((e) => {
+      e.classList.remove("header-search__item--active");
+    });
   },
 
   resetSearchBtn: function () {
