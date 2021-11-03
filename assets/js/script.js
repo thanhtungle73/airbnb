@@ -13,9 +13,17 @@ const headerSearchLocation = $(".header-search__location");
 const headerSearchPanelLocation = $(".search-panel__location");
 const headerSearchPanelLocationVideo = $(".search-panel__location-btn-video");
 const headerSearchPanelCustomer = $(".search-panel-customer");
-const headerSearchPanelCustomerPlusBtn = $(".search-panel-customer__plus");
-const headerSearchPanelCustomerMinusBtn = $(".search-panel-customer__minus");
-const headerSearchPanelCustomerNum = $(".search-panel-customer__num");
+const headerSearchPanelCustomerPlusBtn = $$(".search-panel-customer__plus");
+const headerSearchPanelCustomerMinusBtn = $$(".search-panel-customer__minus");
+const headerSearchPanelCustomerAdultNum = $(
+  ".search-panel-customer__adult .search-panel-customer__num"
+);
+const headerSearchPanelCustomerKidNum = $(
+  ".search-panel-customer__kid .search-panel-customer__num"
+);
+const headerSearchPanelCustomerChildNum = $(
+  ".search-panel-customer__child .search-panel-customer__num"
+);
 
 app = {
   handleEvents: function () {
@@ -189,54 +197,99 @@ app = {
       }
     };
 
-    //handle when clicking plus btn on header search customer panel
-    headerSearchPanelCustomerPlusBtn.onclick = function () {
-      headerSearchPanelCustomerNum.innerText =
-        Number(headerSearchPanelCustomerNum.innerText) + 1;
-      if (Number(headerSearchPanelCustomerNum.innerText) <= 0) {
-        headerSearchPanelCustomerMinusBtn.classList.add(
-          "search-panel-customer__btn--disable"
-        );
-      } else if (
-        Number(headerSearchPanelCustomerNum.innerText) > 0 &&
-        Number(headerSearchPanelCustomerNum.innerText) <= 16
-      ) {
-        headerSearchPanelCustomerMinusBtn.classList.remove(
-          "search-panel-customer__btn--disable"
-        );
-      } else {
-        headerSearchPanelCustomerPlusBtn.classList.add(
-          "search-panel-customer__btn--disable"
-        );
-        headerSearchPanelCustomerNum.innerText = 16;
-      }
-    };
+    //handle when clicking plus btn on header search customer panel & logic
+    headerSearchPanelCustomerPlusBtn.forEach((e, index) => {
+      e.onclick = function () {
+        e.previousElementSibling.innerText =
+          Number(e.previousElementSibling.innerText) + 1;
 
-    //handle when clicking minus btn on header search customer panel
-    headerSearchPanelCustomerMinusBtn.onclick = function () {
-      headerSearchPanelCustomerNum.innerText =
-        Number(headerSearchPanelCustomerNum.innerText) - 1;
-      if (Number(headerSearchPanelCustomerNum.innerText) <= 0) {
-        headerSearchPanelCustomerMinusBtn.classList.add(
-          "search-panel-customer__btn--disable"
-        );
-        headerSearchPanelCustomerPlusBtn.classList.remove(
-          "search-panel-customer__btn--disable"
-        );
-        headerSearchPanelCustomerNum.innerText = 0;
-      } else if (
-        Number(headerSearchPanelCustomerNum.innerText) > 0 &&
-        Number(headerSearchPanelCustomerNum.innerText) <= 16
-      ) {
-        headerSearchPanelCustomerMinusBtn.classList.remove(
-          "search-panel-customer__btn--disable"
-        );
-      } else {
-        headerSearchPanelCustomerPlusBtn.classList.add(
-          "search-panel-customer__btn--disable"
-        );
-      }
-    };
+        //adding the adult value to 1 when adding kid and child without adult
+        if (
+          ((e.closest(".search-panel-customer__kid") &&
+            Number(e.previousElementSibling.innerText > 0)) ||
+            (e.closest(".search-panel-customer__child") &&
+              Number(e.previousElementSibling.innerText > 0))) &&
+          Number(headerSearchPanelCustomerAdultNum.innerText) < 1
+        ) {
+          headerSearchPanelCustomerAdultNum.innerText = 1;
+          headerSearchPanelCustomerAdultNum.previousElementSibling.classList.remove(
+            "search-panel-customer__btn--disable"
+          );
+        }
+
+        if (Number(e.previousElementSibling.innerText) <= 0) {
+          headerSearchPanelCustomerMinusBtn[index].classList.add(
+            "search-panel-customer__btn--disable"
+          );
+        } else if (
+          Number(e.previousElementSibling.innerText) > 0 &&
+          Number(e.previousElementSibling.innerText) <= 4
+        ) {
+          headerSearchPanelCustomerMinusBtn[index].classList.remove(
+            "search-panel-customer__btn--disable"
+          );
+        } else if (
+          Number(e.previousElementSibling.innerText) >= 5 &&
+          (e.closest(".search-panel-customer__kid") ||
+            e.closest(".search-panel-customer__child"))
+        ) {
+          e.classList.add("search-panel-customer__btn--disable");
+          e.previousElementSibling.innerText = 5;
+        } else if (
+          Number(e.previousElementSibling.innerText) >= 5 &&
+          Number(e.previousElementSibling.innerText) < 16 &&
+          e.closest(".search-panel-customer__adult")
+        ) {
+          headerSearchPanelCustomerMinusBtn[index].classList.remove(
+            "search-panel-customer__btn--disable"
+          );
+        } else {
+          e.classList.add("search-panel-customer__btn--disable");
+          e.previousElementSibling.innerText = 16;
+        }
+      };
+    });
+
+    //handle when clicking minus btn on header search customer panel & logic
+    headerSearchPanelCustomerMinusBtn.forEach((e, index) => {
+      e.onclick = function () {
+        //check to see if the child and kid have value, then the adult cannot less than 1
+        if (
+          !(
+            Number(e.nextElementSibling.innerText) < 2 &&
+            e.closest(".search-panel-customer__adult") &&
+            (Number(headerSearchPanelCustomerKidNum.innerText) > 0 ||
+              Number(headerSearchPanelCustomerChildNum.innerText) > 0)
+          )
+        ) {
+          e.nextElementSibling.innerText =
+            Number(e.nextElementSibling.innerText) - 1;
+        }
+
+        if (Number(e.nextElementSibling.innerText) <= 0) {
+          headerSearchPanelCustomerMinusBtn[index].classList.add(
+            "search-panel-customer__btn--disable"
+          );
+          e.nextElementSibling.innerText = 0;
+        } else if (Number(e.nextElementSibling.innerText) < 5) {
+          headerSearchPanelCustomerPlusBtn[index].classList.remove(
+            "search-panel-customer__btn--disable"
+          );
+        } else if (
+          Number(e.nextElementSibling.innerText) < 16 &&
+          Number(e.nextElementSibling.innerText) >= 5 &&
+          e.closest(".search-panel-customer__adult")
+        ) {
+          headerSearchPanelCustomerPlusBtn[index].classList.remove(
+            "search-panel-customer__btn--disable"
+          );
+        } else {
+          headerSearchPanelCustomerPlusBtn[index].classList.remove(
+            "search-panel-customer__btn--disable"
+          );
+        }
+      };
+    });
   },
 
   resetHeaderSearchPanel: function () {

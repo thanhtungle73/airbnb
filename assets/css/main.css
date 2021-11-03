@@ -290,6 +290,7 @@ i.header-navbar-menu__user-icon {
 }
 
 .header-search__desc {
+  display: none;
   margin: 0;
   z-index: 1;
   font-size: 1.4rem;
@@ -307,9 +308,44 @@ i.header-navbar-menu__user-icon {
 }
 
 .header-search__person {
-  min-width: 115px;
-  padding-right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* min-width: 115px; */
+  width: 132px;
+  padding-right: 0px;
   z-index: 1;
+}
+
+.header-search__person-container {
+  min-width: 0;
+}
+
+.header-search__person-number {
+  display: block;
+  margin: 0;
+  z-index: 1;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-search__person-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #ebebeb;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.header-search__person-icon {
+  font-size: 1.4rem;
 }
 
 .header-search__item:hover::before {
@@ -555,6 +591,7 @@ i.header-navbar-menu__user-icon {
 
 .search-panel-customer__minus-icon {
   font-size: 1.2rem;
+  color: #717171;
 }
 
 .search-panel-customer__num {
@@ -574,9 +611,19 @@ i.header-navbar-menu__user-icon {
   border: 1px solid #b4b4b4;
 }
 
+.search-panel-customer__minus:hover,
+.search-panel-customer__plus:hover {
+  border-color: var(--text-color);
+}
+
 .search-panel-customer__plus-icon {
   font-size: 1.2rem;
   color: #717171;
+}
+
+.search-panel-customer__plus:hover .search-panel-customer__plus-icon,
+ .search-panel-customer__minus:hover .search-panel-customer__minus-icon {
+  color: var(--text-color);
 }
 
 .search-panel-customer__plus.search-panel-customer__btn--disable,
@@ -584,6 +631,11 @@ i.header-navbar-menu__user-icon {
   cursor: not-allowed;
   color: #ebebeb;
   border: 1px solid #ebebeb;
+}
+
+.search-panel-customer__plus.search-panel-customer__btn--disable .search-panel-customer__plus-icon,
+.search-panel-customer__minus.search-panel-customer__btn--disable .search-panel-customer__minus-icon {
+  color: #ebebeb;
 }
 
 /* background img */
