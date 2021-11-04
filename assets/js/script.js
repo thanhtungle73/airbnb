@@ -10,6 +10,9 @@ const headerSearchItems = $$(".header-search__item");
 const headerSearchBtnColor = $(".header-search__color");
 const headerSearchBtnIcon = $(".header-search__btn-icon");
 const headerSearchLocation = $(".header-search__location");
+const headerSearchCustomerDesc = $(
+  ".header-search__customer .header-search__desc"
+);
 const headerSearchPanelLocation = $(".search-panel__location");
 const headerSearchPanelLocationVideo = $(".search-panel__location-btn-video");
 const headerSearchPanelCustomer = $(".search-panel-customer");
@@ -24,6 +27,10 @@ const headerSearchPanelCustomerKidNum = $(
 const headerSearchPanelCustomerChildNum = $(
   ".search-panel-customer__child .search-panel-customer__num"
 );
+const headerSearchPanelCustomerIcon = $(
+  ".header-search__person-icon-container"
+);
+const headerSearchPanelCustomerNumber = $(".header-search__person-number");
 
 app = {
   handleEvents: function () {
@@ -59,7 +66,9 @@ app = {
         !e.target.closest(".search-panel__location") &&
         !e.target.closest(".header-search__location")
       ) {
-        headerSearchPanelLocation.style.display = "none";
+        headerSearchPanelLocation.classList.remove(
+          "search-panel__location--active"
+        );
         headerSearchPanelLocationVideo.load();
       }
 
@@ -73,6 +82,9 @@ app = {
         );
         headerSearchPanelCustomer.style.transform = "translateX(50%)";
         headerSearchPanelCustomer.style.opacity = "0";
+        headerSearchPanelCustomerIcon.classList.remove(
+          "header-search__person-icon-container--active"
+        );
       }
     };
 
@@ -135,7 +147,9 @@ app = {
           if (!headerSearchPanelLocationVideo.ended) {
             headerSearchPanelLocationVideo.play();
           }
-          headerSearchPanelLocation.style.display = "block";
+          headerSearchPanelLocation.classList.add(
+            "search-panel__location--active"
+          );
         }
 
         //display header search customer panel
@@ -146,13 +160,26 @@ app = {
               "search-panel-customer--active"
             )
           );
+          if (
+            !headerSearchPanelCustomerNumber.classList.contains(
+              "header-search__person-number--disable"
+            )
+          ) {
+            headerSearchPanelCustomerIcon.classList.add(
+              "header-search__person-icon-container--active"
+            );
+          } else {
+            headerSearchPanelCustomerIcon.classList.remove(
+              "header-search__person-icon-container--active"
+            );
+          }
           setTimeout(() => {
             headerSearchPanelCustomer.style.transform = "translateX(0)";
             headerSearchPanelCustomer.style.opacity = "1";
           }, 50);
         }
         e.classList.add("header-search__item--no-border");
-        headerSearch.style.backgroundColor = "#f7f7f7";
+        headerSearch.classList.add("header__search--active");
         e.classList.add("header-search__item--active");
       };
     });
@@ -191,7 +218,7 @@ app = {
       _this.resetHeaderSearchPanel();
       headerSearchBtnColor.style.width = 0;
       headerSearchBtnColor.style.height = 0;
-      headerSearchPanelLocation.style.display = "block";
+      headerSearchPanelLocation.classList.add("search-panel__location--active");
       if (!headerSearchPanelLocationVideo.ended) {
         headerSearchPanelLocationVideo.play();
       }
@@ -247,6 +274,7 @@ app = {
           e.classList.add("search-panel-customer__btn--disable");
           e.previousElementSibling.innerText = 16;
         }
+        _this.displayCustomerNum();
       };
     });
 
@@ -288,8 +316,87 @@ app = {
             "search-panel-customer__btn--disable"
           );
         }
+        _this.displayCustomerNum();
       };
     });
+
+    //handle when clicking header search customer panel close icon
+    headerSearchPanelCustomerIcon.onclick = function (e) {
+      e.stopPropagation();
+      _this.resetHeaderSearchPanelCustomerValue();
+      headerSearchPanelCustomerNumber.classList.add(
+        "header-search__person-number--disable"
+      );
+      headerSearchPanelCustomerIcon.classList.remove(
+        "header-search__person-icon-container--active"
+      );
+      headerSearchCustomerDesc.classList.remove("header-search__desc--disable");
+    };
+  },
+
+  resetHeaderSearchPanelCustomerValue: function () {
+    headerSearchPanelCustomerAdultNum.innerText = 0;
+    headerSearchPanelCustomerKidNum.innerText = 0;
+    headerSearchPanelCustomerChildNum.innerText = 0;
+
+    headerSearchPanelCustomerAdultNum.previousElementSibling.classList.add(
+      "search-panel-customer__btn--disable"
+    );
+    headerSearchPanelCustomerAdultNum.nextElementSibling.classList.remove(
+      "search-panel-customer__btn--disable"
+    );
+    headerSearchPanelCustomerKidNum.previousElementSibling.classList.add(
+      "search-panel-customer__btn--disable"
+    );
+    headerSearchPanelCustomerKidNum.nextElementSibling.classList.remove(
+      "search-panel-customer__btn--disable"
+    );
+    headerSearchPanelCustomerChildNum.previousElementSibling.classList.add(
+      "search-panel-customer__btn--disable"
+    );
+    headerSearchPanelCustomerChildNum.nextElementSibling.classList.remove(
+      "search-panel-customer__btn--disable"
+    );
+  },
+
+  displayCustomerNum: function () {
+    if (
+      (Number(headerSearchPanelCustomerAdultNum.innerText) > 0 ||
+        Number(headerSearchPanelCustomerKidNum.innerText) > 0) &&
+      Number(headerSearchPanelCustomerChildNum.innerText) < 1
+    ) {
+      headerSearchPanelCustomerNumber.classList.remove(
+        "header-search__person-number--disable"
+      );
+      headerSearchPanelCustomerIcon.classList.add(
+        "header-search__person-icon-container--active"
+      );
+      headerSearchCustomerDesc.classList.add("header-search__desc--disable");
+      headerSearchPanelCustomerNumber.innerText = `${
+        Number(headerSearchPanelCustomerAdultNum.innerText) +
+        Number(headerSearchPanelCustomerKidNum.innerText)
+      } khách`;
+    } else if (Number(headerSearchPanelCustomerChildNum.innerText) > 0) {
+      headerSearchPanelCustomerNumber.classList.remove(
+        "header-search__person-number--disable"
+      );
+      headerSearchPanelCustomerIcon.classList.add(
+        "header-search__person-icon-container--active"
+      );
+      headerSearchCustomerDesc.classList.add("header-search__desc--disable");
+      headerSearchPanelCustomerNumber.innerText = `${
+        Number(headerSearchPanelCustomerAdultNum.innerText) +
+        Number(headerSearchPanelCustomerKidNum.innerText)
+      } khách, ${Number(headerSearchPanelCustomerChildNum.innerText)} em bé`;
+    } else {
+      headerSearchPanelCustomerNumber.classList.add(
+        "header-search__person-number--disable"
+      );
+      headerSearchPanelCustomerIcon.classList.remove(
+        "header-search__person-icon-container--active"
+      );
+      headerSearchCustomerDesc.classList.remove("header-search__desc--disable");
+    }
   },
 
   resetHeaderSearchPanel: function () {
@@ -329,6 +436,7 @@ app = {
     headerSearchItems.forEach((e) => {
       e.classList.remove("header-search__item--active");
     });
+    headerSearch.classList.remove("header__search--active");
   },
 
   resetSearchBtn: function () {
