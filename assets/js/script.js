@@ -31,6 +31,7 @@ const headerSearchPanelCustomerIcon = $(
   ".header-search__person-icon-container"
 );
 const headerSearchPanelCustomerNumber = $(".header-search__person-number");
+const headerSearchPanelCalendarHeading =$$(".search-panel-calendar__heading");
 
 app = {
   handleEvents: function () {
@@ -332,6 +333,32 @@ app = {
       );
       headerSearchCustomerDesc.classList.remove("header-search__desc--disable");
     };
+  },
+
+  isLeapYear: function (year) {
+    return ((year % 4 === 0 && year % 100 !== 0) || (year % 400 ===0));
+  },
+
+  getFebDays: function (year) {
+    return isLeapYear(year) ? 29 : 28;
+  },
+
+  renderCalendar: function (month, year) {
+    const monthNames = ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4', 'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8', 'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12'];
+
+    let daysOfMonth = [31, this.getFebDays(year),  31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    let currentDate = new Date();
+    let firstDay = new Date(month, year, 1);
+
+    headerSearchPanelCalendarHeading.forEach((e, index) => {
+      e.innerText = `${monthNames[month + index]} năm ${year}`;
+    });
+
+    for (let i = 0; i < daysOfMonth[month]; i++) {
+      
+    }
+
   },
 
   resetHeaderSearchPanelCustomerValue: function () {
