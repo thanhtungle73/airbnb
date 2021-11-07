@@ -31,7 +31,14 @@ const headerSearchPanelCustomerIcon = $(
   ".header-search__person-icon-container"
 );
 const headerSearchPanelCustomerNumber = $(".header-search__person-number");
-const headerSearchPanelCalendarHeading =$$(".search-panel-calendar__heading");
+const headerSearchPanelCalendarHeading = $$(".search-panel-calendar__heading");
+const headerSearchPanelCalendarRow = $$(".search-panel-calendar__days-row");
+const headerSearchPanelCalendarRowNext = $$(
+  ".search-panel-calendar__days-row-next"
+);
+const headerSearchPanelCalendarDaysData = $$(
+  ".search-panel-calendar__days-data"
+);
 
 app = {
   handleEvents: function () {
@@ -336,29 +343,92 @@ app = {
   },
 
   isLeapYear: function (year) {
-    return ((year % 4 === 0 && year % 100 !== 0) || (year % 400 ===0));
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   },
 
   getFebDays: function (year) {
-    return isLeapYear(year) ? 29 : 28;
+    return this.isLeapYear(year) ? 29 : 28;
   },
 
-  renderCalendar: function (month, year) {
-    const monthNames = ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4', 'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8', 'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12'];
+  renderCalendar: function (month, nextMonth, year) {
+    const monthNames = [
+      "tháng 1",
+      "tháng 2",
+      "tháng 3",
+      "tháng 4",
+      "tháng 5",
+      "tháng 6",
+      "tháng 7",
+      "tháng 8",
+      "tháng 9",
+      "tháng 10",
+      "tháng 11",
+      "tháng 12",
+    ];
 
-    let daysOfMonth = [31, this.getFebDays(year),  31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let daysOfMonth = [
+      31,
+      this.getFebDays(year),
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31,
+    ];
 
     let currentDate = new Date();
-    let firstDay = new Date(month, year, 1);
+    let firstDay = new Date(year, month, 1);
+    let firstDayNextMonth = new Date(year, nextMonth, 1);
 
     headerSearchPanelCalendarHeading.forEach((e, index) => {
-      e.innerText = `${monthNames[month + index]} năm ${year}`;
+      if (month + index <= 13) {
+        e.innerText = `${monthNames[month + index]} năm ${year}`;
+      } else {
+        e.innerText = `${monthNames[nextMonth + index]} năm ${year + 1}`;
+      }
     });
 
-    for (let i = 0; i < daysOfMonth[month]; i++) {
-      
+    for (let i = 0; i <= daysOfMonth[month] + firstDay.getDay() - 1; i++) {
+      let day = document.createElement("td");
+      if (i >= firstDay.getDay()) {
+        day.classList.add("search-panel-calendar__days-data");
+        day.innerHTML = i - firstDay.getDay() + 1;
+      }
+
+      headerSearchPanelCalendarRow.forEach((e) => {
+         if (e.childElementCount <= 6) {
+          e.appendChild(day);
+          console.log(e)
+        } else {
+          return;
+        }
+      });
     }
 
+    for (
+      let i = 0;
+      i <= daysOfMonth[nextMonth] + firstDayNextMonth.getDay() - 1;
+      i++
+    ) {
+      let dayNext = document.createElement("td");
+      if (i >= firstDayNextMonth.getDay()) {
+        dayNext.classList.add("search-panel-calendar__days-data");
+        dayNext.innerHTML = i - firstDayNextMonth.getDay() + 1;
+      }
+
+      headerSearchPanelCalendarRowNext.forEach((e) => {
+        if (e.childElementCount <= 6) {
+          e.appendChild(dayNext);
+        } else {
+          return;
+        }
+      });
+    }
   },
 
   resetHeaderSearchPanelCustomerValue: function () {
@@ -478,6 +548,16 @@ app = {
   },
 
   start: function () {
+    let currDate = new Date();
+    let currMonth = currDate.getMonth();
+    let currYear = currDate.getFullYear();
+    let nextMonth;
+    if (currMonth + 1 <= 13) {
+      nextMonth = currMonth + 1;
+    } else {
+      nextMonth = 0;
+    }
+    this.renderCalendar(currMonth, nextMonth, currYear);
     this.handleEvents();
   },
 };
