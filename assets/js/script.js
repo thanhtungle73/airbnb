@@ -36,11 +36,30 @@ const headerSearchPanelCalendarRow = $$(".search-panel-calendar__days-row");
 const headerSearchPanelCalendarRowNext = $$(
   ".search-panel-calendar__days-row-next"
 );
-const headerSearchPanelCalendarDaysData = $$(
+const headerSearchPanelCalendarDays = $(".search-panel-calendar__days");
+const headerSearchPanelCalendarDaysNext = $(
+  ".search-panel-calendar__days-next"
+);
+const headerSearchPanelCalendarDaysData = $(
   ".search-panel-calendar__days-data"
 );
+const headerSearchPanelCalendarNextBtn = $(
+  ".search-panel-calendar__navigation-container-next"
+);
+const headerSearchPanelCalendarPreviousBtn = $(
+  ".search-panel-calendar__navigation-container-previous"
+);
+const headerSearchPanelCalendar = $(".search-panel-calendar");
+
+let currDate;
+let currMonth;
+let currYear;
+let secondYear;
+let secondMonth;
 
 app = {
+  calendarDataIndex: 0,
+
   handleEvents: function () {
     const _this = this;
     let headerSearchBtnWidth;
@@ -186,6 +205,16 @@ app = {
             headerSearchPanelCustomer.style.opacity = "1";
           }, 50);
         }
+
+        //display header search calendar panel
+        if (e.classList.contains("header-search__room")) {
+          headerSearchPanelCalendar.classList.toggle(
+            "search-panel-calendar--active"
+          );
+          _this.removeChildDays();
+          _this.renderCalendar(..._this.resetDate());
+        }
+
         e.classList.add("header-search__item--no-border");
         headerSearch.classList.add("header__search--active");
         e.classList.add("header-search__item--active");
@@ -340,6 +369,20 @@ app = {
       );
       headerSearchCustomerDesc.classList.remove("header-search__desc--disable");
     };
+
+    //handle when clicking next month button
+    headerSearchPanelCalendarNextBtn.onclick = function () {
+      ++currMonth;
+      _this.removeChildDays();
+      _this.renderCalendar(..._this.getCurrentDate());
+    };
+
+    //handle when clicking previous month button
+    headerSearchPanelCalendarPreviousBtn.onclick = function () {
+      --currMonth;
+      _this.removeChildDays();
+      _this.renderCalendar(..._this.getCurrentDate());
+    };
   },
 
   isLeapYear: function (year) {
@@ -350,7 +393,12 @@ app = {
     return this.isLeapYear(year) ? 29 : 28;
   },
 
-  renderCalendar: function (month, nextMonth, year) {
+  convertWeekDays: function (firstDayOfMonth) {
+    //start day from Monday
+    return (firstDayOfMonth.getDay() || 7) - 1;
+  },
+
+  renderCalendar: function (month, secondMonth, secondYear, year) {
     const monthNames = [
       "tháng 1",
       "tháng 2",
@@ -383,51 +431,164 @@ app = {
 
     let currentDate = new Date();
     let firstDay = new Date(year, month, 1);
-    let firstDayNextMonth = new Date(year, nextMonth, 1);
+    let firstDaySecondMonth = new Date(secondYear, secondMonth, 1);
 
+    //calender month & year heading
     headerSearchPanelCalendarHeading.forEach((e, index) => {
-      if (month + index <= 13) {
+      if (month + index <= 11) {
         e.innerText = `${monthNames[month + index]} năm ${year}`;
       } else {
-        e.innerText = `${monthNames[nextMonth + index]} năm ${year + 1}`;
+        e.innerText = `${monthNames[0]} năm ${secondYear}`;
       }
     });
 
-    for (let i = 0; i <= daysOfMonth[month] + firstDay.getDay() - 1; i++) {
-      let day = document.createElement("td");
-      if (i >= firstDay.getDay()) {
-        day.classList.add("search-panel-calendar__days-data");
-        day.innerHTML = i - firstDay.getDay() + 1;
-      }
-
-      headerSearchPanelCalendarRow.forEach((e) => {
-         if (e.childElementCount <= 6) {
-          e.appendChild(day);
-          console.log(e)
-        } else {
-          return;
-        }
-      });
-    }
-
+    //render the first calendar in panel
     for (
       let i = 0;
-      i <= daysOfMonth[nextMonth] + firstDayNextMonth.getDay() - 1;
+      i <= daysOfMonth[month] + this.convertWeekDays(firstDay) - 1;
       i++
     ) {
-      let dayNext = document.createElement("td");
-      if (i >= firstDayNextMonth.getDay()) {
-        dayNext.classList.add("search-panel-calendar__days-data");
-        dayNext.innerHTML = i - firstDayNextMonth.getDay() + 1;
-      }
+      let day = document.createElement("div");
 
-      headerSearchPanelCalendarRowNext.forEach((e) => {
-        if (e.childElementCount <= 6) {
-          e.appendChild(dayNext);
+      if (i >= this.convertWeekDays(firstDay)) {
+        day.innerHTML = i - this.convertWeekDays(firstDay) + 1;
+        if (
+          (i - this.convertWeekDays(firstDay) + 1 < currentDate.getDate() &&
+            year === currentDate.getFullYear() &&
+            month === currentDate.getMonth()) ||
+          (year === currentDate.getFullYear() &&
+            month < currentDate.getMonth()) ||
+          year < currentDate.getFullYear()
+        ) {
+          day.setAttribute(
+            "class",
+            "search-panel-calendar__days-data search-panel-calendar__days-data--disabled"
+          );
         } else {
-          return;
+          day.classList.add("search-panel-calendar__days-data");
+          day.setAttribute("onclick", "app.selectCalendar(this);");
+          day.setAttribute("data-index", `${i}`);
         }
+      } else {
+        day.classList.add("search-panel-calendar__days-empty");
+      }
+      headerSearchPanelCalendarDays.appendChild(day);
+    }
+
+    //render the second calendar in panel
+    for (
+      let i = 0;
+      i <=
+      daysOfMonth[secondMonth] + this.convertWeekDays(firstDaySecondMonth) - 1;
+      i++
+    ) {
+      let dayNext = document.createElement("div");
+      dayNext.classList.add("search-panel-calendar__days-empty");
+      if (i >= this.convertWeekDays(firstDaySecondMonth)) {
+        dayNext.innerHTML = i - this.convertWeekDays(firstDaySecondMonth) + 1;
+        if (
+          (i - this.convertWeekDays(firstDaySecondMonth) + 1 <
+            currentDate.getDate() &&
+            secondYear === currentDate.getFullYear() &&
+            secondMonth === currentDate.getMonth()) ||
+          (secondYear === currentDate.getFullYear() &&
+            secondMonth < currentDate.getMonth()) ||
+          secondYear < currentDate.getFullYear()
+        ) {
+          dayNext.setAttribute(
+            "class",
+            "search-panel-calendar__days-data search-panel-calendar__days-data--disabled"
+          );
+        } else {
+          dayNext.classList.add("search-panel-calendar__days-data");
+          dayNext.setAttribute("onclick", "app.selectCalendar(this);");
+          dayNext.setAttribute("data-index", `${10 * i}`);
+        }
+      } else {
+        dayNext.classList.add("search-panel-calendar__days-empty");
+      }
+      headerSearchPanelCalendarDaysNext.appendChild(dayNext);
+    }
+  },
+
+  getCurrentDate: function () {
+    secondMonth = currMonth + 1;
+
+    if (currMonth > 11) {
+      currMonth = 0;
+      currYear = currYear + 1;
+      secondMonth = currMonth + 1;
+      secondYear = currYear;
+    } else if (secondMonth > 11) {
+      secondMonth = 0;
+      secondYear = currYear + 1;
+    } else if (currMonth < 0) {
+      currMonth = 11;
+      currYear = currYear - 1;
+    } else if (secondMonth < 0) {
+      secondMonth = 11;
+      secondYear = currYear - 1;
+    } else {
+      secondMonth = currMonth + 1;
+      secondYear = currYear;
+    }
+    return [currMonth, secondMonth, secondYear, currYear];
+  },
+
+  resetDate: function () {
+    currDate = new Date();
+    currMonth = currDate.getMonth();
+    currYear = currDate.getFullYear();
+    secondMonth = currMonth + 1;
+    secondYear = currYear;
+
+    this.getCurrentDate();
+    return [currMonth, secondMonth, secondYear, currYear];
+  },
+
+  removeChildDays: function () {
+    while (headerSearchPanelCalendarDays.hasChildNodes()) {
+      headerSearchPanelCalendarDays.removeChild(
+        headerSearchPanelCalendarDays.lastChild
+      );
+    }
+    while (headerSearchPanelCalendarDaysNext.hasChildNodes()) {
+      headerSearchPanelCalendarDaysNext.removeChild(
+        headerSearchPanelCalendarDaysNext.lastChild
+      );
+    }
+  },
+
+  selectCalendar: function (e) {
+    const calendarActiveElements = document.querySelectorAll(
+      ".search-panel-calendar__days-data--active"
+    );
+    const calendarElements = document.querySelectorAll(
+      ".search-panel-calendar__days-data"
+    );
+
+    if (calendarActiveElements.length < 1) {
+      e.classList.add("search-panel-calendar__days-data--active");
+      this.calendarDataIndex = e.dataset.index;
+    } else if (
+      calendarActiveElements.length < 2 &&
+      calendarActiveElements.length >= 1 &&
+      Number(e.dataset.index) > Number(this.calendarDataIndex)
+    ) {
+      calendarElements.forEach((element) => {
+        element.classList.remove(
+          "search-panel-calendar__days-data--active-second"
+        );
       });
+      e.classList.add("search-panel-calendar__days-data--active-second");
+    } else {
+      calendarElements.forEach((element) => {
+        element.classList.remove(
+          "search-panel-calendar__days-data--active-second"
+        );
+        element.classList.remove("search-panel-calendar__days-data--active");
+      });
+      e.classList.add("search-panel-calendar__days-data--active");
     }
   },
 
@@ -548,16 +709,6 @@ app = {
   },
 
   start: function () {
-    let currDate = new Date();
-    let currMonth = currDate.getMonth();
-    let currYear = currDate.getFullYear();
-    let nextMonth;
-    if (currMonth + 1 <= 13) {
-      nextMonth = currMonth + 1;
-    } else {
-      nextMonth = 0;
-    }
-    this.renderCalendar(currMonth, nextMonth, currYear);
     this.handleEvents();
   },
 };

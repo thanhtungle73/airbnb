@@ -552,6 +552,7 @@ i.header-navbar-menu__user-icon {
 
 /* header search panel  calendar*/
 .search-panel-calendar {
+  display: none;
   position: absolute;
   top: calc(var(--header-search-height) + 12px);
   left: 0;
@@ -560,6 +561,10 @@ i.header-navbar-menu__user-icon {
   padding: 32px 58px;
   border-radius: 32px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.search-panel-calendar.search-panel-calendar--active {
+  display: block;
 }
 
 .search-panel-calendar__header {
@@ -616,7 +621,8 @@ i.header-navbar-menu__user-icon {
   transform: translateY(-23%);
 }
 
-.search-panel-calendar__navigation-container {
+.search-panel-calendar__navigation-container-previous,
+.search-panel-calendar__navigation-container-next {
   width: 32px;
   height: 32px;
   line-height: 32px;
@@ -624,7 +630,8 @@ i.header-navbar-menu__user-icon {
   border-radius: 50%;
 }
 
-.search-panel-calendar__navigation-container:hover {
+.search-panel-calendar__navigation-container-previous:hover,
+.search-panel-calendar__navigation-container-next:hover {
   background-color: rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
@@ -656,13 +663,24 @@ i.header-navbar-menu__user-icon {
   color: #717171;
 }
 
-.search-panel-calendar__days {
+.search-panel-calendar__days,
+.search-panel-calendar__days-next {
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  text-align: center;
 }
 
-.search-panel-calendar__days-data {
-  width: 48px;
+.search-panel-calendar__days-empty {
+  flex: 0 0 48px;
+  height: 47px;
+  cursor: default;
+}
+
+div.search-panel-calendar__days-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48px;
   height: 47px;
   font-size: 1.4rem;
   color: var(--text-color);
@@ -671,7 +689,7 @@ i.header-navbar-menu__user-icon {
   border-radius: 50%;
   padding: 0;
 }
-
+.search-panel-calendar__days-data.search-panel-calendar__days-data--active-second,
 .search-panel-calendar__days-data.search-panel-calendar__days-data--active {
   background-color: var(--text-color);
   color: var(--white-color);
