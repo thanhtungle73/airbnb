@@ -13,6 +13,9 @@ const headerSearchLocation = $(".header-search__location");
 const headerSearchCustomerDesc = $(
   ".header-search__customer .header-search__desc"
 );
+const headerSearchCalendarDesc = $$(
+  ".header-search__room .header-search__desc"
+);
 const headerSearchPanelLocation = $(".search-panel__location");
 const headerSearchPanelLocationVideo = $(".search-panel__location-btn-video");
 const headerSearchPanelCustomer = $(".search-panel-customer");
@@ -32,16 +35,10 @@ const headerSearchPanelCustomerIcon = $(
 );
 const headerSearchPanelCustomerNumber = $(".header-search__person-number");
 const headerSearchPanelCalendarHeading = $$(".search-panel-calendar__heading");
-const headerSearchPanelCalendarRow = $$(".search-panel-calendar__days-row");
-const headerSearchPanelCalendarRowNext = $$(
-  ".search-panel-calendar__days-row-next"
-);
+const headerSearchPanelCalendar = $(".search-panel-calendar");
 const headerSearchPanelCalendarDays = $(".search-panel-calendar__days");
 const headerSearchPanelCalendarDaysNext = $(
   ".search-panel-calendar__days-next"
-);
-const headerSearchPanelCalendarDaysData = $(
-  ".search-panel-calendar__days-data"
 );
 const headerSearchPanelCalendarNextBtn = $(
   ".search-panel-calendar__navigation-container-next"
@@ -49,7 +46,9 @@ const headerSearchPanelCalendarNextBtn = $(
 const headerSearchPanelCalendarPreviousBtn = $(
   ".search-panel-calendar__navigation-container-previous"
 );
-const headerSearchPanelCalendar = $(".search-panel-calendar");
+const headerSearchCheckIn = $(".header-search__checkIn");
+const headerSearchCheckOut = $(".header-search__checkOut");
+const headerSearchRoomCloseBtn = $(".header-search__room-close");
 
 let currDate;
 let currMonth;
@@ -63,6 +62,8 @@ app = {
   handleEvents: function () {
     const _this = this;
     let headerSearchBtnWidth;
+    const limitAdults = 16;
+    const limitKidChild = 5;
 
     //handle when clicking header search button
     headerSearch.onclick = function (e) {
@@ -111,6 +112,16 @@ app = {
         headerSearchPanelCustomer.style.opacity = "0";
         headerSearchPanelCustomerIcon.classList.remove(
           "header-search__person-icon-container--active"
+        );
+      }
+
+      //close header calendar panel when clicking outside
+      if (
+        !e.target.closest(".header-search__room") &&
+        !e.target.closest(".search-panel-calendar")
+      ) {
+        headerSearchPanelCalendar.classList.remove(
+          "search-panel-calendar--active"
         );
       }
     };
@@ -163,6 +174,11 @@ app = {
         _this.resetHeaderSearchItems();
         _this.resetHeaderSearchBorder();
 
+        //active header search item when clicking
+        e.classList.add("header-search__item--no-border");
+        e.classList.add("header-search__item--active");
+        headerSearch.classList.add("header__search--active");
+
         if (e.previousElementSibling) {
           e.previousElementSibling.classList.add(
             "header-search__item--no-border"
@@ -207,17 +223,29 @@ app = {
         }
 
         //display header search calendar panel
-        if (e.classList.contains("header-search__room")) {
-          headerSearchPanelCalendar.classList.toggle(
+        if (
+          e.classList.contains("header-search__room") &&
+          document.querySelectorAll(".search-panel-calendar__days-data--active")
+            .length > 0
+        ) {
+          headerSearchPanelCalendar.classList.add(
+            "search-panel-calendar--active"
+          );
+        } else if (
+          e.classList.contains("header-search__room") &&
+          document.querySelectorAll(".search-panel-calendar__days-data--active")
+            .length <= 0
+        ) {
+          headerSearchPanelCalendar.classList.add(
             "search-panel-calendar--active"
           );
           _this.removeChildDays();
           _this.renderCalendar(..._this.resetDate());
+        } else {
+          headerSearchPanelCalendar.classList.remove(
+            "search-panel-calendar--active"
+          );
         }
-
-        e.classList.add("header-search__item--no-border");
-        headerSearch.classList.add("header__search--active");
-        e.classList.add("header-search__item--active");
       };
     });
 
@@ -293,15 +321,15 @@ app = {
             "search-panel-customer__btn--disable"
           );
         } else if (
-          Number(e.previousElementSibling.innerText) >= 5 &&
+          Number(e.previousElementSibling.innerText) >= limitKidChild &&
           (e.closest(".search-panel-customer__kid") ||
             e.closest(".search-panel-customer__child"))
         ) {
           e.classList.add("search-panel-customer__btn--disable");
-          e.previousElementSibling.innerText = 5;
+          e.previousElementSibling.innerText = limitKidChild;
         } else if (
-          Number(e.previousElementSibling.innerText) >= 5 &&
-          Number(e.previousElementSibling.innerText) < 16 &&
+          Number(e.previousElementSibling.innerText) >= limitKidChild &&
+          Number(e.previousElementSibling.innerText) < limitAdults &&
           e.closest(".search-panel-customer__adult")
         ) {
           headerSearchPanelCustomerMinusBtn[index].classList.remove(
@@ -309,7 +337,7 @@ app = {
           );
         } else {
           e.classList.add("search-panel-customer__btn--disable");
-          e.previousElementSibling.innerText = 16;
+          e.previousElementSibling.innerText = limitAdults;
         }
         _this.displayCustomerNum();
       };
@@ -336,13 +364,13 @@ app = {
             "search-panel-customer__btn--disable"
           );
           e.nextElementSibling.innerText = 0;
-        } else if (Number(e.nextElementSibling.innerText) < 5) {
+        } else if (Number(e.nextElementSibling.innerText) < limitKidChild) {
           headerSearchPanelCustomerPlusBtn[index].classList.remove(
             "search-panel-customer__btn--disable"
           );
         } else if (
-          Number(e.nextElementSibling.innerText) < 16 &&
-          Number(e.nextElementSibling.innerText) >= 5 &&
+          Number(e.nextElementSibling.innerText) < limitAdults &&
+          Number(e.nextElementSibling.innerText) >= limitKidChild &&
           e.closest(".search-panel-customer__adult")
         ) {
           headerSearchPanelCustomerPlusBtn[index].classList.remove(
@@ -393,7 +421,7 @@ app = {
     return this.isLeapYear(year) ? 29 : 28;
   },
 
-  convertWeekDays: function (firstDayOfMonth) {
+  convertWeekDaysFromMonday: function (firstDayOfMonth) {
     //start day from Monday
     return (firstDayOfMonth.getDay() || 7) - 1;
   },
@@ -445,15 +473,16 @@ app = {
     //render the first calendar in panel
     for (
       let i = 0;
-      i <= daysOfMonth[month] + this.convertWeekDays(firstDay) - 1;
+      i <= daysOfMonth[month] + this.convertWeekDaysFromMonday(firstDay) - 1;
       i++
     ) {
       let day = document.createElement("div");
 
-      if (i >= this.convertWeekDays(firstDay)) {
-        day.innerHTML = i - this.convertWeekDays(firstDay) + 1;
+      if (i >= this.convertWeekDaysFromMonday(firstDay)) {
+        day.innerHTML = i - this.convertWeekDaysFromMonday(firstDay) + 1;
         if (
-          (i - this.convertWeekDays(firstDay) + 1 < currentDate.getDate() &&
+          (i - this.convertWeekDaysFromMonday(firstDay) + 1 <
+            currentDate.getDate() &&
             year === currentDate.getFullYear() &&
             month === currentDate.getMonth()) ||
           (year === currentDate.getFullYear() &&
@@ -466,8 +495,11 @@ app = {
           );
         } else {
           day.classList.add("search-panel-calendar__days-data");
-          day.setAttribute("onclick", "app.selectCalendar(this);");
-          day.setAttribute("data-index", `${i}`);
+          day.setAttribute("onclick", "app.handleSelectCalendar(this);");
+          day.setAttribute(
+            "data-index",
+            `${i - this.convertWeekDaysFromMonday(firstDay) + 1}`
+          );
         }
       } else {
         day.classList.add("search-panel-calendar__days-empty");
@@ -479,15 +511,18 @@ app = {
     for (
       let i = 0;
       i <=
-      daysOfMonth[secondMonth] + this.convertWeekDays(firstDaySecondMonth) - 1;
+      daysOfMonth[secondMonth] +
+        this.convertWeekDaysFromMonday(firstDaySecondMonth) -
+        1;
       i++
     ) {
       let dayNext = document.createElement("div");
       dayNext.classList.add("search-panel-calendar__days-empty");
-      if (i >= this.convertWeekDays(firstDaySecondMonth)) {
-        dayNext.innerHTML = i - this.convertWeekDays(firstDaySecondMonth) + 1;
+      if (i >= this.convertWeekDaysFromMonday(firstDaySecondMonth)) {
+        dayNext.innerHTML =
+          i - this.convertWeekDaysFromMonday(firstDaySecondMonth) + 1;
         if (
-          (i - this.convertWeekDays(firstDaySecondMonth) + 1 <
+          (i - this.convertWeekDaysFromMonday(firstDaySecondMonth) + 1 <
             currentDate.getDate() &&
             secondYear === currentDate.getFullYear() &&
             secondMonth === currentDate.getMonth()) ||
@@ -501,8 +536,13 @@ app = {
           );
         } else {
           dayNext.classList.add("search-panel-calendar__days-data");
-          dayNext.setAttribute("onclick", "app.selectCalendar(this);");
-          dayNext.setAttribute("data-index", `${10 * i}`);
+          dayNext.setAttribute("onclick", "app.handleSelectCalendar(this);");
+          dayNext.setAttribute(
+            "data-index",
+            `${
+              10 * (i - this.convertWeekDaysFromMonday(firstDaySecondMonth) + 1)
+            }`
+          );
         }
       } else {
         dayNext.classList.add("search-panel-calendar__days-empty");
@@ -532,6 +572,7 @@ app = {
       secondMonth = currMonth + 1;
       secondYear = currYear;
     }
+
     return [currMonth, secondMonth, secondYear, currYear];
   },
 
@@ -547,6 +588,8 @@ app = {
   },
 
   removeChildDays: function () {
+    this.calendarDataIndex = 0;
+
     while (headerSearchPanelCalendarDays.hasChildNodes()) {
       headerSearchPanelCalendarDays.removeChild(
         headerSearchPanelCalendarDays.lastChild
@@ -559,36 +602,112 @@ app = {
     }
   },
 
-  selectCalendar: function (e) {
-    const calendarActiveElements = document.querySelectorAll(
+  handleSelectCalendar: function (e) {
+    const calendarActiveElements = $$(
       ".search-panel-calendar__days-data--active"
     );
-    const calendarElements = document.querySelectorAll(
-      ".search-panel-calendar__days-data"
-    );
+    const calendarElements = $$(".search-panel-calendar__days-data");
+    const calendarHeading = $$(".search-panel-calendar__heading");
+    const calendarFirstHeading = calendarHeading[0];
+    const calendarSecondHeading = calendarHeading[1];
+    const headerSearchCheckInItem = headerSearchCheckIn.closest('.header-search__room');
+    const headerSearchCheckOutItem = headerSearchCheckOut.closest('.header-search__room');
 
-    if (calendarActiveElements.length < 1) {
-      e.classList.add("search-panel-calendar__days-data--active");
-      this.calendarDataIndex = e.dataset.index;
-    } else if (
-      calendarActiveElements.length < 2 &&
-      calendarActiveElements.length >= 1 &&
-      Number(e.dataset.index) > Number(this.calendarDataIndex)
-    ) {
+    const resetSecondSelection = function () {
       calendarElements.forEach((element) => {
         element.classList.remove(
           "search-panel-calendar__days-data--active-second"
         );
       });
-      e.classList.add("search-panel-calendar__days-data--active-second");
-    } else {
+    };
+    const resetAllSelection = function () {
       calendarElements.forEach((element) => {
         element.classList.remove(
           "search-panel-calendar__days-data--active-second"
         );
         element.classList.remove("search-panel-calendar__days-data--active");
       });
+    };
+    const activeHeaderSearchCheckInItem = function () {
+      headerSearchCheckInItem.classList.add("header-search__item--no-border");
+      headerSearchCheckInItem.classList.add("header-search__item--active");
+      headerSearch.classList.add("header__search--active");
+    }
+    const activeHeaderSearchCheckOutItem = function () {
+     headerSearchCheckOutItem.classList.add("header-search__item--no-border");
+     headerSearchCheckOutItem.classList.add("header-search__item--active");
+      headerSearch.classList.add("header__search--active");
+    }
+    const inactiveHeaderSearchCheckInItem = function () {
+      headerSearchCheckInItem.classList.remove("header-search__item--no-border");
+      headerSearchCheckInItem.classList.remove("header-search__item--active");
+      headerSearch.classList.remove("header__search--active");
+    }
+    const inactiveHeaderSearchCheckOutItem = function () {
+     headerSearchCheckOutItem.classList.remove("header-search__item--no-border");
+     headerSearchCheckOutItem.classList.remove("header-search__item--active");
+      headerSearch.classList.remove("header__search--active");
+    }
+
+
+    if (calendarActiveElements.length === 0) {
+      this.calendarDataIndex = e.dataset.index;
+
+      this.resetHeaderSearchItems();
+      this.resetHeaderSearchBorder();
+      this.removeHeaderSearchBorder(headerSearchCheckInItem);
+      activeHeaderSearchCheckInItem();
       e.classList.add("search-panel-calendar__days-data--active");
+      headerSearchCheckIn.classList.add("header-search__checkIn--active");
+      headerSearchCheckIn.previousElementSibling.classList.add(
+        "header-search__desc--disable"
+      );
+
+      headerSearchCheckIn.innerText = `${
+        e.innerText
+      } thg ${calendarFirstHeading.innerText.slice(5, 8)}`;
+    } else if (
+      calendarActiveElements.length < 2 &&
+      calendarActiveElements.length >= 1 &&
+      Number(e.dataset.index) > Number(this.calendarDataIndex)
+    ) {
+      resetSecondSelection();
+      this.resetHeaderSearchItems();
+      this.resetHeaderSearchBorder();
+      this.removeHeaderSearchBorder(headerSearchCheckOutItem);
+      activeHeaderSearchCheckOutItem();
+
+      e.classList.add("search-panel-calendar__days-data--active-second");
+      headerSearchCheckOut.classList.add("header-search__checkOut--active");
+      headerSearchCheckOut.previousElementSibling.classList.add(
+        "header-search__desc--disable"
+      );
+
+      headerSearchCheckOut.innerText = `${
+        e.innerText
+      } thg ${calendarSecondHeading.innerText.slice(5, 8)}`;
+    } else {
+      this.calendarDataIndex = e.dataset.index;
+      resetAllSelection();
+
+      e.classList.add("search-panel-calendar__days-data--active");
+      headerSearchCheckOut.classList.remove("header-search__checkOut--active");
+      headerSearchCheckOut.previousElementSibling.classList.remove(
+        "header-search__desc--disable"
+      );
+      headerSearchCheckIn.classList.add("header-search__checkIn--active");
+      headerSearchCheckIn.previousElementSibling.classList.add(
+        "header-search__desc--disable"
+      );
+
+      this.resetHeaderSearchItems();
+      this.resetHeaderSearchBorder();
+      this.removeHeaderSearchBorder(headerSearchCheckInItem);
+      activeHeaderSearchCheckInItem();
+
+      headerSearchCheckIn.innerText = `${
+        e.innerText
+      } thg ${calendarFirstHeading.innerText.slice(5, 8)}`;
     }
   },
 
@@ -690,6 +809,14 @@ app = {
     e.classList.add("header-search__item--no-border");
   },
 
+  removePreviousHeaderSearchBorder: function (e) {
+    if (e.previousElementSibling) {
+      e.previousElementSibling.classList.add(
+        "header-search__item--no-border"
+      );
+    }
+  },
+
   resetHeaderSearchItems: function () {
     headerSearchItems.forEach((e) => {
       e.classList.remove("header-search__item--active");
@@ -709,6 +836,8 @@ app = {
   },
 
   start: function () {
+    this.removeChildDays();
+    this.renderCalendar(...this.resetDate());
     this.handleEvents();
   },
 };

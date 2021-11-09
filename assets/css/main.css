@@ -282,10 +282,15 @@ i.header-navbar-menu__user-icon {
   background-color: inherit;
 }
 
+.header-search__room-container {
+  z-index: 1;
+}
+
 .header-search__room {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   flex: 1;
   z-index: 1;
   position: relative;
@@ -303,6 +308,41 @@ i.header-navbar-menu__user-icon {
 
 .header-search__desc.header-search__desc--disable {
   display: none;
+}
+
+.header-search__checkIn,
+.header-search__checkOut {
+  display: none;
+  margin: 0;
+  z-index: 1;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-search__checkIn.header-search__checkIn--active,
+.header-search__checkOut.header-search__checkOut--active {
+  display: block;
+}
+
+.header-search__room-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  z-index: 1;
+  background-color: #ebebeb;
+  border-radius: 50%;
+  margin-left: 4px;
+}
+
+.header-search__room-close-icon {
+  font-size: 1.4rem;
 }
 
 .header-search__customer {
@@ -561,6 +601,7 @@ i.header-navbar-menu__user-icon {
   padding: 32px 58px;
   border-radius: 32px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: all 3s linear;
 }
 
 .search-panel-calendar.search-panel-calendar--active {
