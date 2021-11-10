@@ -48,7 +48,8 @@ const headerSearchPanelCalendarPreviousBtn = $(
 );
 const headerSearchCheckIn = $(".header-search__checkIn");
 const headerSearchCheckOut = $(".header-search__checkOut");
-const headerSearchRoomCloseBtn = $(".header-search__room-close");
+const headerSearchRoomChkInCloseBtn = $(".header-search__room-checkIn-close");
+const headerSearchRoomChkOutCloseBtn = $(".header-search__room-checkOut-close");
 
 let currDate;
 let currMonth;
@@ -87,6 +88,7 @@ app = {
       if (!e.target.closest(".header__search")) {
         _this.resetHeaderSearchItems();
         _this.resetHeaderSearchBorder();
+        _this.resetHeaderSearchRoomCloseBtn();
       }
 
       //close header location panel when clicking outside
@@ -168,7 +170,7 @@ app = {
       };
     });
 
-    //handle when clicking header search items
+    //handle events when clicking header search items
     headerSearchItems.forEach((e) => {
       e.onclick = function () {
         _this.resetHeaderSearchItems();
@@ -225,15 +227,31 @@ app = {
         //display header search calendar panel
         if (
           e.classList.contains("header-search__room") &&
-          document.querySelectorAll(".search-panel-calendar__days-data--active")
+          $$(".search-panel-calendar__days-data--active")
             .length > 0
         ) {
           headerSearchPanelCalendar.classList.add(
             "search-panel-calendar--active"
           );
+          _this.resetHeaderSearchRoomCloseBtn();
+          if (headerSearchCheckIn.closest(".header-search__room").classList.contains("header-search__item--active")) {
+            headerSearchRoomChkInCloseBtn.classList.add("header-search__room-close--active");
+          } else if (headerSearchCheckOut.closest(".header-search__room").classList.contains("header-search__item--active")) {
+            headerSearchRoomChkOutCloseBtn.classList.add("header-search__room-close--active");
+          } else {
+            headerSearchRoomChkInCloseBtn.classList.remove("header-search__room-close--active");
+            headerSearchRoomChkOutCloseBtn.classList.remove("header-search__room-close--active");
+            headerSearchCheckIn.previousElementSibling.classList.remove(
+              "header-search__desc--disable"
+            );
+            headerSearchCheckOut.previousElementSibling.classList.remove(
+              "header-search__desc--disable"
+            );
+          }
+          
         } else if (
           e.classList.contains("header-search__room") &&
-          document.querySelectorAll(".search-panel-calendar__days-data--active")
+          $$(".search-panel-calendar__days-data--active")
             .length <= 0
         ) {
           headerSearchPanelCalendar.classList.add(
@@ -246,6 +264,9 @@ app = {
             "search-panel-calendar--active"
           );
         }
+
+        //display close btn for header search rooms
+       
       };
     });
 
@@ -258,7 +279,7 @@ app = {
 
         headerSearchBtnColor.style.width = headerSearchBtnWidth + "px";
         headerSearchBtnColor.style.height = headerSearchBtnWidth + "px";
-        if (xMouse >= -64 && xMouse <= headerSearchBtnWidth) {
+        if (xMouse >= yMouse && xMouse <= headerSearchBtnWidth) {
           headerSearchBtnColor.style.top = yMouse + "px";
           headerSearchBtnColor.style.left =
             xMouse - headerSearchBtnWidth / 3 + "px";
@@ -295,12 +316,12 @@ app = {
         e.previousElementSibling.innerText =
           Number(e.previousElementSibling.innerText) + 1;
 
-        //adding the adult value to 1 when adding kid and child without adult
+        //adding the adult value to 1 when adding kid and child first
         if (
           ((e.closest(".search-panel-customer__kid") &&
-            Number(e.previousElementSibling.innerText > 0)) ||
+            Number(e.previousElementSibling.innerText) > 0) ||
             (e.closest(".search-panel-customer__child") &&
-              Number(e.previousElementSibling.innerText > 0))) &&
+              Number(e.previousElementSibling.innerText) > 0)) &&
           Number(headerSearchPanelCustomerAdultNum.innerText) < 1
         ) {
           headerSearchPanelCustomerAdultNum.innerText = 1;
@@ -421,8 +442,8 @@ app = {
     return this.isLeapYear(year) ? 29 : 28;
   },
 
+  //start day from Monday
   convertWeekDaysFromMonday: function (firstDayOfMonth) {
-    //start day from Monday
     return (firstDayOfMonth.getDay() || 7) - 1;
   },
 
@@ -461,7 +482,7 @@ app = {
     let firstDay = new Date(year, month, 1);
     let firstDaySecondMonth = new Date(secondYear, secondMonth, 1);
 
-    //calender month & year heading
+    //render calender month & year heading
     headerSearchPanelCalendarHeading.forEach((e, index) => {
       if (month + index <= 11) {
         e.innerText = `${monthNames[month + index]} năm ${year}`;
@@ -569,7 +590,6 @@ app = {
       secondMonth = 11;
       secondYear = currYear - 1;
     } else {
-      secondMonth = currMonth + 1;
       secondYear = currYear;
     }
 
@@ -607,12 +627,20 @@ app = {
       ".search-panel-calendar__days-data--active"
     );
     const calendarElements = $$(".search-panel-calendar__days-data");
-    const calendarHeading = $$(".search-panel-calendar__heading");
-    const calendarFirstHeading = calendarHeading[0];
-    const calendarSecondHeading = calendarHeading[1];
-    const headerSearchCheckInItem = headerSearchCheckIn.closest('.header-search__room');
-    const headerSearchCheckOutItem = headerSearchCheckOut.closest('.header-search__room');
+    const headerSearchCheckInItem = headerSearchCheckIn.closest(
+      ".header-search__room"
+    );
+    const headerSearchCheckOutItem = headerSearchCheckOut.closest(
+      ".header-search__room"
+    );
+    const calendarHeadingTxt = e.closest(".search-panel-calendar__container")
+      .firstElementChild.innerText;
 
+    const resetFirstSelection = function () {
+      calendarElements.forEach((element) => {
+        element.classList.remove("search-panel-calendar__days-data--active");
+      });
+    };
     const resetSecondSelection = function () {
       calendarElements.forEach((element) => {
         element.classList.remove(
@@ -632,61 +660,70 @@ app = {
       headerSearchCheckInItem.classList.add("header-search__item--no-border");
       headerSearchCheckInItem.classList.add("header-search__item--active");
       headerSearch.classList.add("header__search--active");
-    }
+    };
     const activeHeaderSearchCheckOutItem = function () {
-     headerSearchCheckOutItem.classList.add("header-search__item--no-border");
-     headerSearchCheckOutItem.classList.add("header-search__item--active");
+      headerSearchCheckOutItem.classList.add("header-search__item--no-border");
+      headerSearchCheckOutItem.classList.add("header-search__item--active");
       headerSearch.classList.add("header__search--active");
-    }
-    const inactiveHeaderSearchCheckInItem = function () {
-      headerSearchCheckInItem.classList.remove("header-search__item--no-border");
-      headerSearchCheckInItem.classList.remove("header-search__item--active");
-      headerSearch.classList.remove("header__search--active");
-    }
-    const inactiveHeaderSearchCheckOutItem = function () {
-     headerSearchCheckOutItem.classList.remove("header-search__item--no-border");
-     headerSearchCheckOutItem.classList.remove("header-search__item--active");
-      headerSearch.classList.remove("header__search--active");
-    }
+    };
 
 
-    if (calendarActiveElements.length === 0) {
+    if (
+      calendarActiveElements.length <= 1 &&
+      headerSearchCheckInItem.classList.contains("header-search__item--active")
+    ) {
+      resetFirstSelection();
       this.calendarDataIndex = e.dataset.index;
 
       this.resetHeaderSearchItems();
       this.resetHeaderSearchBorder();
       this.removeHeaderSearchBorder(headerSearchCheckInItem);
-      activeHeaderSearchCheckInItem();
+      activeHeaderSearchCheckOutItem();
       e.classList.add("search-panel-calendar__days-data--active");
       headerSearchCheckIn.classList.add("header-search__checkIn--active");
       headerSearchCheckIn.previousElementSibling.classList.add(
         "header-search__desc--disable"
       );
+      this.resetHeaderSearchRoomCloseBtn();
+      headerSearchCheckInItem.classList.contains("header-search__item--active") ?headerSearchRoomChkInCloseBtn.classList.add(
+        "header-search__room-close--active"
+      ) : headerSearchRoomChkInCloseBtn.classList.remove(
+        "header-search__room-close--active"
+      );
 
       headerSearchCheckIn.innerText = `${
         e.innerText
-      } thg ${calendarFirstHeading.innerText.slice(5, 8)}`;
+      } thg ${calendarHeadingTxt.slice(5, 8)}`;
     } else if (
       calendarActiveElements.length < 2 &&
-      calendarActiveElements.length >= 1 &&
-      Number(e.dataset.index) > Number(this.calendarDataIndex)
+      calendarActiveElements.length >= 0 &&
+      Number(e.dataset.index) >= Number(this.calendarDataIndex) &&
+      headerSearchCheckOutItem.classList.contains("header-search__item--active") 
     ) {
       resetSecondSelection();
       this.resetHeaderSearchItems();
       this.resetHeaderSearchBorder();
       this.removeHeaderSearchBorder(headerSearchCheckOutItem);
-      activeHeaderSearchCheckOutItem();
+      !headerSearchCheckIn.classList.contains("header-search__checkIn--active")
+        ? activeHeaderSearchCheckInItem()
+        : activeHeaderSearchCheckOutItem();
 
       e.classList.add("search-panel-calendar__days-data--active-second");
       headerSearchCheckOut.classList.add("header-search__checkOut--active");
       headerSearchCheckOut.previousElementSibling.classList.add(
         "header-search__desc--disable"
       );
+      this.resetHeaderSearchRoomCloseBtn();
+      headerSearchCheckOutItem.classList.contains("header-search__item--active") ?headerSearchRoomChkOutCloseBtn.classList.add(
+        "header-search__room-close--active"
+      ) : headerSearchRoomChkOutCloseBtn.classList.remove(
+        "header-search__room-close--active"
+      );
 
       headerSearchCheckOut.innerText = `${
         e.innerText
-      } thg ${calendarSecondHeading.innerText.slice(5, 8)}`;
-    } else {
+      } thg ${calendarHeadingTxt.slice(5, 8)}`;
+    } else if (Number(e.dataset.index) < Number(this.calendarDataIndex)){
       this.calendarDataIndex = e.dataset.index;
       resetAllSelection();
 
@@ -699,16 +736,34 @@ app = {
       headerSearchCheckIn.previousElementSibling.classList.add(
         "header-search__desc--disable"
       );
+      this.resetHeaderSearchRoomCloseBtn();
+      if (headerSearchCheckOutItem.classList.contains("header-search__item--active")) {
+        headerSearchRoomChkInCloseBtn.classList.remove(
+          "header-search__room-close--active"
+        );
+        headerSearchRoomChkOutCloseBtn.classList.add(
+          "header-search__room-close--active"
+        );
+      }
 
       this.resetHeaderSearchItems();
       this.resetHeaderSearchBorder();
       this.removeHeaderSearchBorder(headerSearchCheckInItem);
-      activeHeaderSearchCheckInItem();
+      activeHeaderSearchCheckOutItem();
 
       headerSearchCheckIn.innerText = `${
         e.innerText
-      } thg ${calendarFirstHeading.innerText.slice(5, 8)}`;
+      } thg ${calendarHeadingTxt.slice(5, 8)}`;
     }
+  },
+
+  resetHeaderSearchRoomCloseBtn: function () {
+    headerSearchRoomChkInCloseBtn.classList.remove(
+      "header-search__room-close--active"
+    );
+    headerSearchRoomChkOutCloseBtn.classList.remove(
+      "header-search__room-close--active"
+    );
   },
 
   resetHeaderSearchPanelCustomerValue: function () {
@@ -811,9 +866,7 @@ app = {
 
   removePreviousHeaderSearchBorder: function (e) {
     if (e.previousElementSibling) {
-      e.previousElementSibling.classList.add(
-        "header-search__item--no-border"
-      );
+      e.previousElementSibling.classList.add("header-search__item--no-border");
     }
   },
 

@@ -341,6 +341,10 @@ i.header-navbar-menu__user-icon {
   margin-left: 4px;
 }
 
+.header-search__room-close.header-search__room-close--active {
+  display: flex;
+}
+
 .header-search__room-close-icon {
   font-size: 1.4rem;
 }
