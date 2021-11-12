@@ -13,9 +13,6 @@ const headerSearchLocation = $(".header-search__location");
 const headerSearchCustomerDesc = $(
   ".header-search__customer .header-search__desc"
 );
-const headerSearchCalendarDesc = $$(
-  ".header-search__room .header-search__desc"
-);
 const headerSearchPanelLocation = $(".search-panel__location");
 const headerSearchPanelLocationVideo = $(".search-panel__location-btn-video");
 const headerSearchPanelCustomer = $(".search-panel-customer");
@@ -46,10 +43,15 @@ const headerSearchPanelCalendarNextBtn = $(
 const headerSearchPanelCalendarPreviousBtn = $(
   ".search-panel-calendar__navigation-container-previous"
 );
+const searchRoomCheckInDesc = $(".header-search__room-checkIn .header-search__desc");
+const searchRoomCheckOutDesc = $(".header-search__room-checkOut .header-search__desc");
+const searchRoomCheckInDuration = $(".header-search__room-checkIn .header-search__duration");
+const searchRoomCheckOutDuration = $(".header-search__room-checkOut .header-search__duration");
 const headerSearchCheckIn = $(".header-search__checkIn");
 const headerSearchCheckOut = $(".header-search__checkOut");
 const headerSearchRoomChkInCloseBtn = $(".header-search__room-checkIn-close");
 const headerSearchRoomChkOutCloseBtn = $(".header-search__room-checkOut-close");
+const searchPanelFooterItem = $$(".search-panel-calendar__footer-item");
 
 let currDate;
 let currMonth;
@@ -476,6 +478,18 @@ app = {
       headerSearchCheckIn.innerText = "";
       headerSearchCheckOut.innerText = "";
     };
+
+    //handle display date duration when clicking day item in calendar__footer
+    searchPanelFooterItem.forEach((element)=> {
+      element.onclick = function () {
+        //reset active footer function...
+
+
+        searchRoomCheckInDuration.classList.add("header-search__duration--active");
+        searchRoomCheckOutDuration.classList.add("header-search__duration--active");
+      }
+
+    });
   },
 
   isLeapYear: function (year) {
@@ -713,22 +727,20 @@ app = {
     };
     const activeSearchChkInDayHideDescItem = function () {
       headerSearchCheckIn.classList.add("header-search__checkIn--active");
-      headerSearchCheckIn.previousElementSibling.classList.add(
+      searchRoomCheckInDesc.classList.add(
+        "header-search__desc--disable"
+      );
+      headerSearchCheckIn.closest(".header-search__room-container").classList.add(
         "header-search__desc--disable"
       );
     };
     const activeSearchChkOutDayHideDescItem = function () {
       headerSearchCheckOut.classList.add("header-search__checkOut--active");
-      headerSearchCheckOut.previousElementSibling.classList.add(
+      searchRoomCheckOutDesc.classList.add(
         "header-search__desc--disable"
       );
     };
-    const inactiveSearchChkOutDayShowDescItem = function () {
-      headerSearchCheckOut.classList.remove("header-search__checkOut--active");
-      headerSearchCheckOut.previousElementSibling.classList.remove(
-        "header-search__desc--disable"
-      );
-    };
+
 
     if (
       calendarActiveElementsLength <= 1 &&
@@ -838,14 +850,14 @@ app = {
 
   inactiveSearchChkInDayShowDescItem: function () {
     headerSearchCheckIn.classList.remove("header-search__checkIn--active");
-    headerSearchCheckIn.previousElementSibling.classList.remove(
+    searchRoomCheckInDesc.classList.remove(
       "header-search__desc--disable"
     );
   },
 
   inactiveSearchChkOutDayShowDescItem: function () {
     headerSearchCheckOut.classList.remove("header-search__checkOut--active");
-    headerSearchCheckOut.previousElementSibling.classList.remove(
+    searchRoomCheckOutDesc.classList.remove(
       "header-search__desc--disable"
     );
   },

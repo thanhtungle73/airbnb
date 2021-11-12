@@ -282,6 +282,7 @@ i.header-navbar-menu__user-icon {
   background-color: inherit;
 }
 
+/* Search day number */
 .header-search__room-container {
   z-index: 1;
 }
@@ -308,6 +309,24 @@ i.header-navbar-menu__user-icon {
 
 .header-search__desc.header-search__desc--disable {
   display: none;
+}
+
+.header-search__day-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-search__duration {
+  display: none;
+  margin: 0 0 0 7px;
+  font-size: 1.4rem;
+  color: var(--text-color);
+  font-weight: 300;
+}
+
+.header-search__duration.header-search__duration--active {
+  display: block;
 }
 
 .header-search__checkIn,
@@ -349,6 +368,7 @@ i.header-navbar-menu__user-icon {
   font-size: 1.4rem;
 }
 
+/* Search customer number */
 .header-search__customer {
   display: flex;
   align-items: center;

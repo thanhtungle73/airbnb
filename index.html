@@ -75,21 +75,27 @@
                     <input type="text" class="header-search__input" id="header-search__box"
                         placeholder="Bạn sắp đi đâu?">
                 </label>
-                <div class="header-search__room header-search__item">
+                <div class="header-search__room header-search__room-checkIn header-search__item">
                     <span class="header-search__room-container">
                         <h4 class="header-search__heading">Nhận phòng</h4>
                         <p class="header-search__desc">Thêm ngày</p>
-                        <p class="header-search__checkIn"></p>
+                        <span class="header-search__day-info">
+                            <p class="header-search__checkIn"></p>
+                            <p class="header-search__duration">±3</p>
+                        </span>
                     </span>
                     <div class="header-search__room-close header-search__room-checkIn-close">
                         <i class="fas fa-times header-search__room-close-icon"></i>
                     </div>
                 </div>
-                <div class="header-search__room header-search__item">
+                <div class="header-search__room header-search__room-checkOut  header-search__item">
                     <span class="header-search__room-container">
                         <h4 class="header-search__heading">Trả phòng</h4>
                         <p class="header-search__desc">Thêm ngày</p>
-                        <p class="header-search__checkOut"></p>
+                        <span class="header-search__day-info">
+                            <p class="header-search__checkOut"></p>
+                            <p class="header-search__duration">±3</p>
+                        </span>
                     </span>
                     <div class="header-search__room-close header-search__room-checkOut-close">
                         <i class="fas fa-times header-search__room-close-icon"></i>
@@ -181,7 +187,7 @@
                                         <li class="search-panel-calendar__item">T7</li>
                                         <li class="search-panel-calendar__item">CN</li>
                                     </ul>
-                                    <div class="search-panel-calendar__days-next"> 
+                                    <div class="search-panel-calendar__days-next">
                                     </div>
                                 </div>
                             </div>
