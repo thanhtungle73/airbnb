@@ -808,12 +808,6 @@ div.search-panel-calendar__days-data {
   cursor: pointer;
 }
 
-.search-panel-calendar__flexible {
-}
-
-.search-panel-calendar-flexible__lengths {
-}
-
 .search-panel-calendar-flexible__lengths-heading,
 .search-panel-calendar-flexible__dates-heading {
   display: flex;
@@ -832,17 +826,23 @@ div.search-panel-calendar__days-data {
   color: var(--text-color);
 }
 
+.search-panel-calendar-flexible__dates-option {
+  margin-bottom: 14px;
+}
+
 .search-panel-calendar-flexible__lengths-list {
   display: flex;
   align-items: center;
   justify-content: center;
   list-style: none;
   padding-left: 0;
+  margin-top: 6px;
+  margin-bottom: 20px;
 }
 
 .search-panel-calendar-flexible__lengths-item {
   border: 1px solid #c2c2c2;
-  margin-left: 8px;
+  margin-right: 8px;
   padding: 9px 18px;
   border-radius: 36px;
   font-size: 1.4rem;
@@ -859,8 +859,6 @@ div.search-panel-calendar__days-data {
   background-color: #f7f7f7;
 }
 
-.search-panel-calendar-flexible__dates {
-}
 
 .search-panel-calendar-flexible__dates-list {
   display: flex;
@@ -874,21 +872,44 @@ div.search-panel-calendar__days-data {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 113px;
+  height: 122px;
   margin: auto;
   border: 1px solid #c2c2c2;
   border-radius: 10px;
+  cursor: pointer;
 }
 
-.search-panel-calendar-flexible__dates-icon {
+.search-panel-calendar-flexible__dates-item:hover {
+  border-color: var(--text-color);
+}
+
+.search-panel-calendar-flexible__dates-item.search-panel-calendar-flexible__dates-item--active {
+  border: 2px solid var(--text-color);
+  padding: 8px 17px;
+  background-color: #f7f7f7;
+}
+
+i.search-panel-calendar-flexible__dates-icon {
+  display: none;
   font-size: 3.2rem;
 }
 
+i.search-panel-calendar-flexible__dates-icon.search-panel-calendar-flexible__dates-icon--active {
+  display: block;
+}
+
 .search-panel-calendar-flexible__dates-title {
+  margin-top: 14px;
+  color: var(--text-color);
   font-size: 1.4rem;
+  font-weight: 300;
 }
 
 .header-search__flexible {
-  display: none;
+  /* display: none; */
+  display: block;
   flex: 2;
   position: relative;
   z-index: 1;
