@@ -285,7 +285,6 @@ i.header-navbar-menu__user-icon {
 
 /* Search day number */
 .header-search__room {
-  /* display: flex; */
   display: none;
   flex-direction: row;
   justify-content: space-between;
@@ -295,6 +294,10 @@ i.header-navbar-menu__user-icon {
   position: relative;
   padding: 15px 24px;
   cursor: pointer;
+}
+
+.header-search__room.header-search__room--active {
+  display: flex;
 }
 
 .header-search__room-container {
@@ -630,7 +633,6 @@ i.header-navbar-menu__user-icon {
   padding: 32px 58px;
   border-radius: 32px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  transition: all 3s linear;
 }
 
 .search-panel-calendar.search-panel-calendar--active {
@@ -651,15 +653,23 @@ i.header-navbar-menu__user-icon {
   justify-content: center;
   background-color: #ebebeb;
   border-radius: 28px;
+  flex-shrink: 0;
 }
 
 .search-panel-calendar__header-content {
   margin: 4px 4px;
   padding: 6px 14px;
+  border: none;
   border-radius: 28px;
   background-color: transparent;
+  font-size: 1.4rem;
   font-weight: 500;
   cursor: pointer;
+  transition: transform 0.08s ease;
+}
+
+.search-panel-calendar__header-content:active {
+  transform: scale(0.96);
 }
 
 .search-panel-calendar__header-content:first-child {
@@ -677,6 +687,10 @@ i.header-navbar-menu__user-icon {
 
 .search-panel-calendar__normal {
   display: none;
+}
+
+.search-panel-calendar__normal.search-panel-calendar__normal--active {
+  display: block;
 }
 
 .search-panel-calendar__body {
@@ -808,6 +822,14 @@ div.search-panel-calendar__days-data {
   cursor: pointer;
 }
 
+.search-panel-calendar-flexible {
+  display: none;
+}
+
+.search-panel-calendar-flexible.search-panel-calendar-flexible--active {
+  display: block;
+}
+
 .search-panel-calendar-flexible__lengths-heading,
 .search-panel-calendar-flexible__dates-heading {
   display: flex;
@@ -826,8 +848,13 @@ div.search-panel-calendar__days-data {
   color: var(--text-color);
 }
 
+.search-panel-calendar-flexible__dates-heading {
+  padding: 18px 0 14px;
+}
+
 .search-panel-calendar-flexible__dates-option {
-  margin-bottom: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .search-panel-calendar-flexible__lengths-list {
@@ -908,13 +935,16 @@ i.search-panel-calendar-flexible__dates-icon.search-panel-calendar-flexible__dat
 }
 
 .header-search__flexible {
-  /* display: none; */
-  display: block;
+  display: none;
   flex: 2;
   position: relative;
   z-index: 1;
   padding: 15px 24px;
   cursor: pointer;
+}
+
+.header-search__flexible.header-search__flexible--active {
+  display: block;
 }
 
 .header-search__flexible-heading {

@@ -13,6 +13,25 @@ const headerSearchLocation = $(".header-search__location");
 const headerSearchCustomerDesc = $(
   ".header-search__customer .header-search__desc"
 );
+const searchRoomCheckIn = $(".header-search__room-checkIn");
+const searchRoomCheckOut = $(".header-search__room-checkOut");
+const searchRoomCheckInDesc = $(
+  ".header-search__room-checkIn .header-search__desc"
+);
+const searchRoomCheckOutDesc = $(
+  ".header-search__room-checkOut .header-search__desc"
+);
+const searchRoomCheckInDuration = $(
+  ".header-search__room-checkIn .header-search__duration"
+);
+const searchRoomCheckOutDuration = $(
+  ".header-search__room-checkOut .header-search__duration"
+);
+const headerSearchCalendarCheckIn = $(".header-search__room-checkIn");
+const headerSearchCalendarCheckOut = $(".header-search__room-checkOut");
+const headerSearchCalendarFlexible = $(".header-search__flexible");
+const headerSearchRoomChkInCloseBtn = $(".header-search__room-checkIn-close");
+const headerSearchRoomChkOutCloseBtn = $(".header-search__room-checkOut-close");
 const headerSearchPanelLocation = $(".search-panel__location");
 const headerSearchPanelLocationVideo = $(".search-panel__location-btn-video");
 const headerSearchPanelCustomer = $(".search-panel-customer");
@@ -31,6 +50,9 @@ const headerSearchPanelCustomerIcon = $(
   ".header-search__person-icon-container"
 );
 const headerSearchPanelCustomerNumber = $(".header-search__person-number");
+const searchPanelCalendarHeaders = $$(".search-panel-calendar__header-content");
+const searchPanelNormalCalendar = $(".search-panel-calendar__normal");
+const searchPanelFlexibleCalendar = $(".search-panel-calendar-flexible");
 const headerSearchPanelCalendarHeading = $$(".search-panel-calendar__heading");
 const headerSearchPanelCalendar = $(".search-panel-calendar");
 const headerSearchPanelCalendarDays = $(".search-panel-calendar__days");
@@ -43,22 +65,6 @@ const headerSearchPanelCalendarNextBtn = $(
 const headerSearchPanelCalendarPreviousBtn = $(
   ".search-panel-calendar__navigation-container-previous"
 );
-const searchRoomCheckInDesc = $(
-  ".header-search__room-checkIn .header-search__desc"
-);
-const searchRoomCheckOutDesc = $(
-  ".header-search__room-checkOut .header-search__desc"
-);
-const searchRoomCheckInDuration = $(
-  ".header-search__room-checkIn .header-search__duration"
-);
-const searchRoomCheckOutDuration = $(
-  ".header-search__room-checkOut .header-search__duration"
-);
-const headerSearchCheckIn = $(".header-search__checkIn");
-const headerSearchCheckOut = $(".header-search__checkOut");
-const headerSearchRoomChkInCloseBtn = $(".header-search__room-checkIn-close");
-const headerSearchRoomChkOutCloseBtn = $(".header-search__room-checkOut-close");
 const searchPanelFooterItem = $$(".search-panel-calendar__footer-item");
 
 let currDate;
@@ -75,6 +81,28 @@ app = {
     let headerSearchBtnWidth;
     const limitAdults = 16;
     const limitKidChild = 5;
+    const resetSearchPanelCalendarSwitching = function () {
+      searchPanelCalendarHeaders.forEach((element) => {
+        element.classList.remove(
+          "search-panel-calendar__header-content--active"
+        );
+      });
+      searchPanelNormalCalendar.classList.remove(
+        "search-panel-calendar__normal--active"
+      );
+      searchPanelFlexibleCalendar.classList.remove(
+        "search-panel-calendar-flexible--active"
+      );
+      headerSearchCalendarCheckIn.classList.remove(
+        "header-search__room--active"
+      );
+      headerSearchCalendarCheckOut.classList.remove(
+        "header-search__room--active"
+      );
+      headerSearchCalendarFlexible.classList.remove(
+        "header-search__flexible--active"
+      );
+    };
 
     //handle when clicking header search button
     headerSearch.onclick = function (e) {
@@ -521,6 +549,42 @@ app = {
         _this.checkActiveDaysAndAddDuration();
       };
     });
+
+    //handle switching between normal & flexible calendar when clicking calendar header
+    searchPanelCalendarHeaders.forEach((element, index) => {
+      element.onclick = function () {
+        resetSearchPanelCalendarSwitching();
+
+        element.classList.add("search-panel-calendar__header-content--active");
+        if (index === 0) {
+          headerSearchCalendarCheckIn.classList.add(
+            "header-search__room--active"
+          );
+          headerSearchCalendarCheckOut.classList.add(
+            "header-search__room--active"
+          );
+          headerSearchCalendarFlexible.classList.remove(
+            "header-search__flexible--active"
+          );
+          searchPanelNormalCalendar.classList.add(
+            "search-panel-calendar__normal--active"
+          );
+        } else {
+          headerSearchCalendarCheckIn.classList.remove(
+            "header-search__room--active"
+          );
+          headerSearchCalendarCheckOut.classList.remove(
+            "header-search__room--active"
+          );
+          headerSearchCalendarFlexible.classList.add(
+            "header-search__flexible--active"
+          );
+          searchPanelFlexibleCalendar.classList.add(
+            "search-panel-calendar-flexible--active"
+          );
+        }
+      };
+    });
   },
 
   isLeapYear: function (year) {
@@ -863,7 +927,9 @@ app = {
       this.resetHeaderSearchBorder();
       this.inactiveSearchChkOutDayShowDescItem();
     }
-    console.log(headerSearchCheckOut.classList.contains("header-search__checkOut--active"))
+    console.log(
+      headerSearchCheckOut.classList.contains("header-search__checkOut--active")
+    );
     this.checkActiveDaysAndAddDuration();
   },
 

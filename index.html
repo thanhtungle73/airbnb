@@ -74,7 +74,7 @@
                     <input type="text" class="header-search__input" id="header-search__box"
                         placeholder="Where are you going?">
                 </label>
-                <div class="header-search__room header-search__room-checkIn header-search__item">
+                <div class="header-search__room header-search__room-checkIn header-search__item header-search__room--active">
                     <span class="header-search__room-container">
                         <h4 class="header-search__heading">Check in</h4>
                         <p class="header-search__desc">Add dates</p>
@@ -87,7 +87,7 @@
                         <i class="fas fa-times header-search__room-close-icon"></i>
                     </div>
                 </div>
-                <div class="header-search__room header-search__room-checkOut  header-search__item">
+                <div class="header-search__room header-search__room-checkOut  header-search__item header-search__room--active">
                     <span class="header-search__room-container">
                         <h4 class="header-search__heading">Check out</h4>
                         <p class="header-search__desc">Add dates</p>
@@ -142,12 +142,12 @@
                 <div class="search-panel-calendar">
                     <div class="search-panel-calendar__header">
                         <div class="search-panel-calendar__header-item">
-                            <span
-                                class="search-panel-calendar__header-content search-panel-calendar__header-content--active">Calendar</span>
-                            <span class="search-panel-calendar__header-content">I'm flexible</span>
+                            <button
+                                class="search-panel-calendar__header-content search-panel-calendar__header-content--active">Calendar</button>
+                            <button class="search-panel-calendar__header-content">I'm flexible</button>
                         </div>
                     </div>
-                    <div class="search-panel-calendar__normal">
+                    <div class="search-panel-calendar__normal search-panel-calendar__normal--active">
                         <div class="search-panel-calendar__body">
                             <div class="grid">
                                 <div class="row lrg-gutter">
