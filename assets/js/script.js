@@ -32,6 +32,8 @@ const headerSearchCalendarCheckOut = $(".header-search__room-checkOut");
 const headerSearchCalendarFlexible = $(".header-search__flexible");
 const headerSearchRoomChkInCloseBtn = $(".header-search__room-checkIn-close");
 const headerSearchRoomChkOutCloseBtn = $(".header-search__room-checkOut-close");
+const headerSearchCheckIn = $(".header-search__checkIn");
+const headerSearchCheckOut = $(".header-search__checkOut");
 const headerSearchPanelLocation = $(".search-panel__location");
 const headerSearchPanelLocationVideo = $(".search-panel__location-btn-video");
 const headerSearchPanelCustomer = $(".search-panel-customer");
@@ -217,17 +219,12 @@ app = {
       e.onclick = function () {
         _this.resetHeaderSearchItems();
         _this.resetHeaderSearchBorder();
+        _this.resetHeaderSearchRoomCloseBtn(); //reset calendar close btn when clicking outside
 
         //active header search item when clicking
-        e.classList.add("header-search__item--no-border");
         e.classList.add("header-search__item--active");
         headerSearch.classList.add("header__search--active");
-
-        if (e.previousElementSibling) {
-          e.previousElementSibling.classList.add(
-            "header-search__item--no-border"
-          );
-        }
+        _this.removeSeparateOfActiveSearchItem();
 
         //display header search location panel
         if (e.classList.contains("header-search__location")) {
@@ -268,7 +265,8 @@ app = {
 
         //display header search calendar panel
         if (
-          e.classList.contains("header-search__room") &&
+          (e.classList.contains("header-search__room") ||
+            e.classList.contains("header-search__flexible")) &&
           $$(".search-panel-calendar__days-data--active").length > 0
         ) {
           headerSearchPanelCalendar.classList.add(
@@ -298,21 +296,11 @@ app = {
               "header-search__room-close--active"
             );
           } else {
-            headerSearchRoomChkInCloseBtn.classList.remove(
-              "header-search__room-close--active"
-            );
-            headerSearchRoomChkOutCloseBtn.classList.remove(
-              "header-search__room-close--active"
-            );
-            headerSearchCheckIn.previousElementSibling.classList.remove(
-              "header-search__desc--disable"
-            );
-            headerSearchCheckOut.previousElementSibling.classList.remove(
-              "header-search__desc--disable"
-            );
+            _this.resetHeaderSearchRoomCloseBtn();
           }
         } else if (
-          e.classList.contains("header-search__room") &&
+          (e.classList.contains("header-search__room") ||
+            e.classList.contains("header-search__flexible")) &&
           $$(".search-panel-calendar__days-data--active").length <= 0
         ) {
           headerSearchPanelCalendar.classList.add(
@@ -554,14 +542,29 @@ app = {
     searchPanelCalendarHeaders.forEach((element, index) => {
       element.onclick = function () {
         resetSearchPanelCalendarSwitching();
+        _this.resetHeaderSearchBorder();
 
         element.classList.add("search-panel-calendar__header-content--active");
         if (index === 0) {
+          //All header search room active or not
+          if (
+            !searchRoomCheckIn.classList.contains(
+              "header-search__item--active"
+            ) &&
+            !searchRoomCheckOut.classList.contains(
+              "header-search__item--active"
+            )
+          ) {
+            _this.activeHeaderSearchCheckInItem();
+          }
           headerSearchCalendarCheckIn.classList.add(
             "header-search__room--active"
           );
           headerSearchCalendarCheckOut.classList.add(
             "header-search__room--active"
+          );
+          headerSearchCalendarFlexible.classList.remove(
+            "header-search__item--active"
           );
           headerSearchCalendarFlexible.classList.remove(
             "header-search__flexible--active"
@@ -570,6 +573,14 @@ app = {
             "search-panel-calendar__normal--active"
           );
         } else {
+          headerSearchCalendarFlexible.classList.add(
+            "header-search__item--active"
+          );
+          //remove separate line of active search item
+          headerSearchCalendarFlexible.classList.add(
+            "header-search__item--no-border"
+          );
+          headerSearchLocation.classList.add("header-search__item--no-border");
           headerSearchCalendarCheckIn.classList.remove(
             "header-search__room--active"
           );
@@ -583,6 +594,7 @@ app = {
             "search-panel-calendar-flexible--active"
           );
         }
+        _this.removeSeparateOfActiveSearchItem();
       };
     });
   },
@@ -795,11 +807,6 @@ app = {
         element.classList.remove("search-panel-calendar__days-data--active");
       });
     };
-    const activeHeaderSearchCheckInItem = function () {
-      headerSearchCheckInItem.classList.add("header-search__item--no-border");
-      headerSearchCheckInItem.classList.add("header-search__item--active");
-      headerSearch.classList.add("header__search--active");
-    };
     const activeHeaderSearchCheckOutItem = function () {
       headerSearchCheckOutItem.classList.add("header-search__item--no-border");
       headerSearchCheckOutItem.classList.add("header-search__item--active");
@@ -875,7 +882,7 @@ app = {
       e.classList.add("search-panel-calendar__days-data--active-second");
 
       !headerSearchCheckIn.classList.contains("header-search__checkIn--active")
-        ? activeHeaderSearchCheckInItem()
+        ? this.activeHeaderSearchCheckInItem()
         : activeHeaderSearchCheckOutItem();
 
       headerSearchCheckOutItem.classList.contains("header-search__item--active")
@@ -927,10 +934,31 @@ app = {
       this.resetHeaderSearchBorder();
       this.inactiveSearchChkOutDayShowDescItem();
     }
-    console.log(
-      headerSearchCheckOut.classList.contains("header-search__checkOut--active")
-    );
+
     this.checkActiveDaysAndAddDuration();
+  },
+
+  removeSeparateOfActiveSearchItem: function () {
+    headerSearchItems.forEach((element) => {
+      if (element.classList.contains("header-search__item--active")) {
+        element.classList.add("header-search__item--no-border");
+
+        if (element.previousElementSibling) {
+          element.previousElementSibling.classList.add(
+            "header-search__item--no-border"
+          );
+        }
+      }
+    });
+  },
+
+  activeHeaderSearchCheckInItem: function () {
+    const headerSearchCheckInItem = headerSearchCheckIn.closest(
+      ".header-search__room"
+    );
+    headerSearchCheckInItem.classList.add("header-search__item--no-border");
+    headerSearchCheckInItem.classList.add("header-search__item--active");
+    headerSearch.classList.add("header__search--active");
   },
 
   inactiveSearchChkInDayShowDescItem: function () {

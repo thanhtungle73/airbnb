@@ -365,6 +365,10 @@ i.header-navbar-menu__user-icon {
   margin-left: 4px;
 }
 
+.header-search__room-close:hover {
+  background-color: #ddd;
+}
+
 .header-search__room-close.header-search__room-close--active {
   display: flex;
 }
@@ -623,8 +627,7 @@ i.header-navbar-menu__user-icon {
 
 /* header search panel calendar*/
 .search-panel-calendar {
-  /* display: none; */
-  display: block;
+  display: none;
   position: absolute;
   top: calc(var(--header-search-height) + 12px);
   left: 0;
