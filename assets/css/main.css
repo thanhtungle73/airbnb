@@ -851,6 +851,10 @@ div.search-panel-calendar__days-data {
   color: var(--text-color);
 }
 
+.search-panel-calendar-flexible__lengths-option {
+  text-transform: lowercase;
+}
+
 .search-panel-calendar-flexible__dates-heading {
   padding: 18px 0 14px;
 }
@@ -922,12 +926,22 @@ div.search-panel-calendar__days-data {
 }
 
 i.search-panel-calendar-flexible__dates-icon {
+  display: block;
+  font-size: 3.2rem;
+  color: #717171;
+}
+
+i.search-panel-calendar-flexible__dates-icon-check {
   display: none;
   font-size: 3.2rem;
 }
 
-i.search-panel-calendar-flexible__dates-icon.search-panel-calendar-flexible__dates-icon--active {
+.search-panel-calendar-flexible__dates-item--active i.search-panel-calendar-flexible__dates-icon-check {
   display: block;
+}
+
+.search-panel-calendar-flexible__dates-item--active i.search-panel-calendar-flexible__dates-icon {
+  display: none;
 }
 
 .search-panel-calendar-flexible__dates-title {

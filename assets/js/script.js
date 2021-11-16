@@ -68,6 +68,18 @@ const headerSearchPanelCalendarPreviousBtn = $(
   ".search-panel-calendar__navigation-container-previous"
 );
 const searchPanelFooterItem = $$(".search-panel-calendar__footer-item");
+const searchPanelCalendarFlexLengthItems = $$(
+  ".search-panel-calendar-flexible__lengths-item"
+);
+const searchPanelCalendarFlexLengthOption = $(
+  ".search-panel-calendar-flexible__lengths-option"
+);
+const searchPanelCalendarFlexDateItems = $$(
+  ".search-panel-calendar-flexible__dates-item"
+);
+const searchPanelCalendarFlexDateOption = $(
+  ".search-panel-calendar-flexible__dates-option"
+);
 
 let currDate;
 let currMonth;
@@ -104,6 +116,13 @@ app = {
       headerSearchCalendarFlexible.classList.remove(
         "header-search__flexible--active"
       );
+    };
+    const resetSearchPanelFlexLengthItems = function () {
+      searchPanelCalendarFlexLengthItems.forEach((element) => {
+        element.classList.remove(
+          "search-panel-calendar-flexible__lengths-item--active"
+        );
+      });
     };
 
     //handle when clicking header search button
@@ -595,6 +614,111 @@ app = {
           );
         }
         _this.removeSeparateOfActiveSearchItem();
+      };
+    });
+
+    //handle when clicking flexible lengths items
+    searchPanelCalendarFlexLengthItems.forEach((element) => {
+      element.onclick = function () {
+        resetSearchPanelFlexLengthItems();
+        element.classList.add(
+          "search-panel-calendar-flexible__lengths-item--active"
+        );
+        searchPanelCalendarFlexLengthOption.innerText = element.innerText;
+      };
+    });
+
+    //handle when clicking flexible date items
+    searchPanelCalendarFlexDateItems.forEach((element) => {
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      let dateOutputArr;
+
+      //sort the output month in ascending order
+      const sortDisplayMonth = function (array) {
+        array.sort((a, b) => {
+          return monthNames.indexOf(a) - monthNames.indexOf(b);
+        });
+      };
+
+      element.onclick = function () {
+        const activeItems = $$(
+          ".search-panel-calendar-flexible__dates-item--active"
+        );
+
+        if (
+          activeItems.length == 1 &&
+          !element.classList.contains(
+            "search-panel-calendar-flexible__dates-item--active"
+          )
+        ) {
+          element.classList.add(
+            "search-panel-calendar-flexible__dates-item--active"
+          );
+          searchPanelCalendarFlexDateOption.innerText =
+            searchPanelCalendarFlexDateOption.innerText +
+            `, ${element.innerText}`;
+        } else if (activeItems.length > 1) {
+          element.classList.toggle(
+            "search-panel-calendar-flexible__dates-item--active"
+          );
+
+          if (
+            element.classList.contains(
+              "search-panel-calendar-flexible__dates-item--active"
+            ) &&
+            !searchPanelCalendarFlexDateOption.innerText.includes(
+              element.innerText
+            )
+          ) {
+            searchPanelCalendarFlexDateOption.innerText =
+              searchPanelCalendarFlexDateOption.innerText +
+              `, ${element.innerText}`;
+          } else if (
+            searchPanelCalendarFlexDateOption.innerText.includes(
+              `, ${element.innerText}`
+            )
+          ) {
+            searchPanelCalendarFlexDateOption.innerText =
+              searchPanelCalendarFlexDateOption.innerText.replace(
+                `, ${element.innerText}`,
+                ""
+              );
+          } else {
+            searchPanelCalendarFlexDateOption.innerText =
+              searchPanelCalendarFlexDateOption.innerText.replace(
+                `${element.innerText}`,
+                ""
+              );
+          }
+        } else {
+          element.classList.add(
+            "search-panel-calendar-flexible__dates-item--active"
+          );
+          searchPanelCalendarFlexDateOption.innerText =
+            searchPanelCalendarFlexDateOption.innerText;
+        }
+
+        //check to see if the "," in first index or not and remove
+        if (searchPanelCalendarFlexDateOption.innerText.indexOf(",") == 0) {
+          searchPanelCalendarFlexDateOption.innerText =
+            searchPanelCalendarFlexDateOption.innerText.replace(", ", "");
+        }
+        dateOutputArr = searchPanelCalendarFlexDateOption.innerText.split(", ");
+        sortDisplayMonth(dateOutputArr);
+        searchPanelCalendarFlexDateOption.innerText = dateOutputArr.join(", ");
       };
     });
   },
