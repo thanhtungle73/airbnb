@@ -20,3 +20,12 @@ html {
   line-height: 1.6rem;
   font-family: 'Roboto', "Helvetica Neue", Arial, sans-serif;
 }
+
+.btn {
+  display: inline-block;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}

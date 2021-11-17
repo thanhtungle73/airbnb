@@ -36,6 +36,9 @@ const headerSearchCheckIn = $(".header-search__checkIn");
 const headerSearchCheckOut = $(".header-search__checkOut");
 const headerSearchPanelLocation = $(".search-panel__location");
 const headerSearchPanelLocationVideo = $(".search-panel__location-btn-video");
+const searchPanelLocationFlexItem = $(".search-panel__location-flex");
+const searchPanelLocationFlexText = $(".search-panel__location-flex-text");
+const searchLocationInput = $(".header-search__input");
 const headerSearchPanelCustomer = $(".search-panel-customer");
 const headerSearchPanelCustomerPlusBtn = $$(".search-panel-customer__plus");
 const headerSearchPanelCustomerMinusBtn = $$(".search-panel-customer__minus");
@@ -80,6 +83,10 @@ const searchPanelCalendarFlexDateItems = $$(
 const searchPanelCalendarFlexDateOption = $(
   ".search-panel-calendar-flexible__dates-option"
 );
+const searchCalendarFlexInfoLength = $(".header-search__flexible-info-lengths");
+const searchCalendarFlexInfoDate = $(".header-search__flexible-info-dates");
+const searchCustomer = $(".header-search__customer");
+const searchDate = $(".header-search__date");
 
 let currDate;
 let currMonth;
@@ -95,6 +102,7 @@ app = {
     let headerSearchBtnWidth;
     const limitAdults = 16;
     const limitKidChild = 5;
+    const dateTitles = $$(".search-panel-calendar-flexible__dates-title");
     const resetSearchPanelCalendarSwitching = function () {
       searchPanelCalendarHeaders.forEach((element) => {
         element.classList.remove(
@@ -123,6 +131,40 @@ app = {
           "search-panel-calendar-flexible__lengths-item--active"
         );
       });
+    };
+    const handleCalendarFlexDateOutput = function (element) {
+      if (
+        element.classList.contains(
+          "search-panel-calendar-flexible__dates-item--active"
+        ) &&
+        !searchPanelCalendarFlexDateOption.innerText.includes(element.innerText)
+      ) {
+        searchPanelCalendarFlexDateOption.innerText =
+          searchPanelCalendarFlexDateOption.innerText +
+          `, ${element.innerText}`;
+      } else if (
+        searchPanelCalendarFlexDateOption.innerText.includes(
+          `, ${element.innerText}`
+        )
+      ) {
+        searchPanelCalendarFlexDateOption.innerText =
+          searchPanelCalendarFlexDateOption.innerText.replace(
+            `, ${element.innerText}`,
+            ""
+          );
+      } else {
+        searchPanelCalendarFlexDateOption.innerText =
+          searchPanelCalendarFlexDateOption.innerText.replace(
+            `${element.innerText}`,
+            ""
+          );
+      }
+
+      //check to see if the "," in first index or not and remove
+      if (searchPanelCalendarFlexDateOption.innerText.indexOf(",") == 0) {
+        searchPanelCalendarFlexDateOption.innerText =
+          searchPanelCalendarFlexDateOption.innerText.replace(", ", "");
+      }
     };
 
     //handle when clicking header search button
@@ -189,13 +231,50 @@ app = {
           "search-panel-calendar--active"
         );
       }
+
+      //close search calendar exp panel when clicking outside
+      if (
+        !e.target.closest(".header-search__customer-exp--active") &&
+        !e.target.closest(".search-panel-calendar")
+      ) {
+        headerSearchPanelCalendar.classList.remove(
+          "search-panel-calendar-exp--active"
+        );
+      }
     };
 
     //handle when clicking middle header navbar items
-    headerNavMidItems.forEach((e) => {
-      e.onclick = function () {
+    headerNavMidItems.forEach((element) => {
+      element.onclick = function () {
         _this.resetHeaderMidItems();
-        e.classList.add("header__navbar-mid-item--active");
+        element.classList.add("header__navbar-mid-item--active");
+
+        if (element.classList.contains("header__navbar-mid-item-place")) {
+          searchRoomCheckIn.classList.add("header-search__room--active");
+          searchRoomCheckOut.classList.add("header-search__room--active");
+          searchCustomer.classList.remove(
+            "header-search__customer-exp--active"
+          );
+          headerSearchPanelLocation.classList.remove(
+            "search-panel__location-flex--active"
+          );
+        } else if (element.classList.contains("header__navbar-mid-item-exp")) {
+          searchRoomCheckIn.classList.remove("header-search__room--active");
+          searchRoomCheckOut.classList.remove("header-search__room--active");
+          searchCustomer.classList.add("header-search__customer-exp--active");
+          headerSearchPanelLocation.classList.add(
+            "search-panel__location-flex--active"
+          );
+        } else {
+          searchRoomCheckIn.classList.add("header-search__room--active");
+          searchRoomCheckOut.classList.add("header-search__room--active");
+          searchCustomer.classList.remove(
+            "header-search__customer-exp--active"
+          );
+          headerSearchPanelLocation.classList.remove(
+            "search-panel__location-flex--active"
+          );
+        }
       };
     });
 
@@ -256,7 +335,10 @@ app = {
         }
 
         //display header search customer panel
-        if (e.classList.contains("header-search__customer")) {
+        if (
+          e.classList.contains("header-search__customer") &&
+          !e.classList.contains("header-search__customer-exp--active")
+        ) {
           headerSearchPanelCustomer.classList.toggle(
             "search-panel-customer--active",
             !headerSearchPanelCustomer.classList.contains(
@@ -332,8 +414,47 @@ app = {
             "search-panel-calendar--active"
           );
         }
+
+        //display search experience calendar panel
+        if (
+          e.classList.contains("header-search__customer-exp--active") &&
+          $$(".search-panel-calendar__days-data--active").length > 0
+        ) {
+          headerSearchPanelCalendar.classList.add(
+            "search-panel-calendar-exp--active"
+          );
+        } else if (
+          e.classList.contains("header-search__customer-exp--active") &&
+          $$(".search-panel-calendar__days-data--active").length <= 0
+        ) {
+          headerSearchPanelCalendar.classList.add(
+            "search-panel-calendar-exp--active"
+          );
+          _this.removeChildDays();
+          _this.renderCalendar(..._this.resetDate());
+        } else {
+          headerSearchPanelCalendar.classList.remove(
+            "search-panel-calendar-exp--active"
+          );
+        }
       };
     });
+
+    //handle insert text & display calendar when clicking search location flex nearby item
+    searchPanelLocationFlexItem.onclick = function () {
+      searchLocationInput.value = searchPanelLocationFlexText.innerText;
+      _this.resetHeaderSearchItems();
+      $(".header-search__customer-exp--active").classList.add(
+        "header-search__item--active"
+      );
+      headerSearch.classList.add("header__search--active");
+      _this.removeSeparateOfActiveSearchItem();
+      headerSearchPanelCalendar.classList.add(
+        "search-panel-calendar-exp--active"
+      );
+      _this.removeChildDays();
+      _this.renderCalendar(..._this.resetDate());
+    };
 
     //handle color moves according to the cursor when hovering mouse on header search btn
     headerSearchBtn.onmousemove = function (e) {
@@ -562,6 +683,7 @@ app = {
       element.onclick = function () {
         resetSearchPanelCalendarSwitching();
         _this.resetHeaderSearchBorder();
+        searchPanelCalendarFlexDateOption.innerText = "";
 
         element.classList.add("search-panel-calendar__header-content--active");
         if (index === 0) {
@@ -612,7 +734,49 @@ app = {
           searchPanelFlexibleCalendar.classList.add(
             "search-panel-calendar-flexible--active"
           );
+          searchPanelCalendarFlexDateItems.forEach((e) => {
+            handleCalendarFlexDateOutput(e);
+          });
+
+          //display calender flex date in search active item
+          searchCalendarFlexInfoDate.innerText = Array.from(dateTitles)
+            .map((element, index) => {
+              if (
+                element
+                  .closest(".search-panel-calendar-flexible__dates-item")
+                  .classList.contains(
+                    "search-panel-calendar-flexible__dates-item--active"
+                  ) &&
+                index === 0
+              ) {
+                return `${element.innerText.slice(0, 3)}`;
+              } else if (
+                element
+                  .closest(".search-panel-calendar-flexible__dates-item")
+                  .classList.contains(
+                    "search-panel-calendar-flexible__dates-item--active"
+                  ) &&
+                index >= 1 &&
+                index <= 3
+              ) {
+                return `, ${element.innerText.slice(0, 3)}`;
+              } else if (
+                element
+                  .closest(".search-panel-calendar-flexible__dates-item")
+                  .classList.contains(
+                    "search-panel-calendar-flexible__dates-item--active"
+                  ) &&
+                index > 3 &&
+                index <= 4
+              ) {
+                return "...";
+              } else {
+                return;
+              }
+            })
+            .join("");
         }
+
         _this.removeSeparateOfActiveSearchItem();
       };
     });
@@ -625,31 +789,21 @@ app = {
           "search-panel-calendar-flexible__lengths-item--active"
         );
         searchPanelCalendarFlexLengthOption.innerText = element.innerText;
+        searchCalendarFlexInfoLength.innerText = element.innerText;
       };
     });
 
     //handle when clicking flexible date items
     searchPanelCalendarFlexDateItems.forEach((element) => {
-      const monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
       let dateOutputArr;
-
+      //get current flex dates into array
+      const monthNameList = Array.from(dateTitles).map((element) => {
+        return element.innerText.trim();
+      });
       //sort the output month in ascending order
       const sortDisplayMonth = function (array) {
         array.sort((a, b) => {
-          return monthNames.indexOf(a) - monthNames.indexOf(b);
+          return monthNameList.indexOf(a) - monthNameList.indexOf(b);
         });
       };
 
@@ -675,35 +829,10 @@ app = {
             "search-panel-calendar-flexible__dates-item--active"
           );
 
-          if (
-            element.classList.contains(
-              "search-panel-calendar-flexible__dates-item--active"
-            ) &&
-            !searchPanelCalendarFlexDateOption.innerText.includes(
-              element.innerText
-            )
-          ) {
-            searchPanelCalendarFlexDateOption.innerText =
-              searchPanelCalendarFlexDateOption.innerText +
-              `, ${element.innerText}`;
-          } else if (
-            searchPanelCalendarFlexDateOption.innerText.includes(
-              `, ${element.innerText}`
-            )
-          ) {
-            searchPanelCalendarFlexDateOption.innerText =
-              searchPanelCalendarFlexDateOption.innerText.replace(
-                `, ${element.innerText}`,
-                ""
-              );
-          } else {
-            searchPanelCalendarFlexDateOption.innerText =
-              searchPanelCalendarFlexDateOption.innerText.replace(
-                `${element.innerText}`,
-                ""
-              );
-          }
+          //handle output string and active item
+          handleCalendarFlexDateOutput(element);
         } else {
+          //always active at least one item
           element.classList.add(
             "search-panel-calendar-flexible__dates-item--active"
           );
@@ -711,14 +840,21 @@ app = {
             searchPanelCalendarFlexDateOption.innerText;
         }
 
-        //check to see if the "," in first index or not and remove
-        if (searchPanelCalendarFlexDateOption.innerText.indexOf(",") == 0) {
-          searchPanelCalendarFlexDateOption.innerText =
-            searchPanelCalendarFlexDateOption.innerText.replace(", ", "");
-        }
         dateOutputArr = searchPanelCalendarFlexDateOption.innerText.split(", ");
         sortDisplayMonth(dateOutputArr);
         searchPanelCalendarFlexDateOption.innerText = dateOutputArr.join(", ");
+        //render flex month display in search item
+        searchCalendarFlexInfoDate.innerText = dateOutputArr
+          .map((element, index) => {
+            if (index <= 3) {
+              return ` ${element.slice(0, 3)}`;
+            } else if (index == 4) {
+              return "...";
+            } else {
+              return;
+            }
+          })
+          .join(",");
       };
     });
   },

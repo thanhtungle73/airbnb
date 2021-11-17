@@ -229,6 +229,7 @@ i.header-navbar-menu__user-icon {
   display: flex;
   align-items: center;
   position: relative;
+  z-index: 1;
   margin: var(--header-navbar-height) auto 0;
   max-width: 100%;
   width: 850px;
@@ -398,6 +399,25 @@ i.header-navbar-menu__user-icon {
   z-index: 1;
 }
 
+.header-search__date {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding-right: 0px;
+  z-index: 1;
+}
+
+.header-search__customer.header-search__customer-exp--active
+  .header-search__person {
+  display: none;
+}
+
+.header-search__customer.header-search__customer-exp--active
+  .header-search__date {
+  display: flex;
+}
+
 .header-search__person-container {
   min-width: 98px;
   max-width: 100%;
@@ -419,6 +439,7 @@ i.header-navbar-menu__user-icon {
   display: none;
 }
 
+.header-search__person-icon-container,
 .header-search__person-icon-container {
   display: none;
   align-items: center;
@@ -625,6 +646,38 @@ i.header-navbar-menu__user-icon {
   height: 28px;
 }
 
+.search-panel__location-flex {
+  display: none;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.search-panel__location-flex:hover {
+  background: #f7f7f7;
+}
+
+.search-panel__location-flex-img {
+  height: 48px;
+  padding-left: 32px;
+}
+
+.search-panel__location-flex-text {
+  margin-left: 18px;
+  font-size: 1.6rem;
+  padding-right: 32px;
+}
+
+.search-panel__location.search-panel__location-flex--active
+  .search-panel__location-main {
+    display: none;
+}
+
+.search-panel__location.search-panel__location-flex--active
+  .search-panel__location-flex {
+    display: flex;
+}
+
 /* header search panel calendar*/
 .search-panel-calendar {
   display: none;
@@ -639,6 +692,10 @@ i.header-navbar-menu__user-icon {
 }
 
 .search-panel-calendar.search-panel-calendar--active {
+  display: block;
+}
+
+.search-panel-calendar.search-panel-calendar-exp--active {
   display: block;
 }
 
@@ -893,7 +950,6 @@ div.search-panel-calendar__days-data {
   background-color: #f7f7f7;
 }
 
-
 .search-panel-calendar-flexible__dates-list {
   display: flex;
   align-items: center;
@@ -936,11 +992,13 @@ i.search-panel-calendar-flexible__dates-icon-check {
   font-size: 3.2rem;
 }
 
-.search-panel-calendar-flexible__dates-item--active i.search-panel-calendar-flexible__dates-icon-check {
+.search-panel-calendar-flexible__dates-item--active
+  i.search-panel-calendar-flexible__dates-icon-check {
   display: block;
 }
 
-.search-panel-calendar-flexible__dates-item--active i.search-panel-calendar-flexible__dates-icon {
+.search-panel-calendar-flexible__dates-item--active
+  i.search-panel-calendar-flexible__dates-icon {
   display: none;
 }
 
@@ -966,6 +1024,13 @@ i.search-panel-calendar-flexible__dates-icon-check {
 
 .header-search__flexible-heading {
   position: inherit;
+}
+
+.search-panel-calendar.search-panel-calendar-exp--active
+  .search-panel-calendar__header,
+.search-panel-calendar.search-panel-calendar-exp--active
+  .search-panel-calendar__footer {
+  display: none;
 }
 
 .header-search__flexible-info {
@@ -1089,6 +1154,47 @@ i.search-panel-calendar-flexible__dates-icon-check {
   color: #ebebeb;
 }
 
+/*suggestion */
+.suggestion {
+  width: 100%;
+  height: 65vh;
+  position: relative;
+  z-index: 0;
+}
+
+.suggestion__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.suggestion__question {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  color: var(--text-color);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion__btn {
+  background-color: #fff;
+  padding: 18px 36px;
+  border-radius: 52px;
+  font-weight: 500;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: transform 0.1s ease;
+}
+
+.suggestion__btn:active {
+  transform: scale(0.95);
+}
+
+.suggestion__btn-text {
+  background-image: linear-gradient(to right, #6f019c, #8a0193);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 /* background img */
 .header__background {
   overflow: hidden;

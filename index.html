@@ -36,9 +36,10 @@
                 </div>
 
                 <ul class="header__navbar-list header__navbar-list--text-center">
-                    <li class="header__navbar-mid-item header__navbar-mid-item--active">Places to stay</li>
-                    <li class="header__navbar-mid-item">Experiences</li>
-                    <li class="header__navbar-mid-item">Online Experiences</li>
+                    <li class="header__navbar-mid-item header__navbar-mid-item-place header__navbar-mid-item--active">
+                        Places to stay</li>
+                    <li class="header__navbar-mid-item header__navbar-mid-item-exp">Experiences</li>
+                    <li class="header__navbar-mid-item header__navbar-mid-item-online">Online Experiences</li>
                 </ul>
 
                 <ul class="header__navbar-list header__navbar-list--text-right">
@@ -104,7 +105,11 @@
                 </div>
                 <div class="header-search__flexible header-search__item">
                     <h4 class="header-search__flexible-heading header-search__heading">Flexible dates</h4>
-                    <p class="header-search__flexible-info">Weekend in Nov, Dec</p>
+                    <p class="header-search__flexible-info">
+                        <span class="header-search__flexible-info-lengths">Weekend</span>
+                        in
+                        <span class="header-search__flexible-info-dates"></span>
+                    </p>
                 </div>
                 <div class="header-search__customer header-search__item">
                     <div class="header-search__person">
@@ -112,6 +117,16 @@
                             <h4 class="header-search__heading">Guests</h4>
                             <p class="header-search__desc">Add guests</p>
                             <p class="header-search__person-number header-search__person-number--disable"></p>
+                        </span>
+                        <div class="header-search__person-icon-container">
+                            <i class="fas fa-times header-search__person-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="header-search__date">
+                        <span class="header-search__date-container">
+                            <h4 class="header-search__heading">Date</h4>
+                            <p class="header-search__desc">Add when you want to go</p>
                         </span>
                         <div class="header-search__person-icon-container">
                             <i class="fas fa-times header-search__person-icon"></i>
@@ -129,14 +144,21 @@
 
                 <!-- header search location selection panel-->
                 <div class="search-panel__location">
-                    <h3 class="search-panel__location-heading">Go Anywhere, Any Time</h3>
-                    <div class="search-panel__location-btn">
-                        <h3 class="search-panel__location-btn-heading">I'm flexible</h3>
-                        <div class="search-panel__location-btn-icon">
-                            <video class="search-panel__location-btn-video">
-                                <source src="./assets/video/header/header_search_panel.mp4" type="video/mp4">
-                            </video>
+                    <div class="search-panel__location-main">
+                        <h3 class="search-panel__location-heading">Go Anywhere, Any Time</h3>
+                        <div class="search-panel__location-btn">
+                            <h3 class="search-panel__location-btn-heading">I'm flexible</h3>
+                            <div class="search-panel__location-btn-icon">
+                                <video class="search-panel__location-btn-video">
+                                    <source src="./assets/video/header/header_search_panel.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="search-panel__location-flex">
+                        <img src="./assets/img/header/search_location_flexible.png" alt="nearby" class="search-panel__location-flex-img">
+                        <span class="search-panel__location-flex-text">Nearby</span>
                     </div>
                 </div>
 
@@ -229,14 +251,15 @@
                         <div class="search-panel-calendar-flexible__dates">
                             <h3 class="search-panel-calendar-flexible__dates-heading">
                                 Go in
-                                <p class="search-panel-calendar-flexible__dates-option">November, December</p>
+                                <p class="search-panel-calendar-flexible__dates-option"></p>
                             </h3>
 
                             <ul class="search-panel-calendar-flexible__dates-list">
                                 <li
                                     class="search-panel-calendar-flexible__dates-item search-panel-calendar-flexible__dates-item--active">
                                     <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                    <i
+                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
                                     <span class="search-panel-calendar-flexible__dates-title">
                                         November
                                     </span>
@@ -244,35 +267,40 @@
                                 <li
                                     class="search-panel-calendar-flexible__dates-item search-panel-calendar-flexible__dates-item--active">
                                     <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                    <i
+                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
                                     <span class="search-panel-calendar-flexible__dates-title">
                                         December
                                     </span>
                                 </li>
                                 <li class="search-panel-calendar-flexible__dates-item">
                                     <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                    <i
+                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
                                     <span class="search-panel-calendar-flexible__dates-title">
                                         January
                                     </span>
                                 </li>
                                 <li class="search-panel-calendar-flexible__dates-item">
                                     <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                    <i
+                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
                                     <span class="search-panel-calendar-flexible__dates-title">
                                         February
                                     </span>
                                 </li>
                                 <li class="search-panel-calendar-flexible__dates-item">
                                     <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                    <i
+                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
                                     <span class="search-panel-calendar-flexible__dates-title">
                                         March
                                     </span>
                                 </li>
                                 <li class="search-panel-calendar-flexible__dates-item">
                                     <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                    <i
+                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
                                     <span class="search-panel-calendar-flexible__dates-title">
                                         April
                                     </span>
@@ -334,7 +362,6 @@
                     </div>
                 </div>
             </div>
-            <div class="header__suggestion"></div>
             <div class="header__background">
                 <picture>
                     <source media="(max-width: 739px)" srcset="./assets/img/header/landing_page_img_320.png"
@@ -350,7 +377,20 @@
                 </picture>
             </div>
         </header>
-        <div class="app-container"></div>
+        <div class="app-container">
+            <div class="grid wide">
+                <div class="suggestion">
+                    <div class="suggestion__wrapper">
+                        <p class="suggestion__question">
+                            Not sure where to go? Perfect.
+                        </p>
+                        <a href="#" class="suggestion__btn btn">
+                            <span class="suggestion__btn-text">I'm flexible</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <footer class="footer"></footer>
     </div>
     <script src="assets/js/script.js"></script>
