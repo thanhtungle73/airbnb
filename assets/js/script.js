@@ -1,8 +1,11 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+const headerNavbar = $(".header__navbar");
+const headerNavbarMiddle = $(".header__navbar-list-middle");
 const headerNavMidItems = $$(".header__navbar-mid-item");
 const headerNavOptions = $("#header__navbar-right-item-checkbox");
+const headerNavbarSearch = $(".header__navbar-search");
 const headerSearch = $(".header__search");
 const headerSearchBtn = $(".header-search__btn");
 const headerSearchTextBtn = $(".header-search__btn-label");
@@ -102,6 +105,7 @@ app = {
     let headerSearchBtnWidth;
     const limitAdults = 16;
     const limitKidChild = 5;
+    const headerInfoHeight = 58;
     const dateTitles = $$(".search-panel-calendar-flexible__dates-title");
     const resetSearchPanelCalendarSwitching = function () {
       searchPanelCalendarHeaders.forEach((element) => {
@@ -857,6 +861,32 @@ app = {
           .join(",");
       };
     });
+
+    //handle when scrollTop to show fixed header
+    window.onscroll = function () {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      if (scrollTop >= headerInfoHeight) {
+        headerNavbar.classList.add("header__navbar--scrolled");
+        headerNavbar.style.backgroundColor = "#fff";
+        headerSearch.style.transform = "scale(0.7) translateY(-25px)";
+        headerNavbarMiddle.style.transform = "scale(0.8)";
+        headerSearch.style.opacity = "0";
+        headerSearch.style.visibility = "hidden";
+        headerNavbarSearch.style.transform = "translate(-50%, 0) scale(1, 1)";
+        headerNavbarSearch.style.visibility = "visible";
+        headerNavbarSearch.style.opacity = "1";
+      } else {
+        headerNavbar.style.backgroundColor = "unset";
+        headerNavbar.classList.remove("header__navbar--scrolled");
+        headerNavbarMiddle.style.transform = "scale(1)";
+        headerSearch.style.transform = "scale(1) translateY(0)";
+        headerSearch.style.opacity = "1";
+        headerSearch.style.visibility = "visible";
+        headerNavbarSearch.style.transform = "translate(-50%, 150%) scale(2.7, 1.2)";
+        headerNavbarSearch.style.visibility = "hidden";
+        headerNavbarSearch.style.opacity = "0";
+      }
+    };
   },
 
   isLeapYear: function (year) {
