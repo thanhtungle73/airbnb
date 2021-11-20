@@ -1,6 +1,7 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+const header = $(".header");
 const headerNavbar = $(".header__navbar");
 const headerNavbarMiddle = $(".header__navbar-list-middle");
 const headerNavMidItems = $$(".header__navbar-mid-item");
@@ -244,6 +245,22 @@ app = {
         headerSearchPanelCalendar.classList.remove(
           "search-panel-calendar-exp--active"
         );
+      }
+
+      //close the scrolled header with search & navbar middle item
+      console.log(parseInt(getComputedStyle(header, "::before").height));
+      if (!e.target.closest(".header") && parseInt(getComputedStyle(header, "::before").height) > 0) {
+        header.classList.remove("header--scrolled-show-background");
+        headerNavbar.classList.add(
+          "header__navbar-scrolled",
+          "header__navbar-scrolled--white"
+        );
+        headerNavbarMiddle.classList.add(
+          "header__navbar-list-middle--scrolled"
+        );
+        headerNavbarSearch.classList.add("header__navbar-search--scrolled");
+        headerSearch.classList.add("header__search--scrolled");
+        headerSearch.classList.remove("header__search--scrolled-show");
       }
     };
 
@@ -866,6 +883,7 @@ app = {
     window.onscroll = function () {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       if (scrollTop >= headerInfoHeight) {
+        header.classList.remove("header--scrolled-show-background");
         headerNavbar.classList.add(
           "header__navbar-scrolled",
           "header__navbar-scrolled--white"
@@ -875,7 +893,9 @@ app = {
         );
         headerNavbarSearch.classList.add("header__navbar-search--scrolled");
         headerSearch.classList.add("header__search--scrolled");
+        headerSearch.classList.remove("header__search--scrolled-show");
       } else {
+        header.classList.remove("header--scrolled-show-background");
         headerNavbar.classList.remove(
           "header__navbar-scrolled--white",
           "header__navbar-scrolled"
@@ -884,24 +904,21 @@ app = {
           "header__navbar-list-middle--scrolled"
         );
         headerNavbarSearch.classList.remove("header__navbar-search--scrolled");
-        headerSearch.classList.remove("header__search--scrolled");
+        headerSearch.classList.remove("header__search--scrolled", "header__search--scrolled-show");
         headerNavbarMiddle.classList.remove("header__navbar-list-middle-scrolled--active");
       }
     };
 
-    //handle when clicking navbar header search
+    //handle showing search when clicking navbar header search
     headerNavbarSearch.onclick = function () {
+      header.classList.add("header--scrolled-show-background");
       headerNavbarMiddle.classList.remove(
         "header__navbar-list-middle--scrolled"
       );
       headerNavbarMiddle.classList.add("header__navbar-list-middle-scrolled--active");
       headerNavbarSearch.classList.remove("header__navbar-search--scrolled");
-
       headerSearch.classList.remove("header__search--scrolled");
-/*       headerSearch.style.position = "fixed";
-      headerSearch.style.top = 0;
-      headerSearch.style.left = 0;
-      headerSearch.style.right = 0; */
+      headerSearch.classList.add("header__search--scrolled-show");
     }
   },
 
