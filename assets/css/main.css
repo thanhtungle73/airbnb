@@ -22,8 +22,13 @@
   left: calc(-1 * (100vw - 100%));
   right: calc(-1 * (100vw - 100%));
   z-index: 1;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.1);
   height: calc(var(--header-search-height) + 32px);
   background: #fff;
+}
+
+.header--scrolled-show-background .header__navbar-scrolled {
+  box-shadow: none;
 }
 
 .header__info {
@@ -341,11 +346,9 @@ i.header-navbar-menu__user-icon {
   top: 0;
   left: 0;
   right: 0;
-  transition: background-color 0.2s ease;
-}
-
-.header__navbar-scrolled--white {
+  box-shadow: 0  2px 12px rgba(0, 0, 0, 0.08);
   background-color: #fff;
+  transition: background-color var(--header-navbar-transition-time) ease;
 }
 
 .header__navbar-scrolled.header__navbar:before {
@@ -1330,8 +1333,17 @@ i.search-panel-calendar-flexible__dates-icon-check {
   color: #ebebeb;
 }
 
+.app-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 /*suggestion */
 .suggestion {
+  position: absolute;
+  top: calc(var(--header-info-height) + var(--header-navbar-height) + var(--header-search-height));
   width: 100%;
   height: 65vh;
   position: relative;

@@ -171,6 +171,14 @@ app = {
           searchPanelCalendarFlexDateOption.innerText.replace(", ", "");
       }
     };
+    const showNavbarSearchBtnOnScrolled = function () {
+      header.classList.remove("header--scrolled-show-background");
+      headerNavbar.classList.add("header__navbar-scrolled");
+      headerNavbarMiddle.classList.add("header__navbar-list-middle--scrolled");
+      headerNavbarSearch.classList.add("header__navbar-search--scrolled");
+      headerSearch.classList.add("header__search--scrolled");
+      headerSearch.classList.remove("header__search--scrolled-show");
+    };
 
     //handle when clicking header search button
     headerSearch.onclick = function (e) {
@@ -248,19 +256,11 @@ app = {
       }
 
       //close the scrolled header with search & navbar middle item
-      console.log(parseInt(getComputedStyle(header, "::before").height));
-      if (!e.target.closest(".header") && parseInt(getComputedStyle(header, "::before").height) > 0) {
-        header.classList.remove("header--scrolled-show-background");
-        headerNavbar.classList.add(
-          "header__navbar-scrolled",
-          "header__navbar-scrolled--white"
-        );
-        headerNavbarMiddle.classList.add(
-          "header__navbar-list-middle--scrolled"
-        );
-        headerNavbarSearch.classList.add("header__navbar-search--scrolled");
-        headerSearch.classList.add("header__search--scrolled");
-        headerSearch.classList.remove("header__search--scrolled-show");
+      if (
+        !e.target.closest(".header") &&
+        parseInt(getComputedStyle(header, "::before").height) > 0
+      ) {
+        showNavbarSearchBtnOnScrolled();
       }
     };
 
@@ -333,7 +333,7 @@ app = {
       };
     });
 
-    //handle events when clicking header search items
+    //handle events when clicking search items
     headerSearchItems.forEach((e) => {
       e.onclick = function () {
         _this.resetHeaderSearchItems();
@@ -883,29 +883,21 @@ app = {
     window.onscroll = function () {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       if (scrollTop >= headerInfoHeight) {
-        header.classList.remove("header--scrolled-show-background");
-        headerNavbar.classList.add(
-          "header__navbar-scrolled",
-          "header__navbar-scrolled--white"
-        );
-        headerNavbarMiddle.classList.add(
-          "header__navbar-list-middle--scrolled"
-        );
-        headerNavbarSearch.classList.add("header__navbar-search--scrolled");
-        headerSearch.classList.add("header__search--scrolled");
-        headerSearch.classList.remove("header__search--scrolled-show");
+        showNavbarSearchBtnOnScrolled();
       } else {
         header.classList.remove("header--scrolled-show-background");
-        headerNavbar.classList.remove(
-          "header__navbar-scrolled--white",
-          "header__navbar-scrolled"
-        );
+        headerNavbar.classList.remove("header__navbar-scrolled");
         headerNavbarMiddle.classList.remove(
           "header__navbar-list-middle--scrolled"
         );
         headerNavbarSearch.classList.remove("header__navbar-search--scrolled");
-        headerSearch.classList.remove("header__search--scrolled", "header__search--scrolled-show");
-        headerNavbarMiddle.classList.remove("header__navbar-list-middle-scrolled--active");
+        headerSearch.classList.remove(
+          "header__search--scrolled",
+          "header__search--scrolled-show"
+        );
+        headerNavbarMiddle.classList.remove(
+          "header__navbar-list-middle-scrolled--active"
+        );
       }
     };
 
@@ -915,11 +907,13 @@ app = {
       headerNavbarMiddle.classList.remove(
         "header__navbar-list-middle--scrolled"
       );
-      headerNavbarMiddle.classList.add("header__navbar-list-middle-scrolled--active");
+      headerNavbarMiddle.classList.add(
+        "header__navbar-list-middle-scrolled--active"
+      );
       headerNavbarSearch.classList.remove("header__navbar-search--scrolled");
       headerSearch.classList.remove("header__search--scrolled");
       headerSearch.classList.add("header__search--scrolled-show");
-    }
+    };
   },
 
   isLeapYear: function (year) {
