@@ -29,3 +29,10 @@ html {
   text-decoration: none;
   cursor: pointer;
 }
+
+.content-header {
+  font-size: 4.2rem;
+  line-height: 4.2rem;
+  margin: 48px 0;
+  font-weight: 500;
+}
