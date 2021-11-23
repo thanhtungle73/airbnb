@@ -91,6 +91,11 @@ const searchCalendarFlexInfoLength = $(".header-search__flexible-info-lengths");
 const searchCalendarFlexInfoDate = $(".header-search__flexible-info-dates");
 const searchCustomer = $(".header-search__customer");
 const searchDate = $(".header-search__date");
+const futureGateWaysItems = $$(".future-gateways__item");
+const futureGateWaysItemActive = $(
+  ".future-gateways__item.future-gateways__item--active"
+);
+const futureGatewaysLine = $(".future-gateways__line");
 
 let currDate;
 let currMonth;
@@ -107,6 +112,8 @@ app = {
     const limitAdults = 16;
     const limitKidChild = 5;
     const headerInfoHeight = 58;
+    const futureOffsetLeftPadding = 10;
+    const futureOffsetWidthPadding = 20;
     const dateTitles = $$(".search-panel-calendar-flexible__dates-title");
     const resetSearchPanelCalendarSwitching = function () {
       searchPanelCalendarHeaders.forEach((element) => {
@@ -914,6 +921,28 @@ app = {
       headerSearch.classList.remove("header__search--scrolled");
       headerSearch.classList.add("header__search--scrolled-show");
     };
+
+    //handle active tab and line when clicking future gateways activeItems
+    futureGatewaysLine.style.left = futureGateWaysItemActive.offsetLeft + "px";
+    futureGatewaysLine.style.width =
+      futureGateWaysItemActive.offsetWidth -
+      futureOffsetWidthPadding -
+      6 +
+      "px";
+    futureGateWaysItems.forEach((futureGateWaysItem) => {
+      futureGateWaysItem.onclick = function () {
+        if ($(".future-gateways__item.future-gateways__item--active")) {
+          $(
+            ".future-gateways__item.future-gateways__item--active"
+          ).classList.remove("future-gateways__item--active");
+        }
+        futureGatewaysLine.style.left =
+          this.offsetLeft + futureOffsetLeftPadding + "px";
+        futureGatewaysLine.style.width =
+          this.offsetWidth - futureOffsetWidthPadding + "px";
+        futureGateWaysItem.classList.add("future-gateways__item--active");
+      };
+    });
   },
 
   isLeapYear: function (year) {
