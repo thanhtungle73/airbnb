@@ -49,16 +49,19 @@
 
 /*Header navigation bar */
 .header__navbar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   position: absolute;
   top: var(--header-info-height);
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 2;
+}
+
+.header__navbar-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   height: var(--header-navbar-height);
-  padding: 0 80px;
 }
 
 .header__navbar:before {
@@ -78,7 +81,7 @@
   flex: 1;
 }
 
-.header__navbar-logo-link-scrolled {
+.header__navbar-logo-link-scrolled, .header__navbar-logo-link-tablet, .header__navbar-logo-link-tablet-scrolled {
   display: none;
 }
 
@@ -94,7 +97,6 @@
   transform: scale(1);
   transform-origin: top;
   transition: 0.18s;
-  transform-origin: top;
   transition: var(--header-navbar-transition-time) ease;
 }
 
@@ -137,6 +139,7 @@
 .header__navbar-right-item {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   position: relative;
   color: var(--white-color);
   font-size: 1.6rem;
@@ -367,7 +370,7 @@ i.header-navbar-menu__user-icon {
   display: block;
 }
 
-.header__navbar-scrolled .header__navbar-logo-link {
+.header__navbar-scrolled .header__navbar-logo-link, .header__navbar-scrolled .header__navbar-logo-link-tablet {
   display: none;
 }
 
@@ -388,8 +391,8 @@ i.header-navbar-menu__user-icon {
 /* Search */
 .header__search {
   display: flex;
-  visibility: visible;
   align-items: center;
+  visibility: visible;
   position: relative;
   z-index: 1;
   margin: var(--header-navbar-height) auto 0;
@@ -434,6 +437,7 @@ i.header-navbar-menu__user-icon {
   flex: 1.55;
   position: relative;
   cursor: pointer;
+  min-width: 0;
 }
 
 .header-search__location::after,
@@ -464,6 +468,9 @@ i.header-navbar-menu__user-icon {
   outline: none;
   padding: 0;
   background-color: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Search day number */
@@ -980,7 +987,7 @@ i.header-navbar-menu__user-icon {
 .search-panel-calendar__list {
   list-style: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding-left: 0;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -988,9 +995,11 @@ i.header-navbar-menu__user-icon {
 }
 
 .search-panel-calendar__item {
+  flex: 0 0 48px;
   font-size: 1.2rem;
   font-weight: 500;
   color: #717171;
+  text-align: center;
 }
 
 .search-panel-calendar__days,
@@ -1426,25 +1435,31 @@ i.search-panel-calendar-flexible__dates-icon-check {
 
 .trip-item {
   display: block;
+  width: 100%;
   border-radius: 10px;
   overflow: hidden;
   text-decoration: none;
   color: transparent;
-  transition: transform 0.1s ease;
+  transition: transform 0.16s linear;
+  position: relative;
 }
 
 .trip-item:hover {
-  transform: translateY(-0.5%);
+  transform: scale(1.01);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .trip-item__img {
   display: block;
-  max-height: 255px;
+  box-sizing: border-box;
+  height: 14.5vw;
+  width: 100%;
 }
 
 .trip-item__content {
-  height: 255px;
+  height: 14.5vw;
+  /* min-height: 31.5vw; */
+  width: 100%;
   padding: 24px 16px 16px;
   background: #cc2d4a;
   color: var(--white-color);
@@ -1460,6 +1475,25 @@ i.search-panel-calendar-flexible__dates-icon-check {
   margin: 0;
   font-size: 2rem;
   line-height: 2rem;
+}
+
+.live-anywhere__heading {
+  margin: 0 0 48px;
+}
+
+.live-anywhere__item {
+  margin-bottom: 96px;
+  cursor: pointer;
+}
+
+.live-anywhere__img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.live-anywhere__title {
+  font-size: 2.4rem;
+  margin-top: 16px;
 }
 
 /* content gift card */
@@ -1557,15 +1591,18 @@ i.search-panel-calendar-flexible__dates-icon-check {
 }
 
 .discover-experiences__img {
+  position: relative;
+  z-index: -2;
   width: 100%;
   border-radius: 12px;
+  user-select: none;
 }
 
 /* content question */
 .question-hosting {
   position: relative;
   border-radius: 12px;
-  margin-bottom: 144px;
+  margin-bottom: 96px;
 }
 
 .question-hosting__content {
@@ -1600,6 +1637,8 @@ i.search-panel-calendar-flexible__dates-icon-check {
 }
 
 .question-hosting__img {
+  position: relative;
+  z-index: -2;
   width: 100%;
   border-radius: 12px;
   user-select: none;
@@ -1611,6 +1650,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
 }
 
 .future-gateways__heading {
+  font-weight: 500;
   font-size: 2.2rem;
   color: var(--text-color);
 }
@@ -1744,6 +1784,106 @@ i.search-panel-calendar-flexible__dates-icon-check {
   margin-bottom: 18px;
 }
 
+.footer__item-link:hover {
+  text-decoration: underline;
+}
+
 .footer__policy {
-  border-top: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #dbdbdb;
+  padding: 24px 0;
+}
+
+.footer__rights {
+  display: inline-flex;
+}
+
+.footer__rights-year {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+.footer__rights-year-icon {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-right: 6px;
+  margin-top: 1px;
+}
+
+.footer__rights-list {
+  display: flex;
+  align-items: center;
+}
+
+.footer__rights-item {
+  position: relative;
+  margin-left: 19px;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+.footer__rights-item-link, .footer__utilities-social-link {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.footer__rights-item-link:hover {
+  text-decoration: underline;
+}
+
+.footer__rights-item::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: -25%;
+  transform: translateY(-50%);
+  height: 1px;
+  width: 1px;
+  border-radius: 50%;
+  background: var(--text-color);
+}
+
+.footer__powered {
+  font-size: 1.2rem;
+}
+
+.footer__utilities {
+  display: flex;
+  align-items: center;
+}
+
+.footer__utilities-language, .footer__utilities-money {
+  margin-right: 24px;
+  cursor: pointer;
+}
+
+.footer__utilities-language-icon, .footer__utilities-money-icon {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.footer__utilities-language-text, .footer__utilities-money-text {
+  text-decoration: underline;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.footer__utilities-social {
+  margin-left: 10px;
+}
+
+.footer__utilities-social-link {
+  margin-left: 22px;
+}
+
+.footer__utilities-social-icon {
+  font-size: 1.8rem;
 }

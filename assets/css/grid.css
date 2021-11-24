@@ -445,6 +445,10 @@
   .wide {
     width: 644px;
   }
+
+  .wide.lrg-content {
+    width: 688px;
+  }
 }
 
 /* PC low resolution with wide*/

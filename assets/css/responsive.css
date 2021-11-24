@@ -3,6 +3,103 @@
 
 /* Tablet */
 @media (min-width: 740px) and (max-width: 1023px) {
+  .header__navbar-list-middle {
+    position: absolute;
+    top: var(--header-navbar-height);
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+  }
+
+  .header__navbar-list-middle.header__navbar-list-middle--scrolled {
+    visibility: hidden;
+    transform: translate(-50%, -100%) scale(0.35);
+    transform-origin: top left;
+  }
+
+  .header__search {
+    margin-top: calc(2 * var(--header-navbar-height) - 12px);
+  }
+
+  .header__navbar-logo-link-scrolled,
+  .header__navbar-logo-link,
+  .header__navbar-scrolled .header__navbar-logo-link-scrolled {
+    display: none;
+  }
+
+  .header__navbar-logo-link-tablet,
+  .header__navbar-scrolled .header__navbar-logo-link-tablet-scrolled {
+    display: block;
+  }
+
+  .header__navbar-search {
+    visibility: hidden;
+    left: 8%;
+    transform: translate(44%, calc(150% + var(--header-navbar-height)))
+      scale(2.2, 1.35);
+  }
+
+  .header__navbar-search.header__navbar-search--scrolled {
+    visibility: visible;
+    transform: translate(0, 0) scale(1, 1);
+    opacity: 1;
+  }
+
+  .header-search__location {
+    flex: 1;
+  }
+
+  .search-panel-calendar {
+    padding: 16px 32px;
+  }
+
+  .search-panel-calendar {
+    right: 30%;
+    padding: 16px 32px;
+  }
+
+  .search-panel-calendar__container:last-child {
+    display: none;
+  }
+
+  .search-panel-calendar__container {
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+  }
+
+  .suggestion {
+    height: 60vh;
+  }
+
+  .trip-item__img, .trip-item__content {
+    height: 21.3vw;
+  }
+
+  .content-header {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    margin: 24px 0;
+  }
+
+  .trip-item:hover {
+    transform: unset;
+    box-shadow: unset;
+  }
+
+  .trip-item__heading {
+    font-size: 2.3rem;
+    line-height: 2.3rem;
+  }
+  
+  .trip-item__desc {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+
+  .suggestion__items-tablet {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
 }
 
 /* Mobile */
@@ -13,11 +110,5 @@
 @media (min-width: 1440px) {
   .header__background-img {
     height: 85vh;
-  }
-}
-
-@media (min-width: 1700px) {
-  .header__navbar {
-    padding: 0 150px;
   }
 }

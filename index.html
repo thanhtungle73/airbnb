@@ -27,352 +27,367 @@
             <div class="header__info">
                 <a href="#" class="header__info-link">Get the latest information about our COVID-19 response</a>
             </div>
-
             <nav class="header__navbar">
-                <div class="header__navbar-logo">
-                    <a href="#" class="header__navbar-logo-link">
-                        <img src="./assets/img/header/airbnb_logo.svg" class="header__navbar-img"></img>
-                    </a>
-                    <a href="#" class="header__navbar-logo-link-scrolled">
-                        <img src="./assets/img/header/airbnb_scrolled_logo.svg" class="header__navbar-img"></img>
-                    </a>
-                </div>
-
-                <ul class="header__navbar-list header__navbar-list-middle header__navbar-list--text-center">
-                    <li class="header__navbar-mid-item header__navbar-mid-item-place header__navbar-mid-item--active">
-                        Places to stay</li>
-                    <li class="header__navbar-mid-item header__navbar-mid-item-exp">Experiences</li>
-                    <li class="header__navbar-mid-item header__navbar-mid-item-online">Online Experiences</li>
-                </ul>
-
-                <button class="header__navbar-search btn">
-                    <div class="header__navbar-search-holder">Start your search</div>
-                    <div class="header__navbar-search-btn">
-                        <i class="fas fa-search header__navbar-search-btn-icon"></i>
-                    </div>
-                </button>
-
-                <ul class="header__navbar-list header__navbar-list--text-right">
-                    <li class="header__navbar-right-item header__navbar-item--hover"><a href="#"
-                            class="header__navbar-link">Become a Host</a></li>
-                    <li class="header__navbar-right-item header__navbar-item--hover">
-                        <i class="ti-world"></i>
-                    </li>
-                    <li class="header__navbar-right-item header__navbar-right-item--js">
-                        <label for="header__navbar-right-item-checkbox" class="header-navbar-menu">
-                            <i class="fas fa-bars header-navbar-menu__menu-icon"></i>
-                            <i class="fas fa-user-circle header-navbar-menu__user-icon"></i>
-                        </label>
-                        <input type="checkbox" id="header__navbar-right-item-checkbox" hidden>
-                        <div class="header-navbar-options">
-                            <ul class="header-navbar-options__auth">
-                                <li class="header-navbar-options__item header-navbar-options__item--bold">Sign up
-                                </li>
-                                <li class="header-navbar-options__item">Log in</li>
-                            </ul>
-                            <ul class="header-navbar-options__help">
-                                <li class="header-navbar-options__item">Host your home</li>
-                                <li class="header-navbar-options__item">Host an experience</li>
-                                <li class="header-navbar-options__item">Help</li>
-                            </ul>
+                <div class="grid wide lrg-content">
+                    <div class="header__navbar-wrapper">
+                        <div class="header__navbar-logo">
+                            <a href="#" class="header__navbar-logo-link">
+                                <img src="./assets/img/header/airbnb_logo.svg" class="header__navbar-img"></img>
+                            </a>
+                            <a href="#" class="header__navbar-logo-link-scrolled">
+                                <img src="./assets/img/header/airbnb_scrolled_logo.svg"
+                                    class="header__navbar-img"></img>
+                            </a>
+                            <a href="#" class="header__navbar-logo-link-tablet">
+                                <img src="./assets/img/header/airbnb_logo_tablet.svg" class="header__navbar-img"></img>
+                            </a>
+                            <a href="#" class="header__navbar-logo-link-tablet-scrolled">
+                                <img src="./assets/img/header/airbnb_logo_tablet_scrolled.svg"
+                                    class="header__navbar-img"></img>
+                            </a>
                         </div>
-                    </li>
-                </ul>
+
+                        <ul class="header__navbar-list header__navbar-list-middle header__navbar-list--text-center">
+                            <li
+                                class="header__navbar-mid-item header__navbar-mid-item-place header__navbar-mid-item--active">
+                                Places to stay</li>
+                            <li class="header__navbar-mid-item header__navbar-mid-item-exp">Experiences</li>
+                            <li class="header__navbar-mid-item header__navbar-mid-item-online">Online Experiences</li>
+                        </ul>
+
+                        <button class="header__navbar-search btn">
+                            <div class="header__navbar-search-holder">Start your search</div>
+                            <div class="header__navbar-search-btn">
+                                <i class="fas fa-search header__navbar-search-btn-icon"></i>
+                            </div>
+                        </button>
+
+                        <ul class="header__navbar-list header__navbar-list--text-right">
+                            <li class="header__navbar-right-item header__navbar-item--hover"><a href="#"
+                                    class="header__navbar-link">Become a Host</a></li>
+                            <li class="header__navbar-right-item header__navbar-item--hover">
+                                <i class="ti-world"></i>
+                            </li>
+                            <li class="header__navbar-right-item header__navbar-right-item--js">
+                                <label for="header__navbar-right-item-checkbox" class="header-navbar-menu">
+                                    <i class="fas fa-bars header-navbar-menu__menu-icon"></i>
+                                    <i class="fas fa-user-circle header-navbar-menu__user-icon"></i>
+                                </label>
+                                <input type="checkbox" id="header__navbar-right-item-checkbox" hidden>
+                                <div class="header-navbar-options">
+                                    <ul class="header-navbar-options__auth">
+                                        <li class="header-navbar-options__item header-navbar-options__item--bold">Sign
+                                            up
+                                        </li>
+                                        <li class="header-navbar-options__item">Log in</li>
+                                    </ul>
+                                    <ul class="header-navbar-options__help">
+                                        <li class="header-navbar-options__item">Host your home</li>
+                                        <li class="header-navbar-options__item">Host an experience</li>
+                                        <li class="header-navbar-options__item">Help</li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
-            <div class="header__search">
-                <label for="header-search__box" class="header-search__location header-search__item">
-                    <h4 class="header-search__heading">Location</h4>
-                    <input type="text" class="header-search__input" id="header-search__box"
-                        placeholder="Where are you going?">
-                </label>
-                <div
-                    class="header-search__room header-search__room-checkIn header-search__item header-search__room--active">
-                    <span class="header-search__room-container">
-                        <h4 class="header-search__heading">Check in</h4>
-                        <p class="header-search__desc">Add dates</p>
-                        <span class="header-search__day-info">
-                            <p class="header-search__checkIn"></p>
-                            <p class="header-search__duration"></p>
+            <div class="grid wide lrg-content">
+                <div class="header__search">
+                    <label for="header-search__box" class="header-search__location header-search__item">
+                        <h4 class="header-search__heading">Location</h4>
+                        <input type="text" class="header-search__input" id="header-search__box"
+                            placeholder="Where are you going?">
+                    </label>
+                    <div
+                        class="header-search__room header-search__room-checkIn header-search__item header-search__room--active">
+                        <span class="header-search__room-container">
+                            <h4 class="header-search__heading">Check in</h4>
+                            <p class="header-search__desc">Add dates</p>
+                            <span class="header-search__day-info">
+                                <p class="header-search__checkIn"></p>
+                                <p class="header-search__duration"></p>
+                            </span>
                         </span>
-                    </span>
-                    <div class="header-search__room-close header-search__room-checkIn-close">
-                        <i class="fas fa-times header-search__room-close-icon"></i>
-                    </div>
-                </div>
-                <div
-                    class="header-search__room header-search__room-checkOut  header-search__item header-search__room--active">
-                    <span class="header-search__room-container">
-                        <h4 class="header-search__heading">Check out</h4>
-                        <p class="header-search__desc">Add dates</p>
-                        <span class="header-search__day-info">
-                            <p class="header-search__checkOut"></p>
-                            <p class="header-search__duration"></p>
-                        </span>
-                    </span>
-                    <div class="header-search__room-close header-search__room-checkOut-close">
-                        <i class="fas fa-times header-search__room-close-icon"></i>
-                    </div>
-                </div>
-                <div class="header-search__flexible header-search__item">
-                    <h4 class="header-search__flexible-heading header-search__heading">Flexible dates</h4>
-                    <p class="header-search__flexible-info">
-                        <span class="header-search__flexible-info-lengths">Weekend</span>
-                        in
-                        <span class="header-search__flexible-info-dates"></span>
-                    </p>
-                </div>
-                <div class="header-search__customer header-search__item">
-                    <div class="header-search__person">
-                        <span class="header-search__person-container">
-                            <h4 class="header-search__heading">Guests</h4>
-                            <p class="header-search__desc">Add guests</p>
-                            <p class="header-search__person-number header-search__person-number--disable"></p>
-                        </span>
-                        <div class="header-search__person-icon-container">
-                            <i class="fas fa-times header-search__person-icon"></i>
+                        <div class="header-search__room-close header-search__room-checkIn-close">
+                            <i class="fas fa-times header-search__room-close-icon"></i>
                         </div>
                     </div>
-
-                    <div class="header-search__date">
-                        <span class="header-search__date-container">
-                            <h4 class="header-search__heading">Date</h4>
-                            <p class="header-search__desc">Add when you want to go</p>
+                    <div
+                        class="header-search__room header-search__room-checkOut  header-search__item header-search__room--active">
+                        <span class="header-search__room-container">
+                            <h4 class="header-search__heading">Check out</h4>
+                            <p class="header-search__desc">Add dates</p>
+                            <span class="header-search__day-info">
+                                <p class="header-search__checkOut"></p>
+                                <p class="header-search__duration"></p>
+                            </span>
                         </span>
-                        <div class="header-search__person-icon-container">
-                            <i class="fas fa-times header-search__person-icon"></i>
+                        <div class="header-search__room-close header-search__room-checkOut-close">
+                            <i class="fas fa-times header-search__room-close-icon"></i>
                         </div>
                     </div>
-
-                    <div class="header-search__btn">
-                        <span class="header-search__color"></span>
-                        <div class="header-search__btn-icon">
-                            <i class="ti-search"></i>
-                        </div>
-                        <div class="header-search__btn-label">Search</div>
+                    <div class="header-search__flexible header-search__item">
+                        <h4 class="header-search__flexible-heading header-search__heading">Flexible dates</h4>
+                        <p class="header-search__flexible-info">
+                            <span class="header-search__flexible-info-lengths">Weekend</span>
+                            in
+                            <span class="header-search__flexible-info-dates"></span>
+                        </p>
                     </div>
-                </div>
-
-                <!-- header search location selection panel-->
-                <div class="search-panel__location">
-                    <div class="search-panel__location-main">
-                        <h3 class="search-panel__location-heading">Go Anywhere, Any Time</h3>
-                        <div class="search-panel__location-btn">
-                            <h3 class="search-panel__location-btn-heading">I'm flexible</h3>
-                            <div class="search-panel__location-btn-icon">
-                                <video class="search-panel__location-btn-video">
-                                    <source src="./assets/video/header/header_search_panel.mp4" type="video/mp4">
-                                </video>
+                    <div class="header-search__customer header-search__item">
+                        <div class="header-search__person">
+                            <span class="header-search__person-container">
+                                <h4 class="header-search__heading">Guests</h4>
+                                <p class="header-search__desc">Add guests</p>
+                                <p class="header-search__person-number header-search__person-number--disable"></p>
+                            </span>
+                            <div class="header-search__person-icon-container">
+                                <i class="fas fa-times header-search__person-icon"></i>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="search-panel__location-flex">
-                        <img src="./assets/img/header/search_location_flexible.png" alt="nearby"
-                            class="search-panel__location-flex-img">
-                        <span class="search-panel__location-flex-text">Nearby</span>
-                    </div>
-                </div>
+                        <div class="header-search__date">
+                            <span class="header-search__date-container">
+                                <h4 class="header-search__heading">Date</h4>
+                                <p class="header-search__desc">Add when you want to go</p>
+                            </span>
+                            <div class="header-search__person-icon-container">
+                                <i class="fas fa-times header-search__person-icon"></i>
+                            </div>
+                        </div>
 
-                <!-- header search calendar selection panel -->
-                <div class="search-panel-calendar">
-                    <div class="search-panel-calendar__header">
-                        <div class="search-panel-calendar__header-item">
-                            <button
-                                class="search-panel-calendar__header-content search-panel-calendar__header-content--active">Calendar</button>
-                            <button class="search-panel-calendar__header-content">I'm flexible</button>
+                        <div class="header-search__btn">
+                            <span class="header-search__color"></span>
+                            <div class="header-search__btn-icon">
+                                <i class="ti-search"></i>
+                            </div>
+                            <div class="header-search__btn-label">Search</div>
                         </div>
                     </div>
-                    <div class="search-panel-calendar__normal search-panel-calendar__normal--active">
-                        <div class="search-panel-calendar__body">
-                            <div class="grid">
-                                <div class="row lrg-gutter">
-                                    <div class="col l-12 m-12">
-                                        <div class="search-panel-calendar__navigation">
-                                            <span class="search-panel-calendar__navigation-container-previous">
-                                                <i
-                                                    class="fas fa-chevron-left search-panel-calendar__navigation-icon"></i>
-                                            </span>
-                                            <span class="search-panel-calendar__navigation-container-next">
-                                                <i
-                                                    class="fas fa-chevron-right search-panel-calendar__navigation-icon"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row lrg-gutter">
-                                    <div class="col l-6 m-6 search-panel-calendar__container">
-                                        <div class="search-panel-calendar__heading">
-                                        </div>
-                                        <ul class="search-panel-calendar__list">
-                                            <li class="search-panel-calendar__item">Su</li>
-                                            <li class="search-panel-calendar__item">Mo</li>
-                                            <li class="search-panel-calendar__item">Tu</li>
-                                            <li class="search-panel-calendar__item">We</li>
-                                            <li class="search-panel-calendar__item">Th</li>
-                                            <li class="search-panel-calendar__item">Fr</li>
-                                            <li class="search-panel-calendar__item">Sa</li>
-                                        </ul>
-                                        <div class="search-panel-calendar__days">
-                                        </div>
-                                    </div>
-                                    <div class="col l-6 m-6 search-panel-calendar__container">
-                                        <div class="search-panel-calendar__heading">
 
-                                        </div>
-                                        <ul class="search-panel-calendar__list">
-                                            <li class="search-panel-calendar__item">Su</li>
-                                            <li class="search-panel-calendar__item">Mo</li>
-                                            <li class="search-panel-calendar__item">Tu</li>
-                                            <li class="search-panel-calendar__item">We</li>
-                                            <li class="search-panel-calendar__item">Th</li>
-                                            <li class="search-panel-calendar__item">Fr</li>
-                                            <li class="search-panel-calendar__item">Sa</li>
-                                        </ul>
-                                        <div class="search-panel-calendar__days-next">
-                                        </div>
-                                    </div>
+                    <!-- header search location selection panel-->
+                    <div class="search-panel__location">
+                        <div class="search-panel__location-main">
+                            <h3 class="search-panel__location-heading">Go Anywhere, Any Time</h3>
+                            <div class="search-panel__location-btn">
+                                <h3 class="search-panel__location-btn-heading">I'm flexible</h3>
+                                <div class="search-panel__location-btn-icon">
+                                    <video class="search-panel__location-btn-video">
+                                        <source src="./assets/video/header/header_search_panel.mp4" type="video/mp4">
+                                    </video>
                                 </div>
                             </div>
                         </div>
-                        <div class="search-panel-calendar__footer">
-                            <ul class="search-panel-calendar__footer-list">
-                                <li class="search-panel-calendar__footer-item">± 1 days</li>
-                                <li class="search-panel-calendar__footer-item">± 2 days</li>
-                                <li class="search-panel-calendar__footer-item">± 3 days</li>
-                                <li class="search-panel-calendar__footer-item">± 7 days</li>
-                            </ul>
+
+                        <div class="search-panel__location-flex">
+                            <img src="./assets/img/header/search_location_flexible.png" alt="nearby"
+                                class="search-panel__location-flex-img">
+                            <span class="search-panel__location-flex-text">Nearby</span>
                         </div>
                     </div>
 
-                    <div class="search-panel-calendar-flexible">
-                        <div class="search-panel-calendar-flexible__lengths">
-                            <h3 class="search-panel-calendar-flexible__lengths-heading">Stay for a
-                                <p class="search-panel-calendar-flexible__lengths-option">weekend</p>
-                            </h3>
+                    <!-- header search calendar selection panel -->
+                    <div class="search-panel-calendar">
+                        <div class="search-panel-calendar__header">
+                            <div class="search-panel-calendar__header-item">
+                                <button
+                                    class="search-panel-calendar__header-content search-panel-calendar__header-content--active">Calendar</button>
+                                <button class="search-panel-calendar__header-content">I'm flexible</button>
+                            </div>
+                        </div>
+                        <div class="search-panel-calendar__normal search-panel-calendar__normal--active">
+                            <div class="search-panel-calendar__body">
+                                <div class="grid">
+                                    <div class="row">
+                                        <div class="col l-12 m-12">
+                                            <div class="search-panel-calendar__navigation">
+                                                <span class="search-panel-calendar__navigation-container-previous">
+                                                    <i
+                                                        class="fas fa-chevron-left search-panel-calendar__navigation-icon"></i>
+                                                </span>
+                                                <span class="search-panel-calendar__navigation-container-next">
+                                                    <i
+                                                        class="fas fa-chevron-right search-panel-calendar__navigation-icon"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col l-6 m-12 search-panel-calendar__container">
+                                            <div class="search-panel-calendar__heading">
+                                            </div>
+                                            <ul class="search-panel-calendar__list">
+                                                <li class="search-panel-calendar__item">Su</li>
+                                                <li class="search-panel-calendar__item">Mo</li>
+                                                <li class="search-panel-calendar__item">Tu</li>
+                                                <li class="search-panel-calendar__item">We</li>
+                                                <li class="search-panel-calendar__item">Th</li>
+                                                <li class="search-panel-calendar__item">Fr</li>
+                                                <li class="search-panel-calendar__item">Sa</li>
+                                            </ul>
+                                            <div class="search-panel-calendar__days">
+                                            </div>
+                                        </div>
+                                        <div class="col l-6 m-6 search-panel-calendar__container">
+                                            <div class="search-panel-calendar__heading">
 
-                            <ul class="search-panel-calendar-flexible__lengths-list">
-                                <li
-                                    class="search-panel-calendar-flexible__lengths-item search-panel-calendar-flexible__lengths-item--active">
-                                    Weekend</li>
-                                <li class="search-panel-calendar-flexible__lengths-item">Week</li>
-                                <li class="search-panel-calendar-flexible__lengths-item">Month</li>
-                            </ul>
+                                            </div>
+                                            <ul class="search-panel-calendar__list">
+                                                <li class="search-panel-calendar__item">Su</li>
+                                                <li class="search-panel-calendar__item">Mo</li>
+                                                <li class="search-panel-calendar__item">Tu</li>
+                                                <li class="search-panel-calendar__item">We</li>
+                                                <li class="search-panel-calendar__item">Th</li>
+                                                <li class="search-panel-calendar__item">Fr</li>
+                                                <li class="search-panel-calendar__item">Sa</li>
+                                            </ul>
+                                            <div class="search-panel-calendar__days-next">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search-panel-calendar__footer">
+                                <ul class="search-panel-calendar__footer-list">
+                                    <li class="search-panel-calendar__footer-item">± 1 days</li>
+                                    <li class="search-panel-calendar__footer-item">± 2 days</li>
+                                    <li class="search-panel-calendar__footer-item">± 3 days</li>
+                                    <li class="search-panel-calendar__footer-item">± 7 days</li>
+                                </ul>
+                            </div>
                         </div>
 
-                        <div class="search-panel-calendar-flexible__dates">
-                            <h3 class="search-panel-calendar-flexible__dates-heading">
-                                Go in
-                                <p class="search-panel-calendar-flexible__dates-option"></p>
-                            </h3>
+                        <div class="search-panel-calendar-flexible">
+                            <div class="search-panel-calendar-flexible__lengths">
+                                <h3 class="search-panel-calendar-flexible__lengths-heading">Stay for a
+                                    <p class="search-panel-calendar-flexible__lengths-option">weekend</p>
+                                </h3>
 
-                            <ul class="search-panel-calendar-flexible__dates-list">
-                                <li
-                                    class="search-panel-calendar-flexible__dates-item search-panel-calendar-flexible__dates-item--active">
-                                    <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i
-                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
-                                    <span class="search-panel-calendar-flexible__dates-title">
-                                        November
-                                    </span>
-                                </li>
-                                <li
-                                    class="search-panel-calendar-flexible__dates-item search-panel-calendar-flexible__dates-item--active">
-                                    <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i
-                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
-                                    <span class="search-panel-calendar-flexible__dates-title">
-                                        December
-                                    </span>
-                                </li>
-                                <li class="search-panel-calendar-flexible__dates-item">
-                                    <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i
-                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
-                                    <span class="search-panel-calendar-flexible__dates-title">
-                                        January
-                                    </span>
-                                </li>
-                                <li class="search-panel-calendar-flexible__dates-item">
-                                    <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i
-                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
-                                    <span class="search-panel-calendar-flexible__dates-title">
-                                        February
-                                    </span>
-                                </li>
-                                <li class="search-panel-calendar-flexible__dates-item">
-                                    <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i
-                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
-                                    <span class="search-panel-calendar-flexible__dates-title">
-                                        March
-                                    </span>
-                                </li>
-                                <li class="search-panel-calendar-flexible__dates-item">
-                                    <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
-                                    <i
-                                        class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
-                                    <span class="search-panel-calendar-flexible__dates-title">
-                                        April
-                                    </span>
-                                </li>
-                            </ul>
+                                <ul class="search-panel-calendar-flexible__lengths-list">
+                                    <li
+                                        class="search-panel-calendar-flexible__lengths-item search-panel-calendar-flexible__lengths-item--active">
+                                        Weekend</li>
+                                    <li class="search-panel-calendar-flexible__lengths-item">Week</li>
+                                    <li class="search-panel-calendar-flexible__lengths-item">Month</li>
+                                </ul>
+                            </div>
+
+                            <div class="search-panel-calendar-flexible__dates">
+                                <h3 class="search-panel-calendar-flexible__dates-heading">
+                                    Go in
+                                    <p class="search-panel-calendar-flexible__dates-option"></p>
+                                </h3>
+
+                                <ul class="search-panel-calendar-flexible__dates-list">
+                                    <li
+                                        class="search-panel-calendar-flexible__dates-item search-panel-calendar-flexible__dates-item--active">
+                                        <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
+                                        <i
+                                            class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                        <span class="search-panel-calendar-flexible__dates-title">
+                                            November
+                                        </span>
+                                    </li>
+                                    <li
+                                        class="search-panel-calendar-flexible__dates-item search-panel-calendar-flexible__dates-item--active">
+                                        <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
+                                        <i
+                                            class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                        <span class="search-panel-calendar-flexible__dates-title">
+                                            December
+                                        </span>
+                                    </li>
+                                    <li class="search-panel-calendar-flexible__dates-item">
+                                        <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
+                                        <i
+                                            class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                        <span class="search-panel-calendar-flexible__dates-title">
+                                            January
+                                        </span>
+                                    </li>
+                                    <li class="search-panel-calendar-flexible__dates-item">
+                                        <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
+                                        <i
+                                            class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                        <span class="search-panel-calendar-flexible__dates-title">
+                                            February
+                                        </span>
+                                    </li>
+                                    <li class="search-panel-calendar-flexible__dates-item">
+                                        <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
+                                        <i
+                                            class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                        <span class="search-panel-calendar-flexible__dates-title">
+                                            March
+                                        </span>
+                                    </li>
+                                    <li class="search-panel-calendar-flexible__dates-item">
+                                        <i class="far fa-calendar search-panel-calendar-flexible__dates-icon"></i>
+                                        <i
+                                            class="far fa-calendar-check search-panel-calendar-flexible__dates-icon-check"></i>
+                                        <span class="search-panel-calendar-flexible__dates-title">
+                                            April
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <!-- header search customer selection panel -->
+                    <div class="search-panel-customer">
+                        <div class="search-panel-customer__adult">
+                            <div class="search-panel-customer__title">
+                                <h3 class="search-panel-customer__heading">Adults</h3>
+                                <span class="search-panel-customer__desc">Age 13 or above</span>
+                            </div>
 
-                <!-- header search customer selection panel -->
-                <div class="search-panel-customer">
-                    <div class="search-panel-customer__adult">
-                        <div class="search-panel-customer__title">
-                            <h3 class="search-panel-customer__heading">Adults</h3>
-                            <span class="search-panel-customer__desc">Age 13 or above</span>
+                            <div class="search-panel-customer__quantity">
+                                <div class="search-panel-customer__minus  search-panel-customer__btn--disable">
+                                    <i class="fas fa-minus search-panel-customer__minus-icon"></i>
+                                </div>
+                                <div class="search-panel-customer__num">0</div>
+                                <div class="search-panel-customer__plus">
+                                    <i class="fas fa-plus search-panel-customer__plus-icon"></i>
+                                </div>
+                            </div>
                         </div>
+                        <div class="search-panel-customer__kid">
+                            <div class="search-panel-customer__title">
+                                <h3 class="search-panel-customer__heading">Children</h3>
+                                <span class="search-panel-customer__desc">Ages 2-12</span>
+                            </div>
 
-                        <div class="search-panel-customer__quantity">
-                            <div class="search-panel-customer__minus  search-panel-customer__btn--disable">
-                                <i class="fas fa-minus search-panel-customer__minus-icon"></i>
-                            </div>
-                            <div class="search-panel-customer__num">0</div>
-                            <div class="search-panel-customer__plus">
-                                <i class="fas fa-plus search-panel-customer__plus-icon"></i>
+                            <div class="search-panel-customer__quantity">
+                                <div class="search-panel-customer__minus search-panel-customer__btn--disable">
+                                    <i class="fas fa-minus search-panel-customer__minus-icon"></i>
+                                </div>
+                                <div class="search-panel-customer__num">0</div>
+                                <div class="search-panel-customer__plus">
+                                    <i class="fas fa-plus search-panel-customer__plus-icon"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="search-panel-customer__kid">
-                        <div class="search-panel-customer__title">
-                            <h3 class="search-panel-customer__heading">Children</h3>
-                            <span class="search-panel-customer__desc">Ages 2-12</span>
-                        </div>
+                        <div class="search-panel-customer__child">
+                            <div class="search-panel-customer__title">
+                                <h3 class="search-panel-customer__heading">Infants</h3>
+                                <span class="search-panel-customer__desc">Under 2</span>
+                            </div>
 
-                        <div class="search-panel-customer__quantity">
-                            <div class="search-panel-customer__minus search-panel-customer__btn--disable">
-                                <i class="fas fa-minus search-panel-customer__minus-icon"></i>
-                            </div>
-                            <div class="search-panel-customer__num">0</div>
-                            <div class="search-panel-customer__plus">
-                                <i class="fas fa-plus search-panel-customer__plus-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="search-panel-customer__child">
-                        <div class="search-panel-customer__title">
-                            <h3 class="search-panel-customer__heading">Infants</h3>
-                            <span class="search-panel-customer__desc">Under 2</span>
-                        </div>
-
-                        <div class="search-panel-customer__quantity">
-                            <div class="search-panel-customer__minus search-panel-customer__btn--disable">
-                                <i class="fas fa-minus search-panel-customer__minus-icon"></i>
-                            </div>
-                            <div class="search-panel-customer__num">0</div>
-                            <div class="search-panel-customer__plus">
-                                <i class="fas fa-plus search-panel-customer__plus-icon"></i>
+                            <div class="search-panel-customer__quantity">
+                                <div class="search-panel-customer__minus search-panel-customer__btn--disable">
+                                    <i class="fas fa-minus search-panel-customer__minus-icon"></i>
+                                </div>
+                                <div class="search-panel-customer__num">0</div>
+                                <div class="search-panel-customer__plus">
+                                    <i class="fas fa-plus search-panel-customer__plus-icon"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </header>
         <div class="app-container">
             <div class="header__background">
@@ -411,8 +426,8 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col l-3 trip-item-container">
+                        <div class="row suggestion__items-tablet">
+                            <div class="col l-3 m-4 trip-item-container">
                                 <a href="#" class="trip-item">
                                     <img src="./assets/img/content/category/hcm_city.png" alt="" class="trip-item__img">
                                     <div class="trip-item__content">
@@ -421,7 +436,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col l-3 trip-item-container">
+                            <div class="col l-3 m-4 trip-item-container">
                                 <a href="#" class="trip-item">
                                     <img src="./assets/img/content/category/pleiku.png" alt="" class="trip-item__img">
                                     <div class="trip-item__content">
@@ -430,7 +445,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col l-3 trip-item-container">
+                            <div class="col l-3 m-4 trip-item-container">
                                 <a href="#" class="trip-item">
                                     <img src="./assets/img/content/category/cantho.png" alt="" class="trip-item__img">
                                     <div class="trip-item__content">
@@ -439,7 +454,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col l-3 trip-item-container">
+                            <div class="col l-3 m-4 trip-item-container">
                                 <a href="#" class="trip-item">
                                     <img src="./assets/img/content/category/nhatrang.png" alt="" class="trip-item__img">
                                     <div class="trip-item__content">
@@ -447,6 +462,46 @@
                                         <p class="trip-item__desc">318 kilometers away</p>
                                     </div>
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="live-anywhere">
+                        <div class="row">
+                            <div class="col l-12 m-12 c-12">
+                                <h2 class="live-anywhere__heading content-header">Live Anywhere
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col l-3">
+                                <div class="live-anywhere__item">
+                                    <img src="./assets/img/content/live_anywhere_1.jpg" alt="Outdoor"
+                                        class="live-anywhere__img">
+                                    <div class="live-anywhere__title">Outdoor gateways</div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="live-anywhere__item">
+                                    <img src="./assets/img/content/live_anywhere_2.jpg" alt="Unique stays"
+                                        class="live-anywhere__img">
+                                    <div class="live-anywhere__title">Unique stays</div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="live-anywhere__item">
+                                    <img src="./assets/img/content/live_anywhere_3.jpg" alt="Entire homes"
+                                        class="live-anywhere__img">
+                                    <div class="live-anywhere__title">Entire homes</div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="live-anywhere__item">
+                                    <img src="./assets/img/content/live_anywhere_4.jpg" alt="Pet allowed"
+                                        class="live-anywhere__img">
+                                    <div class="live-anywhere__title">Pet allowed</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -781,17 +836,43 @@
                 <div class="col l-12 m-12 c-12">
                     <div class="footer__policy">
                         <div class="footer__rights">
-                            <div class="footer__rights-year">© 2021 Airbnb, Inc.</div>
+                            <div class="footer__rights-year">
+                                <i class="far fa-copyright footer__rights-year-icon"></i>
+                                2021 Airbnb, Inc.
+                            </div>
                             <div class="footer__rights-list">
-                                <div class="footer__rights-item">Privacy</div>
-                                <div class="footer__rights-item">Terms</div>
-                                <div class="footer__rights-item">Sitemap</div>
+                                <div class="footer__rights-item">
+                                    <a href="#" class="footer__rights-item-link">Privacy</a>
+                                </div>
+                                <div class="footer__rights-item">
+                                    <a href="#" class="footer__rights-item-link">Terms</a>
+                                </div>
+                                <div class="footer__rights-item">
+                                    <a href="#" class="footer__rights-item-link">Sitemap</a>
+                                </div>
                             </div>
                         </div>
+                        <div class="footer__powered">Thanh Tung Le</div>
                         <div class="footer__utilities">
-                            <div class="footer__utilities-lenguage"></div>
-                            <div class="footer__utilities-money"></div>
-                            <div class="footer__utilities-social"></div>
+                            <div class="footer__utilities-language">
+                                <i class="ti-world footer__utilities-language-icon"></i>
+                                <span class="footer__utilities-language-text">English</span>
+                            </div>
+                            <div class="footer__utilities-money">
+                                <i class="ti-money footer__utilities-money-icon"></i>
+                                <span class="footer__utilities-money-text">USD</span>
+                            </div>
+                            <div class="footer__utilities-social">
+                                <a href="#" class="footer__utilities-social-link">
+                                    <i class="ti-facebook footer__utilities-social-icon"></i>
+                                </a>
+                                <a href="#" class="footer__utilities-social-link">
+                                    <i class="ti-twitter-alt footer__utilities-social-icon"></i>
+                                </a>
+                                <a href="#" class="footer__utilities-social-link">
+                                    <i class="ti-instagram footer__utilities-social-icon"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
