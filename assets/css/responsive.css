@@ -1,13 +1,13 @@
 @media (max-width: 1023px) {
-  .tablet-trip-container {
+  .tablet-trip-container, .live-anywhere__item-container {
     overflow-x: auto;
     flex-wrap: nowrap;
     scroll-behavior: smooth;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
-  .tablet-trip-container::-webkit-scrollbar {
+  .tablet-trip-container::-webkit-scrollbar, .live-anywhere__item-container::-webkit-scrollbar {
     display: none;
   }
 }
@@ -61,12 +61,17 @@
   }
 
   .search-panel-calendar {
+    right: 30%;
     padding: 16px 32px;
   }
 
-  .search-panel-calendar {
-    right: 30%;
-    padding: 16px 32px;
+  .header-search__flexible--active ~ .search-panel-calendar {
+    left: -2%;
+    right: -2%;
+  }
+
+  .search-panel-calendar-flexible__dates-item {
+    width: 100px;
   }
 
   .search-panel-calendar__container:last-child {
@@ -82,7 +87,13 @@
     height: 60vh;
   }
 
-  .trip-item__img, .trip-item__content {
+  /* trip category */
+  .trip-category {
+    margin-bottom: 56px;
+  }
+
+  .trip-item__img,
+  .trip-item__content {
     height: 21.3vw;
   }
 
@@ -101,24 +112,35 @@
     font-size: 2.3rem;
     line-height: 2.3rem;
   }
-  
+
   .trip-item__desc {
     font-size: 1.5rem;
     line-height: 1.5rem;
   }
 
-  /* trip category slider */
-  .mobile-trip-category-navigation__prev, .mobile-trip-category-navigation__next {
+  .mobile-trip-category-navigation__prev,
+  .mobile-trip-category-navigation__next,
+  .mobile-live-anywhere-navigation__prev,
+  .mobile-live-anywhere-navigation__next {
     display: inline-flex;
   }
 
-  .tablet-trip-container {
+  .tablet-trip-container, .live-anywhere__item-container {
     --tablet-wide-content: 688px; /* wide content in tablet */
     margin-right: calc(-1 * (100vw - var(--tablet-wide-content)) / 2);
     margin-left: calc(-1 * (100vw - var(--tablet-wide-content)) / 2);
     padding-right: 32px;
     padding-left: 32px;
     box-sizing: content-box;
+  }
+
+  /* Live Anywhere */
+  .live-anywhere__item-container {
+    flex-wrap: nowrap;
+  }
+
+  .live-anywhere__title {
+    font-size: 2.3rem;
   }
 }
 

@@ -81,7 +81,9 @@
   flex: 1;
 }
 
-.header__navbar-logo-link-scrolled, .header__navbar-logo-link-tablet, .header__navbar-logo-link-tablet-scrolled {
+.header__navbar-logo-link-scrolled,
+.header__navbar-logo-link-tablet,
+.header__navbar-logo-link-tablet-scrolled {
   display: none;
 }
 
@@ -370,7 +372,8 @@ i.header-navbar-menu__user-icon {
   display: block;
 }
 
-.header__navbar-scrolled .header__navbar-logo-link, .header__navbar-scrolled .header__navbar-logo-link-tablet {
+.header__navbar-scrolled .header__navbar-logo-link,
+.header__navbar-scrolled .header__navbar-logo-link-tablet {
   display: none;
 }
 
@@ -1413,30 +1416,36 @@ i.search-panel-calendar-flexible__dates-icon-check {
   -webkit-text-fill-color: transparent;
 }
 
-/* Trip Category */
+/* Trip Category & Live Anywhere */
 .trip-category {
   position: relative;
   margin-bottom: 96px;
 }
 
-.trip-category__header-container {
+.trip-category__heading-container,
+.live-anywhere__heading-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.trip-category-header {
+.trip-category__heading,
+.live-anywhere__heading {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.mobile-trip-category-navigation {
+.mobile-trip-category-navigation,
+.mobile-live-anywhere-navigation {
   color: #f1f1f1;
   flex-shrink: 0;
 }
 
-.mobile-trip-category-navigation__prev, .mobile-trip-category-navigation__next {
+.mobile-trip-category-navigation__prev,
+.mobile-trip-category-navigation__next,
+.mobile-live-anywhere-navigation__prev,
+.mobile-live-anywhere-navigation__next {
   display: none;
   align-items: center;
   justify-content: center;
@@ -1447,20 +1456,32 @@ i.search-panel-calendar-flexible__dates-icon-check {
   cursor: default;
 }
 
-.mobile-trip-category-navigation__prev--active, .mobile-trip-category-navigation__next--active {
+.mobile-trip-category-navigation__prev--active,
+.mobile-trip-category-navigation__next--active,
+.mobile-live-anywhere-navigation__next--active,
+.mobile-live-anywhere-navigation__prev--active {
   border-color: #e9e9e9;
   cursor: pointer;
 }
 
-.mobile-trip-category-navigation__prev--active .mobile-trip-category-navigation__icon, .mobile-trip-category-navigation__next--active .mobile-trip-category-navigation__icon {
+.mobile-trip-category-navigation__prev--active
+  .mobile-trip-category-navigation__icon,
+.mobile-trip-category-navigation__next--active
+  .mobile-trip-category-navigation__icon,
+.mobile-live-anywhere-navigation__prev--active
+  .mobile-live-anywhere-navigation__icon,
+.mobile-live-anywhere-navigation__next--active
+  .mobile-live-anywhere-navigation__icon {
   color: var(--text-color);
 }
 
-.mobile-trip-category-navigation__next {
+.mobile-trip-category-navigation__next,
+.mobile-live-anywhere-navigation__next {
   margin-left: 6px;
 }
 
-.mobile-trip-category-navigation__icon {
+.mobile-trip-category-navigation__icon,
+.mobile-live-anywhere-navigation__icon {
   font-size: 1.2rem;
 }
 
@@ -1504,8 +1525,8 @@ i.search-panel-calendar-flexible__dates-icon-check {
 }
 
 .trip-item__content {
+  box-sizing: border-box;
   height: 14.5vw;
-  /* min-height: 31.5vw; */
   width: 100%;
   padding: 24px 16px 16px;
   background: #cc2d4a;
@@ -1874,7 +1895,8 @@ i.search-panel-calendar-flexible__dates-icon-check {
   font-weight: 300;
 }
 
-.footer__rights-item-link, .footer__utilities-social-link {
+.footer__rights-item-link,
+.footer__utilities-social-link {
   display: inline-block;
   text-decoration: none;
   color: var(--text-color);
@@ -1906,18 +1928,21 @@ i.search-panel-calendar-flexible__dates-icon-check {
   align-items: center;
 }
 
-.footer__utilities-language, .footer__utilities-money {
+.footer__utilities-language,
+.footer__utilities-money {
   margin-right: 24px;
   cursor: pointer;
 }
 
-.footer__utilities-language-icon, .footer__utilities-money-icon {
+.footer__utilities-language-icon,
+.footer__utilities-money-icon {
   font-size: 1.4rem;
   font-weight: 400;
   margin-right: 5px;
 }
 
-.footer__utilities-language-text, .footer__utilities-money-text {
+.footer__utilities-language-text,
+.footer__utilities-money-text {
   text-decoration: underline;
   font-size: 1.4rem;
   font-weight: 500;

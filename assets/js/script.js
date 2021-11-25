@@ -99,6 +99,9 @@ const futureGatewaysLine = $(".future-gateways__line");
 const mobileTripNextBtn = $(".mobile-trip-category-navigation__next");
 const mobileTripPrevBtn = $(".mobile-trip-category-navigation__prev");
 const mobileTripContainer = $(".tablet-trip-container");
+const mobileLiveNextBtn = $(".mobile-live-anywhere-navigation__next");
+const mobileLivePrevBtn = $(".mobile-live-anywhere-navigation__prev");
+const mobileLiveContainer = $(".live-anywhere__item-container");
 
 let currDate;
 let currMonth;
@@ -111,13 +114,18 @@ app = {
 
   handleEvents: function () {
     const _this = this;
-    let headerSearchBtnWidth;
     const limitAdults = 16;
     const limitKidChild = 5;
     const headerInfoHeight = 58;
     const futureOffsetLeftPadding = 10;
     const futureOffsetWidthPadding = 20;
+    const mobileTripContainerScrollWidth = mobileTripContainer.scrollWidth;
+    const mobileLiveContainerScrollWidth = mobileLiveContainer.scrollWidth;
+    let headerSearchBtnWidth;
+    let mobileTripContainerScrollLeft;
+    let mobileLiveContainerScrollLeft;
     const dateTitles = $$(".search-panel-calendar-flexible__dates-title");
+
     const resetSearchPanelCalendarSwitching = function () {
       searchPanelCalendarHeaders.forEach((element) => {
         element.classList.remove(
@@ -948,23 +956,21 @@ app = {
     });
 
     //mobile trip category slide - handle when clicking next button to scroll
-    const mobileTripContainerScrollWidth = mobileTripContainer.scrollWidth;
-    let mobileTripContainerScrollLeft;
     mobileTripNextBtn.onclick = function () {
       const mobileTripContainerScrolled =
         mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth;
       mobileTripContainerScrollLeft = mobileTripContainer.scrollLeft;
 
       mobileTripContainerScrollLeft += mobileTripContainerScrollWidth / 4;
-      if (mobileTripContainerScrollLeft >= mobileTripContainerScrolled - 1) {
+      if (mobileTripContainerScrollLeft >= mobileTripContainerScrolled - 10) {
         mobileTripContainerScrollLeft = mobileTripContainerScrolled;
         mobileTripNextBtn.classList.remove(
           "mobile-trip-category-navigation__next--active"
         );
-        mobileTripPrevBtn.classList.add(
-          "mobile-trip-category-navigation__prev--active"
-        );
       }
+      mobileTripPrevBtn.classList.add(
+        "mobile-trip-category-navigation__prev--active"
+      );
       mobileTripContainer.scrollLeft = mobileTripContainerScrollLeft;
     };
 
@@ -975,25 +981,23 @@ app = {
       mobileTripContainerScrollLeft -= mobileTripContainerScrollWidth / 4;
       if (mobileTripContainerScrollLeft <= 0) {
         mobileTripContainerScrollLeft = 0;
-        mobileTripNextBtn.classList.add(
-          "mobile-trip-category-navigation__next--active"
-        );
         mobileTripPrevBtn.classList.remove(
           "mobile-trip-category-navigation__prev--active"
         );
       }
+      mobileTripNextBtn.classList.add(
+        "mobile-trip-category-navigation__next--active"
+      );
       mobileTripContainer.scrollLeft = mobileTripContainerScrollLeft;
     };
 
-    //check and handle active next/prev btn when the trip category contain is scrolled => should write in one fuction and re-use
+    //check and handle active next/prev btn when the trip category contain is scrolled
     mobileTripContainer.onscroll = function () {
       mobileTripContainerScrollLeft = mobileTripContainer.scrollLeft;
       const mobileTripContainerScrolled =
-        mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth - 1;
-      if (
-        mobileTripContainerScrollLeft >=
-        mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth - 1
-      ) {
+        mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth;
+
+      if (mobileTripContainerScrollLeft >= mobileTripContainerScrolled - 10) {
         mobileTripContainerScrollLeft = mobileTripContainerScrolled;
         mobileTripNextBtn.classList.remove(
           "mobile-trip-category-navigation__next--active"
@@ -1001,15 +1005,88 @@ app = {
         mobileTripPrevBtn.classList.add(
           "mobile-trip-category-navigation__prev--active"
         );
-      }
-
-      if (mobileTripContainerScrollLeft <= 0) {
+      } else if (mobileTripContainerScrollLeft <= 0) {
         mobileTripContainerScrollLeft = 0;
         mobileTripNextBtn.classList.add(
           "mobile-trip-category-navigation__next--active"
         );
         mobileTripPrevBtn.classList.remove(
           "mobile-trip-category-navigation__prev--active"
+        );
+      } else {
+        mobileTripPrevBtn.classList.add(
+          "mobile-trip-category-navigation__prev--active"
+        );
+        mobileTripNextBtn.classList.add(
+          "mobile-trip-category-navigation__next--active"
+        );
+      }
+    };
+
+    //mobile live anywhere slide - handle when clicking next button to scroll
+    mobileLiveNextBtn.onclick = function () {
+      const mobileLiveContainerScrolled =
+        mobileLiveContainerScrollWidth - mobileLiveContainer.offsetWidth;
+      mobileLiveContainerScrollLeft = mobileLiveContainer.scrollLeft;
+
+      mobileLiveContainerScrollLeft += mobileTripContainerScrollWidth / 4;
+      if (mobileLiveContainerScrollLeft >= mobileLiveContainerScrolled - 10) {
+        mobileLiveContainerScrollLeft = mobileLiveContainerScrolled;
+        mobileLiveNextBtn.classList.remove(
+          "mobile-live-anywhere-navigation__next--active"
+        );
+      }
+      mobileLivePrevBtn.classList.add(
+        "mobile-live-anywhere-navigation__prev--active"
+      );
+      mobileLiveContainer.scrollLeft = mobileLiveContainerScrollLeft;
+    };
+
+    //mobile live anywhere slide - handle when clicking prev button to scrollLeft
+    mobileLivePrevBtn.onclick = function () {
+      mobileLiveContainerScrollLeft = mobileLiveContainer.scrollLeft;
+
+      mobileLiveContainerScrollLeft -= mobileLiveContainerScrollWidth / 4;
+      if (mobileLiveContainerScrollLeft <= 0) {
+        mobileLiveContainerScrollLeft = 0;
+        mobileLivePrevBtn.classList.remove(
+          "mobile-live-anywhere-navigation__prev--active"
+        );
+      }
+      mobileLiveNextBtn.classList.add(
+        "mobile-live-anywhere-navigation__next--active"
+      );
+      mobileLiveContainer.scrollLeft = mobileLiveContainerScrollLeft;
+    };
+
+    //check and handle active next/prev btn when the live anywhere contain is scrolled
+    mobileLiveContainer.onscroll = function () {
+      mobileLiveContainerScrollLeft = mobileLiveContainer.scrollLeft;
+      const mobileLiveContainerScrolled =
+        mobileLiveContainerScrollWidth - mobileLiveContainer.offsetWidth;
+
+      if (mobileLiveContainerScrollLeft >= mobileLiveContainerScrolled - 10) {
+        mobileLiveContainerScrollLeft = mobileLiveContainerScrolled;
+        mobileLiveNextBtn.classList.remove(
+          "mobile-live-anywhere-navigation__next--active"
+        );
+        mobileLivePrevBtn.classList.add(
+          "mobile-live-anywhere-navigation__prev--active"
+        );
+      } else if (mobileLiveContainerScrollLeft <= 0) {
+        mobileLiveContainerScrollLeft = 0;
+        mobileLiveNextBtn.classList.add(
+          "mobile-live-anywhere-navigation__next--active"
+        );
+        mobileLivePrevBtn.classList.remove(
+          "mobile-live-anywhere-navigation__prev--active"
+        );
+      } else {
+        mobileLiveNextBtn.classList.add(
+          "mobile-live-anywhere-navigation__next--active"
+        );
+        mobileLivePrevBtn.classList.add(
+          "mobile-live-anywhere-navigation__prev--active"
         );
       }
     };
