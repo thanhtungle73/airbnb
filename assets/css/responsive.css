@@ -1,4 +1,15 @@
-@media (min-width: 1023px) {
+@media (max-width: 1023px) {
+  .tablet-trip-container {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .tablet-trip-container::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Tablet */
@@ -96,9 +107,18 @@
     line-height: 1.5rem;
   }
 
-  .suggestion__items-tablet {
-    flex-wrap: nowrap;
-    overflow-x: auto;
+  /* trip category slider */
+  .mobile-trip-category-navigation__prev, .mobile-trip-category-navigation__next {
+    display: inline-flex;
+  }
+
+  .tablet-trip-container {
+    --tablet-wide-content: 688px; /* wide content in tablet */
+    margin-right: calc(-1 * (100vw - var(--tablet-wide-content)) / 2);
+    margin-left: calc(-1 * (100vw - var(--tablet-wide-content)) / 2);
+    padding-right: 32px;
+    padding-left: 32px;
+    box-sizing: content-box;
   }
 }
 

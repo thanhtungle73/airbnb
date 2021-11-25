@@ -96,6 +96,9 @@ const futureGateWaysItemActive = $(
   ".future-gateways__item.future-gateways__item--active"
 );
 const futureGatewaysLine = $(".future-gateways__line");
+const mobileTripNextBtn = $(".mobile-trip-category-navigation__next");
+const mobileTripPrevBtn = $(".mobile-trip-category-navigation__prev");
+const mobileTripContainer = $(".tablet-trip-container");
 
 let currDate;
 let currMonth;
@@ -943,6 +946,73 @@ app = {
         futureGateWaysItem.classList.add("future-gateways__item--active");
       };
     });
+
+    //mobile trip category slide - handle when clicking next button to scroll
+    const mobileTripContainerScrollWidth = mobileTripContainer.scrollWidth;
+    let mobileTripContainerScrollLeft;
+    mobileTripNextBtn.onclick = function () {
+      const mobileTripContainerScrolled =
+        mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth;
+      mobileTripContainerScrollLeft = mobileTripContainer.scrollLeft;
+
+      mobileTripContainerScrollLeft += mobileTripContainerScrollWidth / 4;
+      if (mobileTripContainerScrollLeft >= mobileTripContainerScrolled - 1) {
+        mobileTripContainerScrollLeft = mobileTripContainerScrolled;
+        mobileTripNextBtn.classList.remove(
+          "mobile-trip-category-navigation__next--active"
+        );
+        mobileTripPrevBtn.classList.add(
+          "mobile-trip-category-navigation__prev--active"
+        );
+      }
+      mobileTripContainer.scrollLeft = mobileTripContainerScrollLeft;
+    };
+
+    //mobile trip category slide - handle when clicking prev button to scrollLeft
+    mobileTripPrevBtn.onclick = function () {
+      mobileTripContainerScrollLeft = mobileTripContainer.scrollLeft;
+
+      mobileTripContainerScrollLeft -= mobileTripContainerScrollWidth / 4;
+      if (mobileTripContainerScrollLeft <= 0) {
+        mobileTripContainerScrollLeft = 0;
+        mobileTripNextBtn.classList.add(
+          "mobile-trip-category-navigation__next--active"
+        );
+        mobileTripPrevBtn.classList.remove(
+          "mobile-trip-category-navigation__prev--active"
+        );
+      }
+      mobileTripContainer.scrollLeft = mobileTripContainerScrollLeft;
+    };
+
+    //check and handle active next/prev btn when the trip category contain is scrolled => should write in one fuction and re-use
+    mobileTripContainer.onscroll = function () {
+      mobileTripContainerScrollLeft = mobileTripContainer.scrollLeft;
+      const mobileTripContainerScrolled =
+        mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth - 1;
+      if (
+        mobileTripContainerScrollLeft >=
+        mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth - 1
+      ) {
+        mobileTripContainerScrollLeft = mobileTripContainerScrolled;
+        mobileTripNextBtn.classList.remove(
+          "mobile-trip-category-navigation__next--active"
+        );
+        mobileTripPrevBtn.classList.add(
+          "mobile-trip-category-navigation__prev--active"
+        );
+      }
+
+      if (mobileTripContainerScrollLeft <= 0) {
+        mobileTripContainerScrollLeft = 0;
+        mobileTripNextBtn.classList.add(
+          "mobile-trip-category-navigation__next--active"
+        );
+        mobileTripPrevBtn.classList.remove(
+          "mobile-trip-category-navigation__prev--active"
+        );
+      }
+    };
   },
 
   isLeapYear: function (year) {
