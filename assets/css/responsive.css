@@ -10,6 +10,39 @@
   .tablet-trip-container::-webkit-scrollbar, .live-anywhere__item-container::-webkit-scrollbar {
     display: none;
   }
+
+  .live-anywhere__item { 
+    margin-bottom: 80px;
+  }
+
+  .gift-card {
+    margin-bottom: 56px;
+  }
+
+  .gift-card__introduce {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+  }
+
+  .grid.wide.question-hosting-container {
+    width: 100%;
+  }
+
+  .question-hosting, .question-hosting__img {
+    border-radius: 0;
+  }
+
+  .future-gateways__list {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    scroll-behavior: smooth;
+  }
+
+  .future-gateways__list::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Tablet */
@@ -141,6 +174,44 @@
 
   .live-anywhere__title {
     font-size: 2.3rem;
+  }
+
+  .gift-card__content {
+    padding: 0 56px;
+  }
+
+  .gift-card__desc {
+    font-size: 4.9rem;
+    line-height: 4.9rem;
+  }
+
+  .discover-experiences {
+    margin-bottom: 40px;
+  }
+
+  .discover-experiences__content {
+    padding: 24px 24px;
+    right: 20%;
+  }
+
+  .discover-experiences__desc {
+    font-size: 3.4rem;
+    line-height: 3.8rem;
+    margin: 0 0 24px;
+  }
+
+  .discover-experiences__btn {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+  }
+
+  .question-hosting__heading {
+    font-size: 4.9rem;
+    line-height: 4.9rem;
+  }
+
+  .question-hosting__content {
+    padding: 40px 40px;
   }
 }
 

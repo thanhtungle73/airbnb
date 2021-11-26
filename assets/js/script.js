@@ -119,8 +119,6 @@ app = {
     const headerInfoHeight = 58;
     const futureOffsetLeftPadding = 10;
     const futureOffsetWidthPadding = 20;
-    const mobileTripContainerScrollWidth = mobileTripContainer.scrollWidth;
-    const mobileLiveContainerScrollWidth = mobileLiveContainer.scrollWidth;
     let headerSearchBtnWidth;
     let mobileTripContainerScrollLeft;
     let mobileLiveContainerScrollLeft;
@@ -955,8 +953,9 @@ app = {
       };
     });
 
-    //mobile trip category slide - handle when clicking next button to scroll
+    //mobile trip category slide - handle scrolling when clicking next button
     mobileTripNextBtn.onclick = function () {
+      const mobileTripContainerScrollWidth = mobileTripContainer.scrollWidth;
       const mobileTripContainerScrolled =
         mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth;
       mobileTripContainerScrollLeft = mobileTripContainer.scrollLeft;
@@ -974,8 +973,9 @@ app = {
       mobileTripContainer.scrollLeft = mobileTripContainerScrollLeft;
     };
 
-    //mobile trip category slide - handle when clicking prev button to scrollLeft
+    //mobile trip category slide - handle scrollLeft when clicking prev button
     mobileTripPrevBtn.onclick = function () {
+      const mobileTripContainerScrollWidth = mobileTripContainer.scrollWidth;
       mobileTripContainerScrollLeft = mobileTripContainer.scrollLeft;
 
       mobileTripContainerScrollLeft -= mobileTripContainerScrollWidth / 4;
@@ -993,6 +993,7 @@ app = {
 
     //check and handle active next/prev btn when the trip category contain is scrolled
     mobileTripContainer.onscroll = function () {
+      const mobileTripContainerScrollWidth = mobileTripContainer.scrollWidth;
       mobileTripContainerScrollLeft = mobileTripContainer.scrollLeft;
       const mobileTripContainerScrolled =
         mobileTripContainerScrollWidth - mobileTripContainer.offsetWidth;
@@ -1025,17 +1026,19 @@ app = {
 
     //mobile live anywhere slide - handle when clicking next button to scroll
     mobileLiveNextBtn.onclick = function () {
+      const mobileLiveContainerScrollWidth = mobileLiveContainer.scrollWidth;
       const mobileLiveContainerScrolled =
         mobileLiveContainerScrollWidth - mobileLiveContainer.offsetWidth;
       mobileLiveContainerScrollLeft = mobileLiveContainer.scrollLeft;
 
-      mobileLiveContainerScrollLeft += mobileTripContainerScrollWidth / 4;
+      mobileLiveContainerScrollLeft += mobileLiveContainerScrollWidth / 4;
       if (mobileLiveContainerScrollLeft >= mobileLiveContainerScrolled - 10) {
         mobileLiveContainerScrollLeft = mobileLiveContainerScrolled;
         mobileLiveNextBtn.classList.remove(
           "mobile-live-anywhere-navigation__next--active"
         );
       }
+
       mobileLivePrevBtn.classList.add(
         "mobile-live-anywhere-navigation__prev--active"
       );
@@ -1045,6 +1048,7 @@ app = {
     //mobile live anywhere slide - handle when clicking prev button to scrollLeft
     mobileLivePrevBtn.onclick = function () {
       mobileLiveContainerScrollLeft = mobileLiveContainer.scrollLeft;
+      const mobileLiveContainerScrollWidth = mobileLiveContainer.scrollWidth;
 
       mobileLiveContainerScrollLeft -= mobileLiveContainerScrollWidth / 4;
       if (mobileLiveContainerScrollLeft <= 0) {
@@ -1053,6 +1057,7 @@ app = {
           "mobile-live-anywhere-navigation__prev--active"
         );
       }
+
       mobileLiveNextBtn.classList.add(
         "mobile-live-anywhere-navigation__next--active"
       );
@@ -1062,9 +1067,10 @@ app = {
     //check and handle active next/prev btn when the live anywhere contain is scrolled
     mobileLiveContainer.onscroll = function () {
       mobileLiveContainerScrollLeft = mobileLiveContainer.scrollLeft;
+      const viewportWidth = mobileLiveContainer.offsetWidth;
+      const mobileLiveContainerScrollWidth = mobileLiveContainer.scrollWidth;
       const mobileLiveContainerScrolled =
-        mobileLiveContainerScrollWidth - mobileLiveContainer.offsetWidth;
-
+        mobileLiveContainerScrollWidth - viewportWidth;
       if (mobileLiveContainerScrollLeft >= mobileLiveContainerScrolled - 10) {
         mobileLiveContainerScrollLeft = mobileLiveContainerScrolled;
         mobileLiveNextBtn.classList.remove(
