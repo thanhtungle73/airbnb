@@ -9,6 +9,7 @@
   --header-navbar-transition-time: 0.16s;
 
   --header-search-panel-location-width: 500px;
+  --tablet-content-lrg-width: 688px;
 }
 
 * {

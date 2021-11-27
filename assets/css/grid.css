@@ -8,7 +8,7 @@
   max-width: 1200px;
 }
 
-.grid.wide.lrg-content {
+.wide.lrg-content {
   max-width: 1600px;
 }
 
@@ -463,7 +463,7 @@
   }
 
   .wide.lrg-content {
-    width: 1064px;
+    max-width: 1064px;
   }
 
   .wide .row {
@@ -608,11 +608,11 @@
 
 @media (min-width: 1240px) and (max-width: 1727px) {
   .wide {
-    width: 984px;
+    width: 1200px;
   }
 
   .wide.lrg-content {
-    width: 1200px;
+    max-width: 1200px;
   }
 
   .wide .row {
