@@ -10,6 +10,9 @@
 
 .wide.lrg-content {
   max-width: 1600px;
+  width: calc(100% - var(--mobile-total-content-margin));
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .row {
@@ -17,6 +20,11 @@
   flex-wrap: wrap;
   margin-left: -4px;
   margin-right: -4px;
+}
+
+.row.lrg-gutter {
+  margin-left: -8px;
+  margin-right: -8px;
 }
 
 .row.no-gutters {
@@ -32,6 +40,11 @@
 .row.no-gutters .col {
   padding-left: 0;
   padding-right: 0;
+}
+
+.row.lrg-gutter .col {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .c-0 {
