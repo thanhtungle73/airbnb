@@ -1350,7 +1350,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
 
 /* mobile header search */
 .header-mobile__search {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -1358,7 +1358,9 @@ i.search-panel-calendar-flexible__dates-icon-check {
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: var(--header-mobile-search-height);
+  background-color: transparent;
+  transition: background-color 0.4s ease;
 }
 
 .header-mobile__search.header-mobile__search--active {
@@ -1375,6 +1377,11 @@ i.search-panel-calendar-flexible__dates-icon-check {
   margin-right: 24px;
   background-color: var(--white-color);
   border-radius: 46px;
+  cursor: default;
+}
+
+.header-mobile__search.header-mobile__search--active .header-mobile__search-btn {
+  background-color: #f7f7f7;
 }
 
 .header-mobile__search-icon {
@@ -1425,9 +1432,11 @@ i.search-panel-calendar-flexible__dates-icon-check {
 .suggestion__wrapper {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 0;
+  right: 0;
+  transform: translate(0, -50%);
   text-align: center;
+  padding: 0 70px;
 }
 
 .suggestion__question {
@@ -1468,13 +1477,6 @@ i.search-panel-calendar-flexible__dates-icon-check {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.trip-category__heading,
-.live-anywhere__heading {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .mobile-trip-category-navigation,
@@ -1766,6 +1768,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
   font-weight: 500;
   font-size: 2.2rem;
   color: var(--text-color);
+  margin: 32px 0;
 }
 
 .future-gateways__list-container {
@@ -1781,11 +1784,8 @@ i.search-panel-calendar-flexible__dates-icon-check {
   z-index: 1;
   width: 100%;
   list-style: none;
-  border-bottom: 1px solid #dedede;
   padding-left: 0;
-  margin: 14px 0;
-  overflow-x: auto;
-  overflow-y: hidden;
+  margin: 0;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   scroll-behavior: smooth;
@@ -1795,12 +1795,13 @@ i.search-panel-calendar-flexible__dates-icon-check {
   display: none;
 }
 
-.future-gateways__list .future-gateways__line {
+.future-gateways__line {
   display: block;
   position: absolute;
   left: 10px;
-  top: calc(100% - 2px);
-  height: 3px;
+  top: 96%;
+  z-index: 2;
+  height: 2px;
   background-color: var(--text-color);
   border-radius: 3px;
   transition: all 0.16s ease;
@@ -1875,8 +1876,16 @@ i.search-panel-calendar-flexible__dates-icon-check {
   border-radius: 8px;
 }
 
+.future-gateways__separate {
+  display: block;
+  position: relative;
+  top: 0;
+  border-top: 1px solid #dedede;
+  width: 100%;
+}
+
 .future-gateways__options {
-  margin-top: 18px;
+  margin-top: 32px;
 }
 
 .future-gateways__place {

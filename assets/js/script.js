@@ -105,6 +105,7 @@ const mobileLiveContainer = $(".live-anywhere__item-container");
 const mobileFutureNextBtn = $(".mobile-future-gateways__navigation-next");
 const mobileFuturePrevBtn = $(".mobile-future-gateways__navigation-prev");
 const mobileFutureContainer = $(".future-gateways__list");
+const mobileSearchHeader = $(".header-mobile__search");
 
 let currDate;
 let currMonth;
@@ -929,6 +930,14 @@ app = {
     //handle when scrollTop to show fixed header
     window.onscroll = function () {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      
+       //mobile search - handle show search background when scrollTop
+      if (scrollTop > 1) {
+        mobileSearchHeader.classList.add("header-mobile__search--active");
+      } else {
+        mobileSearchHeader.classList.remove("header-mobile__search--active");
+      }
+      
       if (scrollTop >= headerInfoHeight) {
         showNavbarSearchBtnOnScrolled();
       } else {
@@ -964,9 +973,9 @@ app = {
 
     //handle active tab and line when clicking future gateways activeItems
     futureGatewaysLine.style.left =
-      futureGateWaysItemActive.offsetLeft + futureOffsetLeftPadding + "px";
+      futureGateWaysItemActive.offsetLeft + "px";
     futureGatewaysLine.style.width =
-      futureGateWaysItemActive.clientWidth - futureOffsetWidthPadding + "px";
+      futureGateWaysItemActive.clientWidth - futureOffsetWidthPadding - 6 + "px";
     futureGateWaysItems.forEach((futureGateWaysItem) => {
       futureGateWaysItem.onclick = function () {
         if ($(".future-gateways__item.future-gateways__item--active")) {
