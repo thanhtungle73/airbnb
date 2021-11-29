@@ -97,6 +97,9 @@
                     <h4 class="header-search__heading">Location</h4>
                     <input type="text" class="header-search__input" id="header-search__box"
                         placeholder="Where are you going?">
+                    <div class="header-search__location-icon-container">
+                        <i class="fas fa-times header-search__location-icon"></i>
+                    </div>
                 </label>
                 <div
                     class="header-search__room header-search__room-checkIn header-search__item header-search__room--active">
@@ -391,6 +394,20 @@
                     <span class="header-mobile__search-title">Where are you going?</span>
                 </button>
             </div>
+            <nav class="header-mobile__navbar header-mobile__navbar--active">
+                <div class="header-mobile__navbar-item header-mobile__navbar-item--active">
+                    <i class="fas fa-search header-mobile__navbar-icon"></i>
+                    <span class="header-mobile__navbar-text">Explore</span>
+                </div>
+                <div class="header-mobile__navbar-item">
+                    <i class="far fa-heart header-mobile__navbar-icon"></i>
+                    <span class="header-mobile__navbar-text">Wishlists</span>
+                </div>
+                <div class="header-mobile__navbar-item">
+                    <i class="far fa-user-circle header-mobile__navbar-icon"></i>
+                    <span class="header-mobile__navbar-text">Log in</span>
+                </div>
+            </nav>
         </header>
         <div class="app-container">
             <div class="header__background">
@@ -399,9 +416,9 @@
                         class="header__background-img">
                     <source media="(min-width: 740px) and (max-width: 1023px)"
                         srcset="./assets/img/header/landing_page_img_720.png" class="header__background-img">
-                    <source media="(min-width: 1024px) and (max-width: 1439px)"
-                        srcset="./assets/img/header/landing_page_img_960.png" class="header__background-img">
-                    <source media="(min-width: 1440px)" srcset="./assets/img/header/landing_page_img.png"
+                    <!--  <source media="(min-width: 1024px) and (max-width: 1439px)"
+                        srcset="./assets/img/header/landing_page_img.png" class="header__background-img"> -->
+                    <source media="(min-width: 1024px)" srcset="./assets/img/header/landing_page_img.png"
                         class="header__background-img">
                     <img src="./assets/img/header/landing_page_img_960.png" alt="Header Lading"
                         class="header__background-img">
@@ -617,359 +634,358 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="grid wide lrg-content question-hosting-container">
-            <div class="question-hosting">
+            <div class="grid wide lrg-content question-hosting-container">
+                <div class="question-hosting">
+                    <div class="row">
+                        <div class="col l-12 m-12 c-12">
+                            <div class="question-hosting__content">
+                                <h2 class="question-hosting__heading">Question about hosting?</h2>
+                                <a href="#" class="question-hosting__btn btn">Ask a Superhost</a>
+                            </div>
+
+                            <picture>
+                                <source media="(max-width: 739px)" srcset="./assets/img/content/question_320.png"
+                                    class="question-hosting__img">
+                                <source media="(min-width: 740px) and (max-width: 1023px)"
+                                    srcset="./assets/img/content/question_720.png" class="question-hosting__img">
+                                <source media="(min-width: 1024px) and (max-width: 1439px)"
+                                    srcset="./assets/img/content/question_960.png" class="question-hosting__img">
+                                <source media="(min-width: 1440px) and (max-width: 1639px)"
+                                    srcset="./assets/img/content/question_1200.png" class="question-hosting__img">
+                                <source media="(min-width: 1640px)" srcset="./assets/img/content/question_1920.png"
+                                    class="question-hosting__img">
+                                <img src="./assets/img/content/online_discover_experiences_960.png" alt="gift card"
+                                    class="question-hosting__img">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid wide lrg-content">
+                <div class="future-gateways">
+                    <h2 class="future-gateways__heading">Inspiration for future getaways</h2>
+                    <div class="future-gateways__list-container">
+                        <span class="mobile-future-gateways__navigation-prev">
+                            <i class="fas fa-chevron-left mobile-future-gateways__navigation-icon"></i>
+                        </span>
+                        <ul class="future-gateways__list">
+                            <li class="future-gateways__item future-gateways__item--active">
+                                Destinations for arts & culture
+                            </li>
+                            <li class="future-gateways__item">
+                                Destinations for outdoor adventure
+                            </li>
+                            <li class="future-gateways__item">
+                                Mountain cabins
+                            </li>
+                            <li class="future-gateways__item">
+                                Beach destinations
+                            </li>
+                            <li class="future-gateways__item">
+                                Popular destinations
+                            </li>
+                            <li class="future-gateways__item">
+                                Unique Stays
+                            </li>
+                            <span class="future-gateways__line"></span>
+                        </ul>
+                        <span
+                            class="mobile-future-gateways__navigation-next  mobile-future-gateways__navigation-next--active">
+                            <i class="fas fa-chevron-right mobile-future-gateways__navigation-icon"></i>
+                        </span>
+                    </div>
+                    <div class="future-gateways__separate"></div>
+                    <div class="future-gateways__options">
+                        <div class="row">
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">Phoenix</h4>
+                                        <p class="future-gateways__place-desc">Arizona</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">Hot Springs</h4>
+                                        <p class="future-gateways__place-desc">Arkansas</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">Los Angeles</h4>
+                                        <p class="future-gateways__place-desc">California</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">San Diego</h4>
+                                        <p class="future-gateways__place-desc">California</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">San Francisc</h4>
+                                        <p class="future-gateways__place-desc">California</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">Barcelona</h4>
+                                        <p class="future-gateways__place-desc">Catalonia</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">Prague</h4>
+                                        <p class="future-gateways__place-desc">Czechia</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">Washington</h4>
+                                        <p class="future-gateways__place-desc">District of Columbia</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">Keswick</h4>
+                                        <p class="future-gateways__place-desc">England</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">London</h4>
+                                        <p class="future-gateways__place-desc">England</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <a href="#" class="future-gateways__link">
+                                        <h4 class="future-gateways__place-name">Scarborough</h4>
+                                        <p class="future-gateways__place-desc">England</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col l-3 m-4 c-12">
+                                <div class="future-gateways__place">
+                                    <h4 class="future-gateways__place-more">Show more</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="grid wide lrg-content">
+                <div class="footer__info">
+                    <div class="row">
+                        <div class="col l-3 m-12 c-12 mobile-footer__info-wrapper">
+                            <h4 class="footer__heading">Support</h4>
+                            <div class="footer__list">
+                                <div class="row">
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Help Center</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Safety information</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Cancellation options</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Our COVID-19 Response</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Supporting people with
+                                                disabilities</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Report a neighborhood concern</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-3 m-12 c-12 mobile-footer__info-wrapper">
+                            <h4 class="footer__heading">Community</h4>
+                            <div class="footer__list">
+                                <div class="row">
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Airbnb.org: disaster relief
+                                                housing</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Support Afghan refugees</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Celebrating diversity & belonging</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Combating discrimination</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-3 m-12 c-12 mobile-footer__info-wrapper">
+                            <h4 class="footer__heading">Hosting</h4>
+                            <div class="footer__list">
+                                <div class="row">
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Try hosting</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">AirCover: protection for Hosts</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Explore hosting resources</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Visit our community forum</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">How to host responsibly</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-3 m-12 c-12 mobile-footer__info-wrapper">
+                            <h4 class="footer__heading">About</h4>
+                            <div class="footer__list">
+                                <div class="row">
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Newsroom</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Learn about new features</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Letter from our founders</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Careers</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Investors</a>
+                                        </div>
+                                    </div>
+                                    <div class="col l-12 m-4 c-12">
+                                        <div class="footer__item">
+                                            <a href="#" class="footer__item-link">Airbnb Luxe</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col l-12 m-12 c-12">
-                        <div class="question-hosting__content">
-                            <h2 class="question-hosting__heading">Question about hosting?</h2>
-                            <a href="#" class="question-hosting__btn btn">Ask a Superhost</a>
-                        </div>
-
-                        <picture>
-                            <source media="(max-width: 739px)" srcset="./assets/img/content/question_320.png"
-                                class="question-hosting__img">
-                            <source media="(min-width: 740px) and (max-width: 1023px)"
-                                srcset="./assets/img/content/question_720.png" class="question-hosting__img">
-                            <source media="(min-width: 1024px) and (max-width: 1439px)"
-                                srcset="./assets/img/content/question_960.png" class="question-hosting__img">
-                            <source media="(min-width: 1440px) and (max-width: 1639px)"
-                                srcset="./assets/img/content/question_1200.png" class="question-hosting__img">
-                            <source media="(min-width: 1640px)" srcset="./assets/img/content/question_1920.png"
-                                class="question-hosting__img">
-                            <img src="./assets/img/content/online_discover_experiences_960.png" alt="gift card"
-                                class="question-hosting__img">
-                        </picture>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid wide lrg-content">
-            <div class="future-gateways">
-                <h2 class="future-gateways__heading">Inspiration for future getaways</h2>
-                <div class="future-gateways__list-container">
-                    <span class="mobile-future-gateways__navigation-prev">
-                        <i class="fas fa-chevron-left mobile-future-gateways__navigation-icon"></i>
-                    </span>
-                    <ul class="future-gateways__list">
-                        <li class="future-gateways__item future-gateways__item--active">
-                            Destinations for arts & culture
-                        </li>
-                        <li class="future-gateways__item">
-                            Destinations for outdoor adventure
-                        </li>
-                        <li class="future-gateways__item">
-                            Mountain cabins
-                        </li>
-                        <li class="future-gateways__item">
-                            Beach destinations
-                        </li>
-                        <li class="future-gateways__item">
-                            Popular destinations
-                        </li>
-                        <li class="future-gateways__item">
-                            Unique Stays
-                        </li>
-                        <span class="future-gateways__line"></span>
-                    </ul>
-                    <span
-                        class="mobile-future-gateways__navigation-next  mobile-future-gateways__navigation-next--active">
-                        <i class="fas fa-chevron-right mobile-future-gateways__navigation-icon"></i>
-                    </span>
-                </div>
-                <div class="future-gateways__separate"></div>
-                <div class="future-gateways__options">
-                    <div class="row">
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">Phoenix</h4>
-                                    <p class="future-gateways__place-desc">Arizona</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">Hot Springs</h4>
-                                    <p class="future-gateways__place-desc">Arkansas</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">Los Angeles</h4>
-                                    <p class="future-gateways__place-desc">California</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">San Diego</h4>
-                                    <p class="future-gateways__place-desc">California</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">San Francisc</h4>
-                                    <p class="future-gateways__place-desc">California</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">Barcelona</h4>
-                                    <p class="future-gateways__place-desc">Catalonia</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">Prague</h4>
-                                    <p class="future-gateways__place-desc">Czechia</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">Washington</h4>
-                                    <p class="future-gateways__place-desc">District of Columbia</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">Keswick</h4>
-                                    <p class="future-gateways__place-desc">England</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">London</h4>
-                                    <p class="future-gateways__place-desc">England</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <a href="#" class="future-gateways__link">
-                                    <h4 class="future-gateways__place-name">Scarborough</h4>
-                                    <p class="future-gateways__place-desc">England</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col l-3 m-4 c-12">
-                            <div class="future-gateways__place">
-                                <h4 class="future-gateways__place-more">Show more</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <footer class="footer">
-        <div class="grid wide lrg-content">
-            <div class="footer__info">
-                <div class="row">
-                    <div class="col l-3 m-12 c-12 mobile-footer__info-wrapper">
-                        <h4 class="footer__heading">Support</h4>
-                        <div class="footer__list">
-                            <div class="row">
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Help Center</a>
-                                    </div>
+                        <div class="footer__policy">
+                            <div class="footer__rights">
+                                <div class="footer__rights-year">
+                                    <i class="far fa-copyright footer__rights-year-icon"></i>
+                                    2021 Airbnb, Inc.
                                 </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Safety information</a>
+                                <div class="footer__rights-list">
+                                    <div class="footer__rights-item">
+                                        <a href="#" class="footer__rights-item-link">Privacy</a>
                                     </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Cancellation options</a>
+                                    <div class="footer__rights-item">
+                                        <a href="#" class="footer__rights-item-link">Terms</a>
                                     </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Our COVID-19 Response</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Supporting people with disabilities</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Report a neighborhood concern</a>
+                                    <div class="footer__rights-item">
+                                        <a href="#" class="footer__rights-item-link">Sitemap</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col l-3 m-12 c-12 mobile-footer__info-wrapper">
-                        <h4 class="footer__heading">Community</h4>
-                        <div class="footer__list">
-                            <div class="row">
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Airbnb.org: disaster relief housing</a>
-                                    </div>
+                            <div class="footer__powered">Thanh Tung Le</div>
+                            <div class="footer__utilities">
+                                <div class="footer__utilities-language">
+                                    <i class="ti-world footer__utilities-language-icon"></i>
+                                    <span class="footer__utilities-language-text">English</span>
                                 </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Support Afghan refugees</a>
-                                    </div>
+                                <div class="footer__utilities-money">
+                                    <i class="ti-money footer__utilities-money-icon"></i>
+                                    <span class="footer__utilities-money-text">USD</span>
                                 </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Celebrating diversity & belonging</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Combating discrimination</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l-3 m-12 c-12 mobile-footer__info-wrapper">
-                        <h4 class="footer__heading">Hosting</h4>
-                        <div class="footer__list">
-                            <div class="row">
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Try hosting</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">AirCover: protection for Hosts</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Explore hosting resources</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Visit our community forum</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">How to host responsibly</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l-3 m-12 c-12 mobile-footer__info-wrapper">
-                        <h4 class="footer__heading">About</h4>
-                        <div class="footer__list">
-                            <div class="row">
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Newsroom</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Learn about new features</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Letter from our founders</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Careers</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Investors</a>
-                                    </div>
-                                </div>
-                                <div class="col l-12 m-4 c-12">
-                                    <div class="footer__item">
-                                        <a href="#" class="footer__item-link">Airbnb Luxe</a>
-                                    </div>
+                                <div class="footer__utilities-social">
+                                    <a href="#" class="footer__utilities-social-link">
+                                        <i class="ti-facebook footer__utilities-social-icon"></i>
+                                    </a>
+                                    <a href="#" class="footer__utilities-social-link">
+                                        <i class="ti-twitter-alt footer__utilities-social-icon"></i>
+                                    </a>
+                                    <a href="#" class="footer__utilities-social-link">
+                                        <i class="ti-instagram footer__utilities-social-icon"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col l-12 m-12 c-12">
-                    <div class="footer__policy">
-                        <div class="footer__rights">
-                            <div class="footer__rights-year">
-                                <i class="far fa-copyright footer__rights-year-icon"></i>
-                                2021 Airbnb, Inc.
-                            </div>
-                            <div class="footer__rights-list">
-                                <div class="footer__rights-item">
-                                    <a href="#" class="footer__rights-item-link">Privacy</a>
-                                </div>
-                                <div class="footer__rights-item">
-                                    <a href="#" class="footer__rights-item-link">Terms</a>
-                                </div>
-                                <div class="footer__rights-item">
-                                    <a href="#" class="footer__rights-item-link">Sitemap</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer__powered">Thanh Tung Le</div>
-                        <div class="footer__utilities">
-                            <div class="footer__utilities-language">
-                                <i class="ti-world footer__utilities-language-icon"></i>
-                                <span class="footer__utilities-language-text">English</span>
-                            </div>
-                            <div class="footer__utilities-money">
-                                <i class="ti-money footer__utilities-money-icon"></i>
-                                <span class="footer__utilities-money-text">USD</span>
-                            </div>
-                            <div class="footer__utilities-social">
-                                <a href="#" class="footer__utilities-social-link">
-                                    <i class="ti-facebook footer__utilities-social-icon"></i>
-                                </a>
-                                <a href="#" class="footer__utilities-social-link">
-                                    <i class="ti-twitter-alt footer__utilities-social-icon"></i>
-                                </a>
-                                <a href="#" class="footer__utilities-social-link">
-                                    <i class="ti-instagram footer__utilities-social-icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+        </footer>
     </div>
     <script src="assets/js/script.js"></script>
 </body>

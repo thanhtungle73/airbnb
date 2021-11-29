@@ -10,9 +10,6 @@
 
 .wide.lrg-content {
   max-width: 1600px;
-  width: calc(100% - var(--mobile-total-content-margin));
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .row {
@@ -155,6 +152,21 @@
   margin-left: 91.66667%;
 }
 
+/* Mobile - mobile resolution with wide*/
+@media (max-width: 739px) {
+  .wide {
+    width: calc(100% - 64px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wide.lrg-content {
+    width: calc(100% - 64px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* Greater than Tablet no wide*/
 @media (min-width: 740px) {
   .row {
@@ -163,8 +175,8 @@
   }
 
   .row.lrg-gutter {
-    margin-left: -27px;
-    margin-right: -27px;
+    margin-left: -12px;
+    margin-right: -12px;
   }
 
   .col {
@@ -173,8 +185,8 @@
   }
 
   .row.lrg-gutter .col {
-    padding-left: 27px;
-    padding-right: 27px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .m-0 {
@@ -314,8 +326,8 @@
   }
 
   .row.lrg-gutter {
-    margin-left: -27px;
-    margin-right: -27px;
+    margin-left: -12px;
+    margin-right: -12px;
   }
 
   .col {
@@ -324,8 +336,8 @@
   }
 
   .row.lrg-gutter .col {
-    padding-left: 27px;
-    padding-right: 27px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .l-0 {
@@ -619,6 +631,7 @@
   }
 }
 
+/* PC high resolution with wide*/
 @media (min-width: 1240px) and (max-width: 1727px) {
   .wide {
     width: 1200px;

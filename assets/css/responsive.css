@@ -301,9 +301,17 @@
     min-height: 90vh;
   }
 
+  .header-mobile__navbar {
+    display: flex;
+  }
+
   .suggestion {
     margin-top: calc(var(--header-mobile-search-height) * 2);
     padding-bottom: 32px;
+  }
+
+  .suggestion__wrapper {
+    padding: 0;
   }
 
   .suggestion__question {
@@ -414,7 +422,13 @@
   }
 }
 
-/* Background image */
+@media (min-width: 1040px) {
+  .header__background-img {
+    height: 80vh;
+  }
+}
+
+/* Background image in PC high resolution*/
 @media (min-width: 1440px) {
   .header__background-img {
     height: 85vh;
