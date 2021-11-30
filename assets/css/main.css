@@ -477,7 +477,7 @@ i.header-navbar-menu__user-icon {
   white-space: nowrap;
 }
 
-.header-search__location-icon-container {
+.header-search__location-icon-container, .mobile-explore__close {
   position: absolute;
   right: 0;
   z-index: 1;
@@ -492,7 +492,7 @@ i.header-navbar-menu__user-icon {
   margin-right: 16px;
 }
 
-.header-search__location-icon {
+.header-search__location-icon, .mobile-explore__close-icon {
   font-size: 1.4rem;
 }
 
@@ -664,7 +664,8 @@ i.header-navbar-menu__user-icon {
   margin-left: 4px;
 }
 
-.header-search__person-icon-container.header-search__person-icon-container--active, .header-search__location-icon-container.header-search__location-icon-container--active {
+.header-search__person-icon-container.header-search__person-icon-container--active, .header-search__location-icon-container.header-search__location-icon-container--active, 
+.mobile-explore__close.mobile-explore__close--active {
   display: flex;
 }
 
@@ -1221,6 +1222,8 @@ i.search-panel-calendar-flexible__dates-icon-check {
   color: var(--text-color);
   font-size: 1.4rem;
   font-weight: 300;
+  text-align: center;
+  max-width: 75px;
 }
 
 .header-search__flexible {
@@ -1374,7 +1377,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
   align-items: center;
   justify-content: center;
   position: fixed;
-  z-index: 8;
+  z-index: 7;
   top: 0;
   left: 0;
   right: 0;
@@ -1424,7 +1427,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 8;
+  z-index: 11;
   height: 64px;
   background-color: var(--white-color);
   transform: translateY(100%);
@@ -2123,3 +2126,136 @@ i.search-panel-calendar-flexible__dates-icon-check {
 .footer__utilities-social-icon {
   font-size: 1.8rem;
 }
+
+/* mobile explore */
+.mobile-explore {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 12;
+  background-color: var(--white-color);
+  transform: translateY(120vh);
+  opacity: 0.3;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  overflow: hidden;
+}
+
+.mobile-explore.mobile-explore--active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-explore__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 24px 0 0;
+  margin: 56px 0 12px;
+}
+
+.mobile-explore__icon {
+  font-size: 1.6rem;
+  padding: 16px 24px;
+}
+
+.mobile-explore__input {
+  border: none;
+  font-size: 1.7rem;
+  line-height: 4rem;
+  font-weight: 300;
+  flex: 1;
+  outline: none;
+  padding: 4px 0;
+}
+
+/* mobile wishlists */
+.mobile-wishlists {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+  background-color: var(--white-color);
+  padding: 0 24px;
+}
+
+.mobile-wishlists.mobile-wishlists--active {
+  display: block;
+}
+
+.mobile-wishlists__heading {
+    font-size: 3.2rem;
+    line-height: 3.2rem;
+    margin-top: 56px;
+    font-weight: 500;
+}
+
+.mobile-wishlists__login {
+  background-color: var(--black-color);
+  color: var(--white-color);
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  font-weight: 500;
+  width: 100%;
+  padding: 16px 0;
+  margin-top: 8px;
+  border-radius: 8px;
+}
+
+.mobile-wishlists__separate {
+  margin-top: 16px;
+  border-bottom: 1px solid #f2f2f2;
+  width: 100%;
+}
+
+.mobile-wishlists__popular-heading {
+  font-size: 1.8rem;
+  line-height: 1.8rem;
+  color: #484848;
+  font-weight: 500;
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+
+.mobile-wishlists__list {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.mobile-wishlists__item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.mobile-wishlists__img {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.mobile-wishlists__title {
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  color: var(--text-color);
+  margin-left: 16px;
+  font-weight: 500;
+}
+
+.mobile-wishlists__more {
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  color: var(--text-color);
+  background-color: var(--white-color);
+  border-radius: 8px;
+  padding: 14px 24px;
+  border: 2px solid var(--black-color);
+}
+
+
