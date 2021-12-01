@@ -22,7 +22,7 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
   line-height: 1.6rem;
-  font-family: 'Roboto', "Helvetica Neue", Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
 }
 
 .btn {
@@ -38,4 +38,21 @@ html {
   line-height: 4.2rem;
   margin: 48px 0;
   font-weight: 500;
+}
+
+/* Auth modal */
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 14;
+}
+
+.modal-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
 }

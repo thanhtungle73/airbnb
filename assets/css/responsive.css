@@ -420,6 +420,10 @@
   .footer__rights-item:first-child::before {
     display: none;
   }
+
+  .mobile-wishlists.mobile-wishlists--active {
+    display: block;
+  }
 }
 
 @media (min-width: 1040px) {

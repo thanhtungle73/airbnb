@@ -117,6 +117,7 @@ const mobileExploreBackBtn = $(".mobile-explore__icon");
 const mobileExploreCloseBtn = $(".mobile-explore__close");
 const mobileExploreInput = $(".mobile-explore__input");
 const mobileExploreVideoBtn = $(".mobile-explore__video");
+const mobileWishlist = $(".mobile-wishlists");
 
 let currDate;
 let currMonth;
@@ -1080,6 +1081,18 @@ app = {
       }
     };
 
+    //mobile_handle when scroll mobile wishlists to show bottom navbar
+    mobileWishlist.onscroll = function () {
+      const scrollTop = mobileWishlist.scrollY || mobileWishlist.scrollTop;
+
+      if (scrollTop > _this.mobilePreviousScroll) {
+        mobileHeaderNavbar.classList.remove("header-mobile__navbar--active");
+      } else {
+        mobileHeaderNavbar.classList.add("header-mobile__navbar--active");
+      }
+      _this.mobilePreviousScroll = scrollTop;
+    };
+
     //handle showing search when clicking navbar header search
     headerNavbarSearch.onclick = function () {
       header.classList.add("header--scrolled-show-background");
@@ -1242,8 +1255,17 @@ app = {
       });
 
       element.addEventListener("click", function () {
-        if(element.closest(".header-mobile__navbar-explore")) {
+        if (element.closest(".header-mobile__navbar-explore")) {
           window.scrollTo(0, 0);
+          mobileWishlist.classList.remove("mobile-wishlists--active");
+          mobileSearchHeader.classList.remove("header-mobile__search--hide-mobile");
+        }
+      });
+
+      element.addEventListener("click", function () {
+        if (element.closest(".header-mobile__navbar-wishlists")) {
+          mobileWishlist.classList.add("mobile-wishlists--active");
+          mobileSearchHeader.classList.add("header-mobile__search--hide-mobile");
         }
       });
     });

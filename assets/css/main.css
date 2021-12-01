@@ -1390,6 +1390,10 @@ i.search-panel-calendar-flexible__dates-icon-check {
   background-color: var(--white-color);
 }
 
+.header-mobile__search.header-mobile__search--hide-mobile {
+  display: none;
+}
+
 .header-mobile__search-btn {
   display: flex;
   align-items: center;
@@ -2179,13 +2183,10 @@ i.search-panel-calendar-flexible__dates-icon-check {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 11;
+  z-index: 9;
   background-color: var(--white-color);
   padding: 0 24px;
-}
-
-.mobile-wishlists.mobile-wishlists--active {
-  display: block;
+  overflow-y: scroll;
 }
 
 .mobile-wishlists__heading {
@@ -2251,11 +2252,156 @@ i.search-panel-calendar-flexible__dates-icon-check {
 .mobile-wishlists__more {
   font-size: 1.6rem;
   line-height: 1.6rem;
+  font-weight: 500;
   color: var(--text-color);
   background-color: var(--white-color);
   border-radius: 8px;
   padding: 14px 24px;
-  border: 2px solid var(--black-color);
+  margin-bottom: 26px;
+  border: 1px solid var(--black-color);
 }
+
+/* Auth modal */
+.auth-modal {
+  position: relative;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  max-width: 568px;
+  background-color: var(--white-color);
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.auth-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 24px 0 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.auth-modal__close {
+  position: absolute;
+  left: 16px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 8px 11px;
+  border-radius: 50%;
+}
+
+.auth-modal__close:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.auth-modal__label {
+  flex: 1;
+  margin: 24px 0;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.auth-modal__container {
+  padding: 24px;
+}
+
+.auth-modal__heading {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin: 8px 0 24px;
+  color: var(--text-color);
+}
+
+.auth-modal__input {
+
+}
+
+.auth-modal__country {
+  position: relative;
+  border: 1px solid #c6c6c6;
+  border-radius: 8px;
+  padding-right: 12px;
+  overflow: hidden;
+}
+
+.auth-modal__country-label {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  display: block;
+  color: #787878;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.auth-modal__country-dropdown {
+  display: block;
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: 300;
+  padding: 26px 36px 10px 10px;
+}
+
+.auth-modal__country-option {
+  font-size: 1.6rem;
+  font-weight: 300;
+}
+
+.auth-modal__phone {
+
+}
+
+.auth-modal__phone-label {
+
+}
+
+.auth-modal__phone-box {
+
+}
+
+.auth-modal__policy {
+
+}
+
+.auth-modal__policy-link {
+
+}
+
+.auth-modal__continue {
+
+}
+
+.auth-modal__separate {
+
+}
+
+.auth-modal__separate-line {
+
+}
+
+.auth-modal__separate-text {
+
+}
+
+.auth-modal__method {
+
+}
+
+.auth-modal__method-item {
+
+}
+
+
+
+
+
+
+
 
 
