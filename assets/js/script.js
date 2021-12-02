@@ -6,6 +6,7 @@ const headerNavbar = $(".header__navbar");
 const headerNavbarMiddle = $(".header__navbar-list-middle");
 const headerNavMidItems = $$(".header__navbar-mid-item");
 const headerNavOptions = $("#header__navbar-right-item-checkbox");
+const headerNavAuthOptions = $$(".header-navbar-options__auth");
 const headerNavbarSearch = $(".header__navbar-search");
 const headerSearch = $(".header__search");
 const headerSearchBtn = $(".header-search__btn");
@@ -99,6 +100,11 @@ const futureGateWaysItemActive = $(
   ".future-gateways__item.future-gateways__item--active"
 );
 const futureGatewaysLine = $(".future-gateways__line");
+const authModalContainer = $(".modal-wrapper");
+const authModalPhoneBox = $(".auth-modal__phone");
+const authModalPhoneInput = $(".auth-modal__phone-box");
+const authModalContinueBtn = $(".auth-modal__continue");
+const authModalCloseBtn = $(".auth-modal__close");
 const mobileTripNextBtn = $(".mobile-trip-category-navigation__next");
 const mobileTripPrevBtn = $(".mobile-trip-category-navigation__prev");
 const mobileTripContainer = $(".tablet-trip-container");
@@ -385,6 +391,21 @@ app = {
       }
     });
 
+    //return initial state of modal phone number input
+    document.addEventListener("mouseup", function (e) {
+      if (!e.target.closest(".auth-modal__phone")) {
+        authModalPhoneBox.classList.remove("auth-modal__phone--active");
+        authModalPhoneInput.placeholder = "";
+      }
+    });
+
+    document.addEventListener("mouseup", function (e) {
+      if (!e.target.closest(".auth-modal")) {
+        authModalContainer.classList.remove("modal-wrapper--active");
+        $("body").style.overflow = "unset";
+      }
+    });
+
     //handle when clicking middle header navbar items
     headerNavMidItems.forEach((element) => {
       element.onclick = function () {
@@ -424,6 +445,15 @@ app = {
             "search-panel__location-flex--active"
           );
         }
+      };
+    });
+
+    //handle when clicking header navbar login & sign in
+    headerNavAuthOptions.forEach((element) => {
+      element.onclick = function () {
+        authModalContainer.classList.add("modal-wrapper--active");
+        headerNavOptions.checked = false;
+        $("body").style.overflow = "hidden";
       };
     });
 
@@ -1258,14 +1288,18 @@ app = {
         if (element.closest(".header-mobile__navbar-explore")) {
           window.scrollTo(0, 0);
           mobileWishlist.classList.remove("mobile-wishlists--active");
-          mobileSearchHeader.classList.remove("header-mobile__search--hide-mobile");
+          mobileSearchHeader.classList.remove(
+            "header-mobile__search--hide-mobile"
+          );
         }
       });
 
       element.addEventListener("click", function () {
         if (element.closest(".header-mobile__navbar-wishlists")) {
           mobileWishlist.classList.add("mobile-wishlists--active");
-          mobileSearchHeader.classList.add("header-mobile__search--hide-mobile");
+          mobileSearchHeader.classList.add(
+            "header-mobile__search--hide-mobile"
+          );
         }
       });
     });
@@ -1293,7 +1327,6 @@ app = {
         mobileExploreCloseBtn.classList.remove("mobile-explore__close--active");
       }
     };
-
     mobileExploreCloseBtn.onclick = function () {
       if (
         mobileExploreCloseBtn.classList.contains(
@@ -1303,6 +1336,37 @@ app = {
         mobileExploreInput.value = "";
         mobileExploreCloseBtn.classList.remove("mobile-explore__close--active");
       }
+    };
+
+    //modal - handle zoom out phone label when clicking phone number box
+    authModalPhoneBox.onclick = function () {
+      this.classList.add("auth-modal__phone--active");
+      authModalPhoneInput.placeholder = "(XXX) XXX-XXXX";
+    };
+
+    //modal - handle background image move when hover to continue btn
+    authModalContinueBtn.onmousemove = function (e) {
+      //calculating the position in percentage and set the css variables
+      authModalContinueBtn.style.setProperty(
+        "--xMouse",
+        (e.offsetX * 100) / e.target.offsetWidth
+      );
+      authModalContinueBtn.style.setProperty(
+        "--yMouse",
+        (e.offsetY * 100) / e.target.offsetHeight
+      );
+    };
+
+    //modal - handle background image return initial when mouse leave
+    authModalContinueBtn.onmouseleave = function () {
+      authModalContinueBtn.style.setProperty("--xMouse", 0);
+      authModalContinueBtn.style.setProperty("--yMouse", 50);
+    };
+
+    //modal - handle close modal when clicking close btn
+    authModalCloseBtn.onclick = function () {
+      authModalContainer.classList.remove("modal-wrapper--active");
+      $("body").style.overflow = "unset";
     };
   },
 
