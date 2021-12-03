@@ -1437,7 +1437,8 @@ i.search-panel-calendar-flexible__dates-icon-check {
   left: 0;
   right: 0;
   z-index: 11;
-  height: 64px;
+  height: var(--mobile-bottom-navbar-height);
+  border-top: 1px solid #ededed;
   background-color: var(--white-color);
   transform: translateY(100%);
   transition: transform 0.25s ease;
@@ -2340,12 +2341,17 @@ i.search-panel-calendar-flexible__dates-icon-check {
   color: var(--text-color);
 }
 
-.auth-modal__input {
+.auth-modal__input-inner {
+  border-radius: 8px;
+  border: 1px solid #c6c6c6;
 }
 
 .auth-modal__country {
   position: relative;
-  border: 1px solid #c6c6c6;
+  border: 2px solid transparent;
+  border-bottom: 1px solid #c6c6c6;
+  padding-bottom: 1px;
+  margin: -1px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   overflow: hidden;
@@ -2372,7 +2378,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
   border: none;
   font-size: 1.6rem;
   font-weight: 400;
-  padding: 27px 36px 11px 12px;
+  padding: 24px 36px 10px 12px;
   background: transparent;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -2395,8 +2401,8 @@ i.search-panel-calendar-flexible__dates-icon-check {
 
 .auth-modal__phone {
   position: relative;
-  border: 1px solid #c6c6c6;
-  border-top: none;
+  border: 2px solid transparent;
+  margin: -1px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   overflow: hidden;
@@ -2413,8 +2419,19 @@ i.search-panel-calendar-flexible__dates-icon-check {
   font-size: 1.2rem;
   font-weight: 300;
   transform-origin: top;
-  transform: translate(15px, 12px) scale(1.38);
+  transform: translate(15px, 8px) scale(1.38);
   transition: transform 0.18s ease;
+}
+
+.auth-modal__phone.auth-modal__phone--active {
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.auth-modal__country.auth-modal__country--active {
+  border: 2px solid var(--black-color);
+  padding-bottom: 0;
+  border-radius: 8px;
 }
 
 .auth-modal__phone.auth-modal__phone--active .auth-modal__phone-label {
@@ -2422,7 +2439,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
 }
 
 .auth-modal__phone.auth-modal__phone--active .auth-modal__phone-box {
-  padding: 26px 36px 10px 12px;
+  padding: 23px 36px 10px 12px;
 }
 
 .auth-modal__phone-box {
@@ -2433,8 +2450,9 @@ i.search-panel-calendar-flexible__dates-icon-check {
   outline: none;
   border: none;
   font-size: 1.6rem;
+  line-height: 1.6rem;
   font-weight: 300;
-  padding: 19px 36px 19px 12px;
+  padding: 16px 36px 17px 12px;
   background: transparent;
   -moz-appearance: textfield;
 }

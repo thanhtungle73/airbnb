@@ -101,6 +101,7 @@ const futureGateWaysItemActive = $(
 );
 const futureGatewaysLine = $(".future-gateways__line");
 const authModalContainer = $(".modal-wrapper");
+const authModalCountryBox = $(".auth-modal__country");
 const authModalPhoneBox = $(".auth-modal__phone");
 const authModalPhoneInput = $(".auth-modal__phone-box");
 const authModalContinueBtn = $(".auth-modal__continue");
@@ -396,6 +397,13 @@ app = {
       if (!e.target.closest(".auth-modal__phone")) {
         authModalPhoneBox.classList.remove("auth-modal__phone--active");
         authModalPhoneInput.placeholder = "";
+      }
+    });
+
+    document.addEventListener("mouseup", function (e) {
+      if (!e.target.closest(".auth-modal__country")) {
+        authModalPhoneBox.classList.remove("auth-modal__phone--active");
+        authModalCountryBox.classList.remove("auth-modal__country--active");
       }
     });
 
@@ -1073,6 +1081,7 @@ app = {
     });
 
     //handle when scrollTop to show fixed header
+    let reappear;
     window.onscroll = function () {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const mobileScrollTop = scrollTop;
@@ -1083,11 +1092,14 @@ app = {
         mobileSearchHeader.classList.remove("header-mobile__search--active");
       }
 
-      //mobile navbar - handle show/hide mobile navbar when scrollTop
+      //mobile navbar - handle show mobile navbar when scrollTop and hide navbar after scroll 300px
       if (scrollTop > _this.mobilePreviousScroll) {
-        mobileHeaderNavbar.classList.remove("header-mobile__navbar--active");
+        if (scrollTop > reappear) {
+          mobileHeaderNavbar.classList.remove("header-mobile__navbar--active");
+        }
       } else {
         mobileHeaderNavbar.classList.add("header-mobile__navbar--active");
+        reappear = scrollTop + 300;
       }
       _this.mobilePreviousScroll = mobileScrollTop;
 
@@ -1114,11 +1126,11 @@ app = {
     //mobile_handle when scroll mobile wishlists to show bottom navbar
     mobileWishlist.onscroll = function () {
       const scrollTop = mobileWishlist.scrollY || mobileWishlist.scrollTop;
-
       if (scrollTop > _this.mobilePreviousScroll) {
         mobileHeaderNavbar.classList.remove("header-mobile__navbar--active");
       } else {
         mobileHeaderNavbar.classList.add("header-mobile__navbar--active");
+        reappearScroll = scrollTop - 100;
       }
       _this.mobilePreviousScroll = scrollTop;
     };
@@ -1291,15 +1303,29 @@ app = {
           mobileSearchHeader.classList.remove(
             "header-mobile__search--hide-mobile"
           );
+          authModalContainer.classList.remove("modal-wrapper--active");
         }
       });
 
       element.addEventListener("click", function () {
         if (element.closest(".header-mobile__navbar-wishlists")) {
+          mobileWishlist.classList.remove("mobile-wishlists--active");
+          mobileSearchHeader.classList.remove(
+            "header-mobile__search--hide-mobile"
+          );
+          authModalContainer.classList.remove("modal-wrapper--active");
+
           mobileWishlist.classList.add("mobile-wishlists--active");
           mobileSearchHeader.classList.add(
             "header-mobile__search--hide-mobile"
           );
+        }
+      });
+
+      element.addEventListener("click", function () {
+        if (element.closest(".header-mobile__navbar-login")) {
+          authModalContainer.classList.add("modal-wrapper--active");
+          $("body").style.overflow = "hidden";
         }
       });
     });
@@ -1338,10 +1364,15 @@ app = {
       }
     };
 
-    //modal - handle zoom out phone label when clicking phone number box
+    //modal - handle zoom out phone label and active border when clicking phone number box
     authModalPhoneBox.onclick = function () {
       this.classList.add("auth-modal__phone--active");
       authModalPhoneInput.placeholder = "(XXX) XXX-XXXX";
+    };
+
+    //modal - handle active border when clicking modal country box
+    authModalCountryBox.onclick = function () {
+      this.classList.add("auth-modal__country--active");
     };
 
     //modal - handle background image move when hover to continue btn
