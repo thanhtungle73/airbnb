@@ -279,6 +279,15 @@
     );
     background: #fff;
   }
+
+  /* flexible page */
+  .flexible-menu-category__item:nth-child(n + 3) {
+    display: none;
+  }
+
+  .flexible-menu-category__item:last-child {
+    display: block;
+  }
 }
 
 /* Mobile */
@@ -312,6 +321,7 @@
   .suggestion {
     margin-top: calc(var(--header-mobile-search-height) * 2);
     padding-bottom: 32px;
+    height: 73vh;
   }
 
   .suggestion__wrapper {
@@ -323,7 +333,8 @@
     line-height: 3.1rem;
     font-weight: 500;
   }
-  .trip-category, .gift-card {
+  .trip-category,
+  .gift-card {
     margin-bottom: 40px;
   }
 
@@ -344,7 +355,8 @@
     height: 33.7vw;
   }
 
-  .trip-item__heading, .live-anywhere__title {
+  .trip-item__heading,
+  .live-anywhere__title {
     font-size: 2rem;
     line-height: 2rem;
   }
@@ -373,14 +385,16 @@
     right: 0;
     text-align: center;
     padding: 0 32px 32px;
-}
+  }
 
-  .gift-card__desc, .question-hosting__heading {
+  .gift-card__desc,
+  .question-hosting__heading {
     font-size: 4.3rem;
     line-height: 4.3rem;
   }
 
-  .discover-experiences__content, .question-hosting__content {
+  .discover-experiences__content,
+  .question-hosting__content {
     right: 25%;
     padding: 32px 32px;
   }
@@ -409,8 +423,9 @@
     margin-bottom: 8px;
   }
 
-  .footer__policy, .footer__rights {
-    align-items: flex-start
+  .footer__policy,
+  .footer__rights {
+    align-items: flex-start;
   }
 
   .footer__utilities-social {
@@ -459,11 +474,51 @@
   .auth-modal__method-item {
     padding: 15px 12px;
   }
+
+  /* Flexible html page */
+  .flexible-menu-category {
+    overflow-x: auto;
+    margin-left: -32px;
+    margin-right: -32px;
+    padding-left: 32px;
+  }
+
+  .flexible-menu-category::-webkit-scrollbar {
+    display: none;
+  }
+
+  .flexible-menu-filter {
+    display: none;
+  }
+
+  .flexible-menu-category__line {
+    left: 32px;
+  }
 }
 
-@media (min-width: 1040px) {
+@media (min-width: 1040px) and (max-width: 1239px) {
   .header__background-img {
     height: 80vh;
+  }
+
+  /* flexible page */
+  .flexible-menu-category__item:nth-child(n + 6) {
+    display: none;
+  }
+
+  .flexible-menu-category__item:last-child {
+    display: block;
+  }
+}
+
+@media (min-width: 1240px) and (max-width: 1727px) {
+  .header__background-img {
+    height: 80vh;
+  }
+
+  /* flexible page */
+  .flexible-menu-category__item:nth-child(3n + 2) {
+    display: none;
   }
 }
 

@@ -1,0 +1,23 @@
+.header__navbar {
+  border-bottom: 2px solid #efefef;
+}
+
+.header__navbar-right-item,
+.header__navbar-link {
+  color: var(--text-color);
+  font-size: 1.4rem;
+}
+
+.header-navbar-menu {
+  border: 1px solid #dfdfdf;
+}
+
+.header__navbar-item--hover:hover {
+  height: 42px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 40px;
+}
+
+.header-navbar-menu:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+  }

@@ -149,6 +149,7 @@ app = {
     let mobileLiveContainerScrollLeft;
     let mobileFutureContainerScrollLeft;
     let isFlexCalendarActive = false;
+    let navbarAppear = 300; //300px
 
     const resetSearchPanelCalendarSwitching = function () {
       searchPanelCalendarHeaders.forEach((element) => {
@@ -1081,7 +1082,6 @@ app = {
     });
 
     //handle when scrollTop to show fixed header
-    let reappear;
     window.onscroll = function () {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const mobileScrollTop = scrollTop;
@@ -1094,12 +1094,12 @@ app = {
 
       //mobile navbar - handle show mobile navbar when scrollTop and hide navbar after scroll 300px
       if (scrollTop > _this.mobilePreviousScroll) {
-        if (scrollTop > reappear) {
+        if (scrollTop > navbarAppear) {
           mobileHeaderNavbar.classList.remove("header-mobile__navbar--active");
         }
       } else {
         mobileHeaderNavbar.classList.add("header-mobile__navbar--active");
-        reappear = scrollTop + 300;
+        navbarAppear = scrollTop + 300;
       }
       _this.mobilePreviousScroll = mobileScrollTop;
 
