@@ -397,10 +397,16 @@ app = {
     document.addEventListener("mouseup", function (e) {
       if (!e.target.closest(".auth-modal__phone")) {
         authModalPhoneBox.classList.remove("auth-modal__phone--active");
-        authModalPhoneInput.placeholder = "";
+        if (authModalPhoneInput.value) {
+          authModalPhoneBox.classList.add("auth-modal__phone--has-value");
+        } else {
+          authModalPhoneBox.classList.remove("auth-modal__phone--has-value");
+          authModalPhoneInput.placeholder = "";
+        }
       }
     });
 
+    //return initial state of modal country number input
     document.addEventListener("mouseup", function (e) {
       if (!e.target.closest(".auth-modal__country")) {
         authModalPhoneBox.classList.remove("auth-modal__phone--active");
@@ -408,6 +414,7 @@ app = {
       }
     });
 
+    //close modal when clicking outside
     document.addEventListener("mouseup", function (e) {
       if (!e.target.closest(".auth-modal")) {
         authModalContainer.classList.remove("modal-wrapper--active");
@@ -1766,6 +1773,10 @@ app = {
       this.inactiveSearchChkOutDayShowDescItem();
     }
 
+    //temporary active experiences calendar
+    if ($(".header__navbar-mid-item-exp.header__navbar-mid-item--active")) {
+      e.classList.add("search-panel-calendar__days-data--active");
+    }
     this.checkActiveDaysAndAddDuration();
   },
 

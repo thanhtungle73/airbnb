@@ -295,6 +295,7 @@ i.flexible-menu-category__item-icon {
   position: fixed;
   top: 91vh;
   left: 50%;
+  z-index: 10;
   transform: translateX(-50%);
   font-size: 1.6rem;
   background-color: var(--text-color);

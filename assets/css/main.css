@@ -2360,7 +2360,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
 
 .auth-modal__country-label {
   position: absolute;
-  top: 8px;
+  top: 6px;
   left: 12px;
   z-index: 1;
   display: block;
@@ -2376,13 +2376,14 @@ i.search-panel-calendar-flexible__dates-icon-check {
   width: 100%;
   outline: none;
   border: none;
-  font-size: 1.6rem;
-  font-weight: 400;
   padding: 24px 36px 10px 12px;
   background: transparent;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--text-color);
 }
 
 .auth-modal__country-icon {
@@ -2412,7 +2413,7 @@ i.search-panel-calendar-flexible__dates-icon-check {
 .auth-modal__phone-label {
   display: block;
   position: absolute;
-  top: 8px;
+  top: 6px;
   left: 12px;
   z-index: 1;
   color: #787878;
@@ -2439,6 +2440,14 @@ i.search-panel-calendar-flexible__dates-icon-check {
 }
 
 .auth-modal__phone.auth-modal__phone--active .auth-modal__phone-box {
+  padding: 23px 36px 10px 12px;
+}
+
+.auth-modal__phone.auth-modal__phone--has-value .auth-modal__phone-label{
+  transform: none;
+}
+
+.auth-modal__phone.auth-modal__phone--has-value .auth-modal__phone-box{
   padding: 23px 36px 10px 12px;
 }
 
