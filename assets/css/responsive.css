@@ -208,8 +208,8 @@
     line-height: 1.5rem;
   }
 
-  .tablet-trip-container,
-  .live-anywhere__item-container {
+  .row.lrg-gutter.tablet-trip-container,
+  .row.lrg-gutter.live-anywhere__item-container {
     margin-right: calc(-1 * (100vw - var(--tablet-content-lrg-width)) / 2);
     margin-left: calc(-1 * (100vw - var(--tablet-content-lrg-width)) / 2);
     padding-right: 32px;
